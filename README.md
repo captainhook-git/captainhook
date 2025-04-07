@@ -3,16 +3,16 @@
 [![Downloads](https://poser.pugx.org/captainhook/captainhook/downloads)](https://packagist.org/packages/captainhook/captainhook/stats)
 [![Downloads](https://poser.pugx.org/captainhook/captainhook/d/monthly)](https://packagist.org/packages/captainhook/captainhook/stats)
 [![Downloads](https://poser.pugx.org/captainhook/captainhook/d/daily)](https://packagist.org/packages/captainhook/captainhook/stats)
-[![License](https://poser.pugx.org/captainhook/captainhook/license.svg?v=1)](https://github.com/captainhookphp/captainhook/blob/main/LICENSE)
-[![Build Status](https://github.com/captainhookphp/captainhook/workflows/Continuous%20Integration/badge.svg)](https://github.com/captainhookphp/captainhook/actions)
-[![Code Quality](https://scrutinizer-ci.com/g/captainhookphp/captainhook/badges/quality-score.png?b=main&v=1)](https://scrutinizer-ci.com/g/captainhookphp/captainhook/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/captainhookphp/captainhook/badges/coverage.png?b=main&v=1)](https://scrutinizer-ci.com/g/captainhookphp/captainhook/?branch=master)
+[![License](https://poser.pugx.org/captainhook/captainhook/license.svg?v=1)](https://github.com/captainhook-git/captainhook/blob/main/LICENSE)
+[![Build Status](https://github.com/captainhook-git/captainhook/workflows/Continuous%20Integration/badge.svg)](https://github.com/captainhook-git/captainhook/actions)
+[![Code Quality](https://scrutinizer-ci.com/g/captainhook-git/captainhook/badges/quality-score.png?b=main&v=1)](https://scrutinizer-ci.com/g/captainhook-git/captainhook/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/captainhook-git/captainhook/badges/coverage.png?b=main&v=1)](https://scrutinizer-ci.com/g/captainhook-git/captainhook/?branch=master)
 [![X](https://img.shields.io/badge/X-%40captainhookphp-black.svg)](https://twitter.com/intent/user?screen_name=captainhookphp)
 [![Mastodon](https://img.shields.io/badge/Mastodon-%40captainhook-purple.svg)](https://phpc.social/@captainhook)
 
 # CaptainHook
 
-<img src="https://captainhookphp.github.io/captainhook/gfx/ch.png" alt="CaptainHook logo" align="right" width="200"/>
+<img src="https://captainhook-git.github.io/captainhook/gfx/ch.png" alt="CaptainHook logo" align="right" width="200"/>
 
 *CaptainHook* is an easy to use and very flexible git hook library for php developers.
 It enables you to configure your git hook actions in a simple json file.
@@ -31,7 +31,7 @@ For more information have a look at the [documentation](https://php.captainhook.
 ## Installation
 
 The preferred method to install *CaptainHook* is to install the PHAR file.
-You can do so by using [Phive](https://phar.io/), use the PHAR Composer package, or download the PHAR from the GitHub [release page](https://github.com/captainhookphp/captainhook/releases/latest).
+You can do so by using [Phive](https://phar.io/), use the PHAR Composer package, or download the PHAR from the GitHub [release page](https://github.com/captainhook-git/captainhook/releases/latest).
 ```bash
 phive install captainhook
 ```
