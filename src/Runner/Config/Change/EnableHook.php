@@ -18,7 +18,7 @@ use CaptainHook\App\Config;
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
- * @link    https://github.com/captainhookphp/captainhook
+ * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 4.2.0
  */
 class EnableHook extends Hook

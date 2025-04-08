@@ -20,7 +20,7 @@ use SebastianFeldmann\Cli\Processor\ProcOpen as Processor;
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
- * @link    https://github.com/captainhookphp/captainhook
+ * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 1.2.0
  */
 class PHPUnit implements CoverageResolver

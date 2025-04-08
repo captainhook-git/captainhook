@@ -21,7 +21,7 @@ namespace CaptainHook\App\Hook\Template\Local;
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
  * @author  Christoph Kappestein <me@chrisk.app>
- * @link    https://github.com/captainhookphp/captainhook
+ * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 5.23.0
  */
 class WSL extends Shell

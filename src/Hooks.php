@@ -23,7 +23,7 @@ use RuntimeException;
  * @package CaptainHook
  * @author  Andrea Heigl <andreas@heigl.org>
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
- * @link    https://github.com/captainhookphp/captainhook
+ * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 3.0.1
  */
 final class Hooks

@@ -7,7 +7,7 @@
 [![Build Status](https://github.com/captainhook-git/captainhook/workflows/Continuous%20Integration/badge.svg)](https://github.com/captainhook-git/captainhook/actions)
 [![Code Quality](https://scrutinizer-ci.com/g/captainhook-git/captainhook/badges/quality-score.png?b=main&v=1)](https://scrutinizer-ci.com/g/captainhook-git/captainhook/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/captainhook-git/captainhook/badges/coverage.png?b=main&v=1)](https://scrutinizer-ci.com/g/captainhook-git/captainhook/?branch=master)
-[![X](https://img.shields.io/badge/X-%40captainhookphp-black.svg)](https://twitter.com/intent/user?screen_name=captainhookphp)
+[![X](https://img.shields.io/badge/X-%40captainhook-git-black.svg)](https://twitter.com/intent/user?screen_name=captainhookphp)
 [![Mastodon](https://img.shields.io/badge/Mastodon-%40captainhook-purple.svg)](https://phpc.social/@captainhook)
 
 # CaptainHook

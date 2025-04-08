@@ -21,7 +21,7 @@ use CaptainHook\App\Hook\Condition;
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
  * @author  Andreas Heigl <andreas@heigl.org>
- * @link    https://github.com/captainhookphp/captainhook
+ * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 5.7.0
  */
 abstract class Logic implements Condition

@@ -31,7 +31,7 @@ Here are some hints on a good workflow for contributing to the project.
 
 ## Look for existing issues
 
-First of all, check the [issues](https://github.com/captainhookphp/captainhook/issues) list.
+First of all, check the [issues](https://github.com/captainhook-git/captainhook/issues) list.
 If you see an outstanding issue which you would like to tackle, by all means comment on the
 issue and let me know.
 
@@ -41,7 +41,7 @@ just to make sure it hasn't already been discussed.
 ## Open a new issue before making a PR
 
 I _don't_ recommend just making a pull request for some new feature. Usually it's better
-to [open an issue](https://github.com/captainhookphp/captainhook/issues/new) first,
+to [open an issue](https://github.com/captainhook-git/captainhook/issues/new) first,
 and we can discuss what the feature is about, how best to design it, other people can
 weigh in with contributions, and so forth. Design is, in fact, the hard part. Once we
 have a solid, well-thought-out design, implementing it is usually fairly easy.

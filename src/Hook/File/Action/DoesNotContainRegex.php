@@ -21,7 +21,7 @@ use SebastianFeldmann\Git\Repository;
  *
  * @package CaptainHook
  * @author  Felix Edelmann <fxedel@gmail.com>
- * @link    https://github.com/captainhookphp/captainhook
+ * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 5.4.0
  */
 class DoesNotContainRegex extends Check

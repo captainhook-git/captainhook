@@ -19,7 +19,7 @@ use CaptainHook\App\Runner\Hook;
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
- * @link    https://github.com/captainhookphp/captainhook
+ * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 5.4.0
  */
 class PostRewrite extends Hook
