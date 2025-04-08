@@ -132,7 +132,7 @@ jobs:
       - name: Check out the phar repo
         uses: actions/checkout@v2
         with:
-          repository: captainhookphp/captainhook-phar
+          repository: captainhook-git/captainhook-phar
           token: ${{ secrets.PAT_SF }}
           path: phar-repo
 
