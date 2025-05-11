@@ -46,7 +46,7 @@ abstract class Util
      */
     public static function extractBranchInfo(string $ref): array
     {
-        $ref   = preg_replace('#^refs/#', '', $ref);
+        $ref   = (string) preg_replace('#^refs/#', '', $ref);
         $parts = explode('/', $ref);
 
         return [

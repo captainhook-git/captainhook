@@ -201,7 +201,7 @@ class PreserveWorkingTree extends Base implements Plugin\Hook
 
             // At this point, the working tree should be pristine, so the
             // patch should cleanly apply.
-            $this->applyPatch($this->unstagedPatchFile);
+            $this->applyPatch((string)$this->unstagedPatchFile);
         }
 
         $this->io->write("<info>Restored changes from {$this->unstagedPatchFile}.</info>");

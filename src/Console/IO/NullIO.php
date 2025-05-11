@@ -72,7 +72,7 @@ class NullIO extends Base
      */
     public function ask($question, $default = null)
     {
-        return $default;
+        return (string) $default;
     }
 
     /**

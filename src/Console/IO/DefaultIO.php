@@ -13,6 +13,7 @@ namespace CaptainHook\App\Console\IO;
 
 use CaptainHook\App\Console\IO;
 use CaptainHook\App\Console\IOUtil;
+use RuntimeException;
 use SebastianFeldmann\Cli\Reader\StandardInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
@@ -186,6 +187,9 @@ class DefaultIO extends Base
      */
     public function ask($question, $default = null)
     {
+        if ($this->helperSet === null) {
+            throw new RuntimeException('You must set the helperSet before asking');
+        }
         /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
         $helper   = $this->helperSet->get('question');
         $question = new Question($question, $default);
@@ -198,6 +202,9 @@ class DefaultIO extends Base
      */
     public function askConfirmation($question, $default = true)
     {
+        if ($this->helperSet === null) {
+            throw new RuntimeException('You must set the helperSet before asking');
+        }
         /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
         $helper   = $this->helperSet->get('question');
         $question = new ConfirmationQuestion($question, $default);
@@ -210,6 +217,9 @@ class DefaultIO extends Base
      */
     public function askAndValidate($question, $validator, $attempts = null, $default = null)
     {
+        if ($this->helperSet === null) {
+            throw new RuntimeException('You must set the helperSet before asking');
+        }
         /** @var \Symfony\Component\Console\Helper\QuestionHelper $helper */
         $helper   = $this->helperSet->get('question');
         $question = new Question($question, $default);
