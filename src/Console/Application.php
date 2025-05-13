@@ -15,6 +15,8 @@ use CaptainHook\App\CH;
 use CaptainHook\App\Console\Command as Cmd;
 use CaptainHook\App\Console\Runtime\Resolver;
 use Symfony\Component\Console\Application as SymfonyApplication;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class Application
@@ -46,6 +48,24 @@ class Application extends SymfonyApplication
 
         $this->setDefaultCommand('list');
         $this->silenceXDebug();
+    }
+
+    /**
+     * Make sure the list command is run on default `-h|--help` executions
+     *
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
+     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @return int
+     * @throws \Symfony\Component\Console\Exception\ExceptionInterface
+     * @throws \Throwable
+     */
+    public function doRun(InputInterface $input, OutputInterface $output): int
+    {
+        if ($this->isHelpWithoutCommand($input)) {
+            // Run the `list` command not `list --help`
+            return $this->find('list')->run($input, $output);
+        }
+        return parent::doRun($input, $output);
     }
 
     /**
@@ -108,5 +128,16 @@ class Application extends SymfonyApplication
             ini_set('xdebug.show_exception_trace', '0');
             ini_set('xdebug.scream', '0');
         }
+    }
+
+    /**
+     * Checks if the --help is called without any sub command
+     *
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @return bool
+     */
+    private function isHelpWithoutCommand(InputInterface $input): bool
+    {
+        return $input->hasParameterOption(['--help', '-h'], true) && !$input->getFirstArgument();
     }
 }
