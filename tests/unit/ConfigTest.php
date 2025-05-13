@@ -65,7 +65,7 @@ class ConfigTest extends TestCase
 
     public function testItCanReturnTheConfigurationPath(): void
     {
-        $path   = realpath(__DIR__ . '/../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = new Config($path);
 
         $this->assertEquals($path, $config->getPath());
@@ -73,7 +73,7 @@ class ConfigTest extends TestCase
 
     public function testIsHasABootstrapDefault(): void
     {
-        $path   = realpath(__DIR__ . '/../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = new Config($path);
 
         $this->assertEquals('vendor/autoload.php', $config->getBootstrap());
@@ -81,7 +81,7 @@ class ConfigTest extends TestCase
 
     public function testItCanSetTheBootstrap(): void
     {
-        $path   = realpath(__DIR__ . '/../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = new Config($path, true, ['bootstrap' => 'libs/autoload.php']);
 
         $this->assertEquals('libs/autoload.php', $config->getBootstrap());
@@ -89,7 +89,7 @@ class ConfigTest extends TestCase
 
     public function testNoFailuresAreAllowedByDefault(): void
     {
-        $path   = realpath(__DIR__ . '/../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = new Config($path, true);
 
         $this->assertFalse($config->isFailureAllowed());
@@ -97,7 +97,7 @@ class ConfigTest extends TestCase
 
     public function testAllowFailureCanBeChanged(): void
     {
-        $path   = realpath(__DIR__ . '/../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = new Config($path, true, ['allow-failure' => true]);
 
         $this->assertTrue($config->isFailureAllowed());

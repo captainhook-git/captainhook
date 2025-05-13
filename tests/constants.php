@@ -9,5 +9,5 @@
  * file that was distributed with this source code.
  */
 
-define('CH_PATH_FILES', realpath(__DIR__ . '/files'));
+define('CH_PATH_FILES', realpath(__DIR__ . '/_files'));
 define('CH_PATH_ROOT', realpath(__DIR__ . '/..'));

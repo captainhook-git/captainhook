@@ -23,7 +23,7 @@ class FactoryTest extends TestCase
      */
     public function testCreate(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
         $this->assertCount(1, $config->getHookConfig('pre-commit')->getActions());
@@ -36,7 +36,7 @@ class FactoryTest extends TestCase
      */
     public function testOverwriteConfigSettingsBySettingsConfigFile(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/config-file/captainhook.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/config-file/captainhook.json'));
 
         $this->assertEquals('quiet', $config->getVerbosity());
     }
@@ -49,7 +49,7 @@ class FactoryTest extends TestCase
     public function testCreateWithAbsoluteGitDir(): void
     {
         $config = Factory::create(
-            realpath(__DIR__ . '/../../files/config/valid.json'),
+            realpath(CH_PATH_FILES . '/config/valid.json'),
             ['git-directory' => '/foo']
         );
 
@@ -68,7 +68,7 @@ class FactoryTest extends TestCase
         $this->expectException(Exception::class);
 
         Factory::create(
-            realpath(__DIR__ . '/../../files/config/valid.json'),
+            realpath(CH_PATH_FILES . '/config/valid.json'),
             ['php-path' => '/foo/bar/baz']
         );
     }
@@ -80,7 +80,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithRelativeGitDir(): void
     {
-        $path   = realpath(__DIR__ . '/../../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = Factory::create($path, ['git-directory' => '../.git']);
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
@@ -93,7 +93,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithRunConfig(): void
     {
-        $path   = realpath(__DIR__ . '/../../files/config/valid-run-config-nested.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid-run-config-nested.json');
         $config = Factory::create($path, []);
 
         $this->assertEquals('./vendor/bin/captainhook', $config->getRunConfig()->getCaptainsPath());
@@ -106,7 +106,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithRunConfigLegacy(): void
     {
-        $path   = realpath(__DIR__ . '/../../files/config/valid-run-config-legacy.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid-run-config-legacy.json');
         $config = Factory::create($path, []);
 
         $this->assertEquals('./vendor/bin/captainhook', $config->getRunConfig()->getCaptainsPath());
@@ -121,7 +121,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithConditions(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-conditions.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-conditions.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
         $this->assertCount(1, $config->getHookConfig('pre-commit')->getActions());
@@ -134,7 +134,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithSettings(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-conditions.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-conditions.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->getActions()[0]->isFailureAllowed());
     }
@@ -146,9 +146,9 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithCrazyPHPPath(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-strange-settings.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-strange-settings.json'));
 
-        $this->assertEquals("tests/files/bin/success foo", $config->getPhpPath());
+        $this->assertEquals("tests/_files/bin/success foo", $config->getPhpPath());
     }
 
     /**
@@ -158,7 +158,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithAllSetting(): void
     {
-        $path   = realpath(__DIR__ . '/../../files/config/valid-with-all-settings.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid-with-all-settings.json');
         $gitDir = dirname($path) . DIRECTORY_SEPARATOR . '../../../.git';
         $config = Factory::create($path);
 
@@ -179,7 +179,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithIncludes(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-includes.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-includes.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
         $this->assertCount(2, $config->getHookConfig('pre-commit')->getActions());
@@ -192,7 +192,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithValidNestedIncludes(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-nested-includes.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-nested-includes.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
         $this->assertCount(3, $config->getHookConfig('pre-commit')->getActions());
@@ -207,7 +207,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithInvalidNestedIncludes(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/invalid-with-nested-includes.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/invalid-with-nested-includes.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
         $this->assertCount(2, $config->getHookConfig('pre-commit')->getActions());
@@ -221,7 +221,7 @@ class FactoryTest extends TestCase
     public function testCreateWithInvalidIncludes(): void
     {
         $this->expectException(Exception::class);
-        Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-invalid-includes.json'));
+        Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-invalid-includes.json'));
     }
 
     /**
@@ -231,7 +231,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateEmptyWithIncludes(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/empty-with-includes.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/empty-with-includes.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
         $this->assertCount(1, $config->getHookConfig('pre-commit')->getActions());
@@ -244,7 +244,7 @@ class FactoryTest extends TestCase
      */
     public function testCreateWithNestedAndConditions(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-nested-and-conditions.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-nested-and-conditions.json'));
 
         $this->assertTrue($config->getHookConfig('pre-commit')->isEnabled());
         $this->assertCount(1, $config->getHookConfig('pre-commit')->getActions());
@@ -257,7 +257,7 @@ class FactoryTest extends TestCase
      */
     public function testWithMainConfigurationOverridingInclude(): void
     {
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-disabled-action.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-disabled-action.json'));
 
         $this->assertFalse($config->getHookConfig('pre-commit')->isEnabled());
     }
@@ -270,7 +270,7 @@ class FactoryTest extends TestCase
     public function testMaxIncludeLevel(): void
     {
         // one of the included files will not be loaded because of the includes-level value of 2
-        $config = Factory::create(realpath(__DIR__ . '/../../files/config/valid-with-exceeded-max-include-level.json'));
+        $config = Factory::create(realpath(CH_PATH_FILES . '/config/valid-with-exceeded-max-include-level.json'));
         // all files have combined 6 pre-commit actions but one should not be loaded
         $this->assertCount(5, $config->getHookConfig('pre-commit')->getActions());
     }

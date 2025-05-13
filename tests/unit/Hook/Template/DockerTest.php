@@ -24,7 +24,7 @@ class DockerTest extends TestCase
      */
     public function testTemplateCaptainHookDevelopment(): void
     {
-        $repo       = realpath(__DIR__ . '/../../../files/template-ch');
+        $repo       = realpath(CH_PATH_FILES . '/template-ch');
         $config     = $repo . '/captainhook.json';
         $executable = $repo . '/does/not/matter';
         $pathInfo   = new PathInfo($repo, $config, $executable, false);
@@ -69,7 +69,7 @@ class DockerTest extends TestCase
      */
     public function testTemplateCustomPath(): void
     {
-        $repo       = realpath(__DIR__ . '/../../../files/template-ch');
+        $repo       = realpath(CH_PATH_FILES . '/template-ch');
         $executable = $repo . '/does/not/matter';
         $config     = $repo . '/captainhook.json';
         $pathInfo   = new PathInfo($repo, $config, $executable, false);

@@ -1,6 +1,6 @@
 {
   "config": {
-    "php-path": "tests/files/bin/success foo"
+    "php-path": "tests/_files/bin/success foo"
   },
   "prepare-commit-msg": {
     "enabled": true,

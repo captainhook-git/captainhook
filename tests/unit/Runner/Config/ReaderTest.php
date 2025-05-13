@@ -54,7 +54,7 @@ class ReaderTest extends TestCase
 
     public function testItDisplaysOnlyActions(): void
     {
-        $path   = realpath(__DIR__ . '/../../../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = Config\Factory::create($path);
         $io     = $this->createIOMock();
         $repo   = $this->createRepositoryMock();
@@ -69,7 +69,7 @@ class ReaderTest extends TestCase
 
     public function testItDisplaysActionsAndConditions(): void
     {
-        $path   = realpath(__DIR__ . '/../../../files/config/valid-with-conditions.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid-with-conditions.json');
         $config = Config\Factory::create($path);
         $io     = $this->createIOMock();
         $repo   = $this->createRepositoryMock();
@@ -85,7 +85,7 @@ class ReaderTest extends TestCase
 
     public function testItDisplaysAll(): void
     {
-        $path   = realpath(__DIR__ . '/../../../files/config/valid-with-nested-and-conditions.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid-with-nested-and-conditions.json');
         $config = Config\Factory::create($path);
         $io     = $this->createIOMock();
         $repo   = $this->createRepositoryMock();
@@ -98,7 +98,7 @@ class ReaderTest extends TestCase
 
     public function testDisplaysExtended(): void
     {
-        $path   = realpath(__DIR__ . '/../../../files/config/valid.json');
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
         $config = Config\Factory::create($path);
         $io     = $this->createIOMock();
         $repo   = $this->createRepositoryMock();
