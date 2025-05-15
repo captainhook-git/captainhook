@@ -98,3 +98,6 @@ jobs:
     - name: Run phar pre-push
       if: ${{ matrix.buildphar }}
       run: ${{ env.PHAR }} --configuration=build/captainhook.json hook:pre-push
+
+    - name: Execute phar end-to-end tests
+      run: CH_TEST_BIN=${{ env.PHAR }} tools/phpunit --no-coverage --testsuite EndToEndTests
