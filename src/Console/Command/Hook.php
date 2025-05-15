@@ -84,8 +84,8 @@ abstract class Hook extends RepositoryAware
         $config     = $this->createConfig($input, true, ['git-directory', 'bootstrap']);
         $repository = $this->createRepository(dirname($config->getGitDirectory()));
 
-        // use ansi coloring if not disabled in captainhook.json
-        $output->setDecorated($config->useAnsiColors());
+        // use ansi coloring if available and not disabled in captainhook.json
+        $output->setDecorated($output->isDecorated() && $config->useAnsiColors());
         // use the configured verbosity to manage general output verbosity
         $output->setVerbosity(IOUtil::mapConfigVerbosity($config->getVerbosity()));
 
