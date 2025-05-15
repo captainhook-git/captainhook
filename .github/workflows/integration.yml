@@ -59,6 +59,9 @@ jobs:
     - name: Execute integration tests
       run: tools/phpunit --no-coverage --testsuite IntegrationTests
 
+    - name: Execute end-to-end tests
+      run: tools/phpunit --no-coverage --testsuite EndToEndTests
+
     - name: Execute dummy pre commit
       run: bin/captainhook --configuration=build/captainhook.json hook:pre-commit
 
