@@ -1,0 +1,5 @@
+This message is fine
+
+It is not too long and not to short.
+It uses the right tense and the correct line
+boundaries.

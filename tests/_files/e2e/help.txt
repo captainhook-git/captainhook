@@ -1,0 +1,34 @@
+CaptainHook version %s #StandWithUkraine
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+      --silent          Do not output any message
+  -q, --quiet           Only errors are displayed. All other output is suppressed
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  configure                Create or update a captainhook.json configuration
+  help                     Display help for a command
+  install                  Install hooks to your .git/hooks directory
+  list                     List commands
+  uninstall                Remove all git hooks from your .git/hooks directory
+ config
+  config:add               [add] Add an action to your hook configuration
+  config:disable           [disable] Disable the handling for a hook in your configuration
+  config:enable            [enable] Enable the handling for a hook in your configuration
+  config:info              [info] Displays information about the configuration
+ hook
+  hook:commit-msg          [commit-msg] Run git commit-msg hook
+  hook:post-checkout       [post-checkout] Run git post-checkout hook
+  hook:post-commit         [post-commit] Run git post-commit hook
+  hook:post-merge          [post-merge] Run git post-merge hook
+  hook:post-rewrite        [post-rewrite] Run git post-rewrite hook
+  hook:pre-commit          [pre-commit] Run git pre-commit hook
+  hook:pre-push            [pre-push] Run git pre-push hook
+  hook:prepare-commit-msg  [prepare-commit-msg] Run git prepare-commit-msg hook

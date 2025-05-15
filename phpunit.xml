@@ -20,8 +20,8 @@
     <testsuite name="IntegrationTests">
       <directory>tests/integration</directory>
     </testsuite>
-    <testsuite name="PharEndToEndTests">
-      <directory>tests/phar-e2e</directory>
+    <testsuite name="EndToEndTests">
+      <directory suffix=".phpt">tests/end-to-end</directory>
     </testsuite>
   </testsuites>
   <logging>

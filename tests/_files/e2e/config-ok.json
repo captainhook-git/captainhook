@@ -1,0 +1,40 @@
+{
+  "config":{
+    "verbosity": "normal"
+  },
+  "prepare-commit-msg": {
+    "enabled": true,
+    "actions": []
+  },
+  "commit-msg": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
+        "options": {
+          "subjectLength": 50,
+          "bodyLineLength": 72
+        },
+        "config": {
+          "label": "Verify commit message format"
+        }
+      }
+    ]
+  },
+  "pre-commit": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "echo foo"
+      }
+    ]
+  },
+  "pre-push": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "echo foo"
+      }
+    ]
+  }
+}
