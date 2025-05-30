@@ -158,7 +158,7 @@ class Installer extends Files
     public function getHooksToInstall(): array
     {
         $hooks = $this->getHooksToHandle();
-        // if only enabled hooks should be installed remove disabled ones from $hooks array
+        // if only enabled hooks should be installed, remove disabled ones from the $hooks array
         if ($this->onlyEnabled) {
             $hooks = array_filter(
                 $hooks,
@@ -225,7 +225,7 @@ class Installer extends Files
         $hookFile = $hooksDir . DIRECTORY_SEPARATOR . $hook;
         $doIt     = true;
 
-        // if hook is configured and no force option is set
+        // if a hook is configured and no force option is set,
         // ask the user if overwriting the hook is ok
         if ($this->needConfirmation($hook)) {
             $ans  = $this->io->ask(
