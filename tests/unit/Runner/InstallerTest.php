@@ -198,7 +198,7 @@ class InstallerTest extends TestCase
     /**
      * Tests Installer::checkForBrokenSymlinks
      */
-    public function testBrokenSymlinkDetectionOnBrokenSymlink(): void
+    public function testBrokenSymlinkDetectionOnBrokenAbsoluteSymlink(): void
     {
         $this->expectException(Exception::class);
 
@@ -213,7 +213,30 @@ class InstallerTest extends TestCase
 
         $runner = new FakeInstaller($io, $config, $repo, $template);
         $file->method('isLink')->willReturn(true);
-        $file->method('linkTarget')->willReturn('./foo/bar/baz');
+        $file->method('linkTarget')->willReturn('/foo/bar/baz');
+
+        $runner->checkSymlink($file);
+    }
+
+    /**
+     * Tests Installer::checkForBrokenSymlinks
+     */
+    public function testBrokenSymlinkDetectionOnBrokenRelativeSymlink(): void
+    {
+        $this->expectException(Exception::class);
+
+        $io       = $this->createIOMock();
+        $config   = $this->createConfigMock();
+        $repo     = $this->createRepositoryMock();
+        $template = $this->createTemplateMock();
+
+        $file = $this->getMockBuilder(File::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $runner = new FakeInstaller($io, $config, $repo, $template);
+        $file->method('isLink')->willReturn(true);
+        $file->method('linkTarget')->willReturn('../../foo/bar/baz');
 
         $runner->checkSymlink($file);
     }

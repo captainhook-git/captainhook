@@ -268,7 +268,11 @@ class Installer extends Files
     protected function checkForBrokenSymlink(File $file): void
     {
         if ($file->isLink()) {
-            if (!is_dir(dirname($file->linkTarget()))) {
+            $target = $file->linkTarget();
+            if (!Check::isAbsolutePath($target)) {
+                $target = dirname($file->getPath()) . DIRECTORY_SEPARATOR . $target;
+            }
+            if (!is_dir(dirname($target))) {
                 throw new RuntimeException(
                     'The hook at \'' . $file->getPath() . '\' is a broken symbolic link. ' . PHP_EOL .
                     'Please remove the symbolic link and try again.'
