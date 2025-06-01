@@ -119,4 +119,27 @@ class File
             }
         }
     }
+
+    /**
+     * Determines if the given path is a symbolic link
+     *
+     * @return bool True if the path is a symbolic link, false otherwise.
+     */
+    public function isLink(): bool
+    {
+        return is_link($this->path);
+    }
+
+    /**
+     * Resolves and returns the target of a symbolic link
+     *
+     * @return string The resolved target of the symbolic link.
+     */
+    public function linkTarget(): string
+    {
+        if (!$this->isLink()) {
+            throw new RuntimeException('Not a symbolic link: ' . $this->path);
+        }
+        return (string)readlink($this->path);
+    }
 }

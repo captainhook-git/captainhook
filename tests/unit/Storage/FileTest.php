@@ -14,6 +14,7 @@ namespace CaptainHook\App\Storage;
 use Exception;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class FileTest extends TestCase
 {
@@ -61,6 +62,36 @@ class FileTest extends TestCase
 
         $this->assertEquals('foo', file_get_contents($path));
         $this->assertTrue(unlink($path));
+    }
+
+    /**
+     * Tests File::isLink
+     */
+    public function testIsLink(): void
+    {
+        $tmpDir = sys_get_temp_dir();
+        $link   = $tmpDir . '/fooLink';
+        $target = tempnam($tmpDir, 'bar');
+
+        symlink($target, $link);
+
+        $file = new File($link);
+        $this->assertTrue($file->isLink());
+        $this->assertEquals($target, $file->linkTarget());
+
+        $this->assertTrue(unlink($link));
+        $this->assertTrue(unlink($target));
+    }
+
+    /**
+     * Tests File::linkTarget
+     */
+    public function testLinkTarget(): void
+    {
+        $this->expectException(RuntimeException::class);
+
+        $file = new File(__FILE__);
+        $file->linkTarget();
     }
 
     /**
