@@ -12,11 +12,13 @@
 namespace CaptainHook\App\Runner;
 
 use CaptainHook\App\Config\Mockery as ConfigMockery;
+use CaptainHook\App\Console\IO\DefaultIO;
 use CaptainHook\App\Console\IO\Mockery as IOMockery;
 use CaptainHook\App\Exception\InvalidHookName;
 use CaptainHook\App\Git\DummyRepo;
 use CaptainHook\App\Hook\Mockery as HookMockery;
 use CaptainHook\App\Mockery as CHMockery;
+use CaptainHook\App\Storage\File;
 use Exception;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
@@ -169,6 +171,51 @@ class InstallerTest extends TestCase
         $runner->run();
 
         $this->assertFileExists($fakeRepo->getHookDir() . '/pre-commit');
+    }
+
+    /**
+     * Tests Installer::checkForBrokenSymlinks
+     */
+    public function testBrokenSymlinkDetectionOnExistingFile(): void
+    {
+        $io       = $this->createIOMock();
+        $config   = $this->createConfigMock();
+        $repo     = $this->createRepositoryMock();
+        $template = $this->createTemplateMock();
+
+        $file = $this->getMockBuilder(File::class)
+                     ->disableOriginalConstructor()
+                     ->getMock();
+
+        $runner = new FakeInstaller($io, $config, $repo, $template);
+        $file->method('isLink')->willReturn(true);
+        $file->method('linkTarget')->willReturn(__FILE__);
+
+        $runner->checkSymlink($file);
+        $this->assertTrue(true);
+    }
+
+    /**
+     * Tests Installer::checkForBrokenSymlinks
+     */
+    public function testBrokenSymlinkDetectionOnBrokenSymlink(): void
+    {
+        $this->expectException(Exception::class);
+
+        $io       = $this->createIOMock();
+        $config   = $this->createConfigMock();
+        $repo     = $this->createRepositoryMock();
+        $template = $this->createTemplateMock();
+
+        $file = $this->getMockBuilder(File::class)
+                     ->disableOriginalConstructor()
+                     ->getMock();
+
+        $runner = new FakeInstaller($io, $config, $repo, $template);
+        $file->method('isLink')->willReturn(true);
+        $file->method('linkTarget')->willReturn('./foo/bar/baz');
+
+        $runner->checkSymlink($file);
     }
 
     /**

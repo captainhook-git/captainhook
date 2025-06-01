@@ -238,6 +238,7 @@ class Installer extends Files
         if ($doIt) {
             $code = $this->getHookSourceCode($hook);
             $file = new File($hookFile);
+            $this->checkForBrokenSymlink($file);
             $file->write($code);
             chmod($hookFile, 0755);
             $this->io->write(IOUtil::PREFIX_OK . ' <comment>' . $hook . '</comment> installed');
@@ -255,5 +256,24 @@ class Installer extends Files
     private function getHookSourceCode(string $hook): string
     {
         return $this->template->getCode($hook);
+    }
+
+    /**
+     * Checks if the provided file is a broken symbolic link
+     *
+     * @param  File $file The File object representing the file.
+     * @return void
+     * @throws RuntimeException If the file is determined to be a broken symbolic link.
+     */
+    protected function checkForBrokenSymlink(File $file): void
+    {
+        if ($file->isLink()) {
+            if (!is_dir(dirname($file->linkTarget()))) {
+                throw new RuntimeException(
+                    'The hook at \'' . $file->getPath() . '\' is a broken symbolic link. ' . PHP_EOL .
+                    'Please remove the symbolic link and try again.'
+                );
+            }
+        }
     }
 }
