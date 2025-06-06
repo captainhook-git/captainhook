@@ -16,10 +16,7 @@ namespace CaptainHook\App\Runner;
 use CaptainHook\App\Config;
 use CaptainHook\App\Console\IO;
 use CaptainHook\App\Console\IOUtil;
-use CaptainHook\App\Exception;
 use CaptainHook\App\Hook\Template;
-use CaptainHook\App\Hook\Util as HookUtil;
-use CaptainHook\App\Hooks;
 use CaptainHook\App\Storage\File;
 use RuntimeException;
 use SebastianFeldmann\Camino\Check;
@@ -138,9 +135,10 @@ class Installer extends Files
      */
     public function run(): void
     {
-        $hooks = $this->getHooksToInstall();
-
-        foreach ($hooks as $hook => $ask) {
+        if (!$this->shouldRun()) {
+            return;
+        }
+        foreach ($this->getHooksToInstall() as $hook => $ask) {
             $this->installHook($hook, ($ask && !$this->force));
         }
     }
@@ -148,10 +146,12 @@ class Installer extends Files
     /**
      * Return list of hooks to install
      *
+     * <code>
      * [
      *   string    => bool
      *   HOOK_NAME => ASK_USER_TO_CONFIRM_INSTALL
      * ]
+     * </code>
      *
      * @return array<string, bool>
      */
@@ -279,5 +279,21 @@ class Installer extends Files
                 );
             }
         }
+    }
+
+    /**
+     * Check for problems
+     *
+     * @return bool
+     */
+    private function shouldRun(): bool
+    {
+        $hooksDir = $this->repository->getHooksDir();
+        // check nix and win systems black holes
+        if ($hooksDir === '/dev/null' || $hooksDir === 'NUL') {
+            $this->io->write('<fg=red>can\'t install hooks into hooksPath: /dev/null</>');
+            return false;
+        }
+        return true;
     }
 }
