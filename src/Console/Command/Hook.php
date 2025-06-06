@@ -12,7 +12,6 @@
 namespace CaptainHook\App\Console\Command;
 
 use CaptainHook\App\Config;
-use CaptainHook\App\Console\IOUtil;
 use CaptainHook\App\Hook\Util;
 use CaptainHook\App\Runner\Bootstrap\Util as BootstrapUtil;
 use RuntimeException;
@@ -98,8 +97,8 @@ abstract class Hook extends RepositoryAware
             $hook->run();
 
             return 0;
-        } catch (Throwable $e) {
-            return $this->crash($output, $e);
+        } catch (Throwable $t) {
+            return $this->crash($output, $t);
         }
     }
 

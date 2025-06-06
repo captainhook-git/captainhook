@@ -16,6 +16,7 @@ use CaptainHook\App\Console\Runtime\Resolver;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ConfigurationTest extends TestCase
 {
@@ -38,5 +39,27 @@ class ConfigurationTest extends TestCase
         $this->assertFileExists($config);
 
         unlink($config);
+    }
+
+    /**
+     * Tests Configure::run
+     *
+     * @throws \Exception
+     */
+    public function testConfigFailure(): void
+    {
+        $resolver  = new Resolver();
+        $config    = '/foo/bar/fiz/baz/config.json';
+        $input     = new ArrayInput(['--configuration' => $config]);
+        $output    = $this->getMockBuilder(OutputInterface::class)
+                          ->disableOriginalConstructor()
+                          ->getMock();
+        $output->method('isVerbose')->willReturn(true);
+
+        $configure = new Configuration($resolver);
+        $configure->setIO(new NullIO());
+        $code = $configure->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 }

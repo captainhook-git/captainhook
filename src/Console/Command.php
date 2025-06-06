@@ -12,10 +12,10 @@
 namespace CaptainHook\App\Console;
 
 use CaptainHook\App\Console\Runtime\Resolver;
-use Exception;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 /**
  * Class Command
@@ -81,21 +81,21 @@ abstract class Command extends SymfonyCommand
      * Write a final error message
      *
      * @param  \Symfony\Component\Console\Output\OutputInterface $out
-     * @param  \Exception                                        $e
+     * @param  \Throwable                                        $t
      * @return int
-     * @throws \Exception
+     * @throws \Throwable
      */
-    public function crash(OutputInterface $out, Exception $e): int
+    public function crash(OutputInterface $out, Throwable $t): int
     {
         if ($out->isDebug()) {
-            throw $e;
+            throw $t;
         }
 
-        $out->writeln('<fg=red>' . $e->getMessage() . '</>');
+        $out->writeln('<fg=red>' . $t->getMessage() . '</>');
         if ($out->isVerbose()) {
             $out->writeln(
-                '<comment>Error triggered in file:</comment> ' . $e->getFile() .
-                ' <comment>in line:</comment> ' . $e->getLine()
+                '<comment>Error triggered in file:</comment> ' . $t->getFile() .
+                ' <comment>in line:</comment> ' . $t->getLine()
             );
         }
         return 1;
