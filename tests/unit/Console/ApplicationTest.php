@@ -37,6 +37,25 @@ class ApplicationTest extends TestCase
         $app->run($input, $output);
     }
 
+
+    /**
+     * Tests Cli::run
+     *
+     * @throws \Exception
+     */
+    public function testExecuteDefaultHelp(): void
+    {
+        $input = new ArrayInput(['--help' => true]);
+        $output = $this->getMockBuilder(NullOutput::class)
+                       ->disableOriginalConstructor()
+                       ->getMock();
+
+        $app = new Application('captainhook');
+        $app->setAutoExit(false);
+
+        $this->assertEquals(0, $app->run($input, $output));
+    }
+
     /**
      * Tests Cli::run
      *
