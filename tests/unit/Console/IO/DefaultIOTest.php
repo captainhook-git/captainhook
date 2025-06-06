@@ -244,7 +244,12 @@ class DefaultIOTest extends TestCase
         $input  = $this->getInputMock();
         $output = $this->getOutputMock();
         $io     = new DefaultIO($input, $output);
-        $io->askAndValidate('foo', function() { return true; });
+        $io->askAndValidate(
+            'foo',
+            function () {
+                return true;
+            }
+        );
     }
 
     /**
