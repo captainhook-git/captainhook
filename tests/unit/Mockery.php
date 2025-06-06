@@ -48,7 +48,7 @@ trait Mockery
      * @param  string $root
      * @return \SebastianFeldmann\Git\Repository&\PHPUnit\Framework\MockObject\MockObject
      */
-    public function createRepositoryMock(string $root = ''): Repository
+    public function createRepositoryMock(string $root = '', string $hooksDir = ''): Repository
     {
 
         $repo = $this->getMockBuilder(Repository::class)
@@ -56,7 +56,7 @@ trait Mockery
                      ->getMock();
 
         $repo->method('getRoot')->willReturn($root);
-        $repo->method('getHooksDir')->willReturn($root . '/.git/hooks');
+        $repo->method('getHooksDir')->willReturn(empty($hooksDir) ? $root . '/.git/hooks' : $hooksDir);
 
         return $repo;
     }

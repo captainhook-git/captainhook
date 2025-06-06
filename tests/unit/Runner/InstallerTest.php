@@ -173,6 +173,24 @@ class InstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getHookDir() . '/pre-commit');
     }
 
+    public function testDontWriteToDevNull(): void
+    {
+        $fakeRepo = new DummyRepo();
+
+        $io       = $this->createIOMock();
+        $config   = $this->createConfigMock();
+        $template = $this->createTemplateMock();
+        $repo     = $this->createRepositoryMock($fakeRepo->getRoot(), '/dev/null');
+
+        $template->expects($this->never())->method('getCode');
+
+        $runner = new Installer($io, $config, $repo, $template);
+        $runner->setHook('pre-commit');
+        $runner->run();
+
+        $this->assertFileDoesNotExist($fakeRepo->getHookDir() . '/pre-commit');
+    }
+
     /**
      * Tests Installer::checkForBrokenSymlinks
      */
