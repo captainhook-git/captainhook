@@ -29,8 +29,6 @@ class InstallTest extends TestCase
      */
     public function testFailMissingConfig(): void
     {
-        $this->expectException(Exception::class);
-
         $output = new NullOutput();
         $input  = new ArrayInput(
             [
@@ -41,7 +39,9 @@ class InstallTest extends TestCase
         );
 
         $install = new Install(new Resolver(CH_PATH_FILES . '/bin/captainhook'));
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     /**
@@ -51,8 +51,6 @@ class InstallTest extends TestCase
      */
     public function testFailInvalidRepository(): void
     {
-        $this->expectException(Exception::class);
-
         $output = new NullOutput();
         $input  = new ArrayInput(
             [
@@ -64,7 +62,9 @@ class InstallTest extends TestCase
 
         $install = new Install(new Resolver(CH_PATH_FILES . '/bin/captainhook'));
         $install->setIO(new NullIO());
-        $install->run($input, $output);
+        $code = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     /**
@@ -74,8 +74,6 @@ class InstallTest extends TestCase
      */
     public function testFailMissingRunExecOption(): void
     {
-        $this->expectException(Exception::class);
-
         $repo   = new DummyRepo();
         $output = new NullOutput();
         $input  = new ArrayInput(
@@ -88,7 +86,9 @@ class InstallTest extends TestCase
         );
 
         $install = new Install(new Resolver(CH_PATH_FILES . '/bin/captainhook'));
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
 
@@ -172,7 +172,6 @@ class InstallTest extends TestCase
      */
     public function testInstallMultipleHooksWithOneWrong(): void
     {
-        $this->expectException(\CaptainHook\App\Exception\InvalidHookName::class);
         $repo   = new DummyRepo();
         $output = new NullOutput();
         $input  = new ArrayInput(
@@ -184,7 +183,9 @@ class InstallTest extends TestCase
         );
 
         $install = new Install(new Resolver(CH_PATH_FILES . '/bin/captainhook'));
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
 
@@ -195,7 +196,6 @@ class InstallTest extends TestCase
      */
     public function testInstallMultipleHooksWithMultipleWrong(): void
     {
-        $this->expectException(\CaptainHook\App\Exception\InvalidHookName::class);
         $repo   = new DummyRepo();
         $output = new NullOutput();
         $input  = new ArrayInput(
@@ -207,7 +207,9 @@ class InstallTest extends TestCase
         );
 
         $install = new Install(new Resolver(CH_PATH_FILES . '/bin/captainhook'));
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     /**
@@ -361,7 +363,6 @@ class InstallTest extends TestCase
      */
     public function testInstallOnlyEnabledAndHook(): void
     {
-        $this->expectException(\RuntimeException::class);
         $repo = new DummyRepo();
         $output = new NullOutput();
         $input = new ArrayInput(
@@ -374,6 +375,8 @@ class InstallTest extends TestCase
         );
 
         $install = new Install(new Resolver(CH_PATH_FILES . '/bin/captainhook'));
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 }

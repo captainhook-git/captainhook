@@ -19,6 +19,7 @@ use RuntimeException;
 use SebastianFeldmann\Camino\Check;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class ConfigAware
@@ -107,5 +108,19 @@ abstract class ConfigAware extends Command
             }
         }
         return $settings;
+    }
+
+    /**
+     * Check which verbosity to use, either the cli option or the config file setting
+     *
+     * @param \Symfony\Component\Console\Output\OutputInterface $out
+     * @param \CaptainHook\App\Config                           $config
+     * @return void
+     */
+    protected function determineVerbosity(OutputInterface $out, Config $config): void
+    {
+        $confVerbosity = IOUtil::mapConfigVerbosity($config->getVerbosity());
+        $cliVerbosity  = $out->getVerbosity();
+        $out->setVerbosity(max($confVerbosity, $cliVerbosity));
     }
 }

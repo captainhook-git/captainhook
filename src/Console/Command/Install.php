@@ -11,12 +11,13 @@
 
 namespace CaptainHook\App\Console\Command;
 
+use CaptainHook\App\Config;
 use CaptainHook\App\Console\IOUtil;
-use CaptainHook\App\Console\Runtime\Resolver;
 use CaptainHook\App\Hook\Template;
 use CaptainHook\App\Runner\Installer;
+use Exception;
 use RuntimeException;
-use SebastianFeldmann\Camino\Check;
+use SebastianFeldmann\Git\Repository;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -111,31 +112,45 @@ class Install extends RepositoryAware
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io     = $this->getIO($input, $output);
-        $config = $this->createConfig($input, true, ['git-directory', 'run-mode', 'run-exec', 'run-path', 'bootstrap']);
-        $repo   = $this->createRepository(dirname($config->getGitDirectory()));
+        try {
+            $args     = ['git-directory', 'run-mode', 'run-exec', 'run-path', 'bootstrap'];
+            $io       = $this->getIO($input, $output);
+            $config   = $this->createConfig($input, true, $args);
+            $repo     = $this->createRepository(dirname($config->getGitDirectory()));
+            $template = $this->createTemplate($config, $repo);
 
-        // use the configured verbosity to manage general output verbosity
-        $output->setVerbosity(IOUtil::mapConfigVerbosity($config->getVerbosity()));
+            $this->determineVerbosity($output, $config);
 
+            $installer = new Installer($io, $config, $repo, $template);
+            $installer->setHook(IOUtil::argToString($input->getArgument('hook')))
+                      ->setForce(IOUtil::argToBool($input->getOption('force')))
+                      ->setSkipExisting(IOUtil::argToBool($input->getOption('skip-existing')))
+                      ->setMoveExistingTo(IOUtil::argToString($input->getOption('move-existing-to')))
+                      ->setOnlyEnabled(IOUtil::argToBool($input->getOption('only-enabled')))
+                      ->run();
+
+            return 0;
+        } catch (Exception $e) {
+            return $this->crash($output, $e);
+        }
+    }
+
+    /**
+     * Create the template to generate the hook source code
+     *
+     * @param  \CaptainHook\App\Config           $config
+     * @param  \SebastianFeldmann\Git\Repository $repo
+     * @return \CaptainHook\App\Hook\Template
+     */
+    private function createTemplate(Config $config, Repository $repo): Template
+    {
         if (
             $config->getRunConfig()->getMode() === Template::DOCKER
             && empty($config->getRunConfig()->getDockerCommand())
         ) {
-            throw new RuntimeException(
-                'Run "exec" option missing for run-mode docker.'
-            );
+            throw new RuntimeException('Run "exec" option missing for run-mode docker.');
         }
 
-        $template  = Template\Builder::build($config, $repo, $this->resolver);
-        $installer = new Installer($io, $config, $repo, $template);
-        $installer->setHook(IOUtil::argToString($input->getArgument('hook')))
-                  ->setForce(IOUtil::argToBool($input->getOption('force')))
-                  ->setSkipExisting(IOUtil::argToBool($input->getOption('skip-existing')))
-                  ->setMoveExistingTo(IOUtil::argToString($input->getOption('move-existing-to')))
-                  ->setOnlyEnabled(IOUtil::argToBool($input->getOption('only-enabled')))
-                  ->run();
-
-        return 0;
+        return Template\Builder::build($config, $repo, $this->resolver);
     }
 }

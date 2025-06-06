@@ -13,6 +13,7 @@ namespace CaptainHook\App\Console\Command;
 
 use CaptainHook\App\Console\IOUtil;
 use CaptainHook\App\Runner\Config\Reader;
+use Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -84,18 +85,24 @@ class Info extends RepositoryAware
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io     = $this->getIO($input, $output);
-        $config = $this->createConfig($input, true, ['git-directory']);
-        $repo   = $this->createRepository(dirname($config->getGitDirectory()));
+        try {
+            $io     = $this->getIO($input, $output);
+            $config = $this->createConfig($input, true, ['git-directory']);
+            $repo   = $this->createRepository(dirname($config->getGitDirectory()));
 
-        $editor = new Reader($io, $config, $repo);
-        $editor->setHook(IOUtil::argToString($input->getArgument('hook')))
-               ->display(Reader::OPT_ACTIONS, $input->getOption('list-actions'))
-               ->display(Reader::OPT_CONDITIONS, $input->getOption('list-conditions'))
-               ->display(Reader::OPT_OPTIONS, $input->getOption('list-options'))
-               ->extensive($input->getOption('extensive'))
-               ->run();
+            $this->determineVerbosity($output, $config);
 
-        return 0;
+            $editor = new Reader($io, $config, $repo);
+            $editor->setHook(IOUtil::argToString($input->getArgument('hook')))
+                   ->display(Reader::OPT_ACTIONS, $input->getOption('list-actions'))
+                   ->display(Reader::OPT_CONDITIONS, $input->getOption('list-conditions'))
+                   ->display(Reader::OPT_OPTIONS, $input->getOption('list-options'))
+                   ->extensive($input->getOption('extensive'))
+                   ->run();
+
+            return 0;
+        } catch (Exception $e) {
+            return $this->crash($output, $e);
+        }
     }
 }

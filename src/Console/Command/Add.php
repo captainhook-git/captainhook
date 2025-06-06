@@ -13,6 +13,7 @@ namespace CaptainHook\App\Console\Command;
 
 use CaptainHook\App\Console\IOUtil;
 use CaptainHook\App\Runner\Config\Editor;
+use Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -53,14 +54,20 @@ class Add extends ConfigAware
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io     = $this->getIO($input, $output);
-        $config = $this->createConfig($input, true);
+        try {
+            $io     = $this->getIO($input, $output);
+            $config = $this->createConfig($input, true);
 
-        $editor = new Editor($io, $config);
-        $editor->setHook(IOUtil::argToString($input->getArgument('hook')))
-               ->setChange('AddAction')
-               ->run();
+            $this->determineVerbosity($output, $config);
 
-        return 0;
+            $editor = new Editor($io, $config);
+            $editor->setHook(IOUtil::argToString($input->getArgument('hook')))
+                   ->setChange('AddAction')
+                   ->run();
+
+            return 0;
+        } catch (Exception $e) {
+            return $this->crash($output, $e);
+        }
     }
 }

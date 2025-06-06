@@ -14,6 +14,7 @@ namespace CaptainHook\App\Console\Command;
 use CaptainHook\App\Console\IOUtil;
 use CaptainHook\App\Console\Runtime\Resolver;
 use CaptainHook\App\Runner\Config\Creator;
+use Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -60,15 +61,22 @@ class Configuration extends ConfigAware
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io       = $this->getIO($input, $output);
-        $config   = $this->createConfig($input, false, ['bootstrap']);
+        try {
+            $io     = $this->getIO($input, $output);
+            $config = $this->createConfig($input, false, ['bootstrap']);
 
-        $configurator = new Creator($io, $config);
-        $configurator->force(IOUtil::argToBool($input->getOption('force')))
-                     ->extend(IOUtil::argToBool($input->getOption('extend')))
-                     ->advanced(IOUtil::argToBool($input->getOption('advanced')))
-                     ->setExecutable($this->resolver->getExecutable())
-                     ->run();
-        return 0;
+            $this->determineVerbosity($output, $config);
+
+            $configurator = new Creator($io, $config);
+            $configurator->force(IOUtil::argToBool($input->getOption('force')))
+                         ->extend(IOUtil::argToBool($input->getOption('extend')))
+                         ->advanced(IOUtil::argToBool($input->getOption('advanced')))
+                         ->setExecutable($this->resolver->getExecutable())
+                         ->run();
+
+            return 0;
+        } catch (Exception $e) {
+            return $this->crash($output, $e);
+        }
     }
 }

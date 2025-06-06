@@ -216,6 +216,37 @@ class DefaultIOTest extends TestCase
         $this->assertEquals('y', $answer);
     }
 
+    public function testAskNoHelper(): void
+    {
+        $this->expectException(Exception::class);
+
+        $input  = $this->getInputMock();
+        $output = $this->getOutputMock();
+        $io     = new DefaultIO($input, $output);
+        $io->ask('foo');
+    }
+
+    public function testAskConfirmationNoHelper(): void
+    {
+        $this->expectException(Exception::class);
+
+        $input  = $this->getInputMock();
+        $output = $this->getOutputMock();
+        $io     = new DefaultIO($input, $output);
+        $io->askConfirmation('foo');
+    }
+
+
+    public function testAskAndValidateNoHelper(): void
+    {
+        $this->expectException(Exception::class);
+
+        $input  = $this->getInputMock();
+        $output = $this->getOutputMock();
+        $io     = new DefaultIO($input, $output);
+        $io->askAndValidate('foo', function() { return true; });
+    }
+
     /**
      * Tests DefaultIO::askConfirmation
      */

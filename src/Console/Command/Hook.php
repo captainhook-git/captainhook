@@ -87,7 +87,7 @@ abstract class Hook extends RepositoryAware
         // use ansi coloring if available and not disabled in captainhook.json
         $output->setDecorated($output->isDecorated() && $config->useAnsiColors());
         // use the configured verbosity to manage general output verbosity
-        $output->setVerbosity(IOUtil::mapConfigVerbosity($config->getVerbosity()));
+        $this->determineVerbosity($output, $config);
 
         try {
             $this->handleBootstrap($config);
@@ -96,12 +96,10 @@ abstract class Hook extends RepositoryAware
             /** @var \CaptainHook\App\Runner\Hook $hook */
             $hook  = new $class($io, $config, $repository);
             $hook->run();
+
             return 0;
         } catch (Throwable $e) {
-            if ($output->isDebug()) {
-                throw $e;
-            }
-            return 1;
+            return $this->crash($output, $e);
         }
     }
 
@@ -113,16 +111,16 @@ abstract class Hook extends RepositoryAware
     private function handleBootstrap(Config $config): void
     {
         // we only have to care about bootstrapping PHAR builds because for
-        // Composer installs the bootstrapping is already done in the bin script
+        // Composer installations the bootstrapping is already done in the bin script
         if ($this->resolver->isPharRelease()) {
             // check the custom and default autoloader
             $bootstrapFile = BootstrapUtil::validateBootstrapPath($this->resolver->isPharRelease(), $config);
-            // since the phar has its own autoloader we don't need to do anything
+            // since the phar has its own autoloader, we don't need to do anything
             // if the bootstrap file is not actively set
             if (empty($bootstrapFile)) {
                 return;
             }
-            // the bootstrap file exists so lets load it
+            // the bootstrap file exists, so let's load it
             try {
                 require $bootstrapFile;
             } catch (Throwable $t) {

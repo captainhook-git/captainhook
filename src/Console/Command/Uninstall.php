@@ -13,6 +13,7 @@ namespace CaptainHook\App\Console\Command;
 
 use CaptainHook\App\Console\IOUtil;
 use CaptainHook\App\Runner\Uninstaller;
+use Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -75,19 +76,25 @@ class Uninstall extends RepositoryAware
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io     = $this->getIO($input, $output);
-        $config = $this->createConfig($input, true, ['git-directory']);
-        $repo   = $this->createRepository(dirname($config->getGitDirectory()));
+        $io = $this->getIO($input, $output);
 
-        // use the configured verbosity to manage general output verbosity
-        $output->setVerbosity(IOUtil::mapConfigVerbosity($config->getVerbosity()));
+        try {
+            $config = $this->createConfig($input, true, ['git-directory']);
+            $repo   = $this->createRepository(dirname($config->getGitDirectory()));
 
-        $uninstaller = new Uninstaller($io, $config, $repo);
-        $uninstaller->setHook(IOUtil::argToString($input->getArgument('hook')))
-                    ->setForce(IOUtil::argToBool($input->getOption('force')))
-                    ->setOnlyDisabled(IOUtil::argToBool($input->getOption('only-disabled')))
-                    ->setMoveExistingTo(IOUtil::argToString($input->getOption('move-existing-to')))
-                    ->run();
-        return 0;
+            $this->determineVerbosity($output, $config);
+
+            $uninstaller = new Uninstaller($io, $config, $repo);
+            $uninstaller->setHook(IOUtil::argToString($input->getArgument('hook')))
+                        ->setForce(IOUtil::argToBool($input->getOption('force')))
+                        ->setOnlyDisabled(IOUtil::argToBool($input->getOption('only-disabled')))
+                        ->setMoveExistingTo(IOUtil::argToString($input->getOption('move-existing-to')))
+                        ->run();
+
+            return 0;
+        } catch (Exception $e) {
+            $this->crash($output, $e);
+            return 1;
+        }
     }
 }

@@ -28,8 +28,6 @@ class DisableTest extends TestCase
      */
     public function testExecuteNoConfig(): void
     {
-        $this->expectException(Exception::class);
-
         $resolver = new Resolver();
         $output   = new NullOutput();
         $input    = new ArrayInput(
@@ -39,9 +37,11 @@ class DisableTest extends TestCase
             ]
         );
 
-        $install  = new Disable($resolver);
+        $install = new Disable($resolver);
         $install->setIO(new NullIO());
-        $install->run($input, $output);
+        $code = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     /**

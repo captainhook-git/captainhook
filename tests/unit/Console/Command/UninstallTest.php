@@ -29,8 +29,6 @@ class UninstallTest extends TestCase
      */
     public function testFailMissingConfig(): void
     {
-        $this->expectException(Exception::class);
-
         $output = new NullOutput();
         $input  = new ArrayInput(
             [
@@ -41,7 +39,9 @@ class UninstallTest extends TestCase
         );
 
         $install = new Uninstall(new Resolver(CH_PATH_FILES . '/bin/captainhook'));
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     /**

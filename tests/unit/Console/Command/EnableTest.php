@@ -27,8 +27,6 @@ class EnableTest extends TestCase
      */
     public function testExecuteNoConfig(): void
     {
-        $this->expectException(Exception::class);
-
         $resolver = new Resolver();
         $output   = new NullOutput();
         $input    = new ArrayInput([
@@ -37,7 +35,9 @@ class EnableTest extends TestCase
         ]);
 
         $install = new Enable($resolver);
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     /**

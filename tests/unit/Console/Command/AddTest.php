@@ -28,8 +28,6 @@ class AddTest extends TestCase
      */
     public function testExecuteNoConfig(): void
     {
-        $this->expectException(Exception::class);
-
         $resolver = new Resolver();
         $input    = new ArrayInput(
             [
@@ -41,7 +39,9 @@ class AddTest extends TestCase
         $output  = new NullOutput();
         $install = new Add($resolver);
         $install->setIO(new NullIO());
-        $install->run($input, $output);
+        $code = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     /**

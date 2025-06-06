@@ -24,8 +24,6 @@ class InfoTest extends TestCase
 {
     public function testFailsWithoutConfig(): void
     {
-        $this->expectException(Exception::class);
-
         $resolver = new Resolver();
         $output   = new NullOutput();
         $input    = new ArrayInput([
@@ -34,7 +32,9 @@ class InfoTest extends TestCase
         ]);
 
         $install = new Info($resolver);
-        $install->run($input, $output);
+        $code    = $install->run($input, $output);
+
+        $this->assertEquals(1, $code);
     }
 
     public function testDisplaySingleHook(): void
