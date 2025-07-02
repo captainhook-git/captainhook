@@ -40,10 +40,8 @@ class BranchFilesTest extends TestCase
         $repo   = $this->createRepositoryMock();
         $info   = $this->createGitInfoOperator();
         $log    = $this->createGitLogOperator();
+        $diff   = $this->createGitDiffOperator(['file1.php', 'file2.php', 'README.md']);
 
-        $log->expects($this->once())
-            ->method('getChangedFilesSince')
-            ->willReturn(['file1.php', 'file2.php', 'README.md']);
         $log->expects($this->once())
             ->method('getBranchRevFromRefLog')
             ->willReturn('main');
@@ -52,6 +50,7 @@ class BranchFilesTest extends TestCase
              ->willReturn('foo');
 
         $repo->expects($this->atLeastOnce())->method('getLogOperator')->willReturn($log);
+        $repo->expects($this->atLeastOnce())->method('getDiffOperator')->willReturn($diff);
         $repo->expects($this->atLeastOnce())->method('getInfoOperator')->willReturn($info);
 
         $placeholder = new BranchFiles($io, $config, $repo);
@@ -96,16 +95,13 @@ class BranchFilesTest extends TestCase
         $config = $this->createConfigMock();
         $repo   = $this->createRepositoryMock();
         $info   = $this->createGitInfoOperator();
-        $log    = $this->createGitLogOperator();
+        $diff   = $this->createGitDiffOperator(['file1.php', 'file2.php', 'README.md', 'foo.txt']);
 
-        $log->expects($this->once())
-            ->method('getChangedFilesSince')
-            ->willReturn(['file1.php', 'file2.php', 'README.md', 'foo.txt']);
         $info->expects($this->once())
              ->method('getCurrentBranch')
              ->willReturn('foo');
 
-        $repo->expects($this->atLeastOnce())->method('getLogOperator')->willReturn($log);
+        $repo->expects($this->atLeastOnce())->method('getDiffOperator')->willReturn($diff);
         $repo->expects($this->atLeastOnce())->method('getInfoOperator')->willReturn($info);
 
         $placeholder = new BranchFiles($io, $config, $repo);
@@ -123,16 +119,13 @@ class BranchFilesTest extends TestCase
         $config = $this->createConfigMock();
         $repo   = $this->createRepositoryMock();
         $info   = $this->createGitInfoOperator();
-        $log    = $this->createGitLogOperator();
+        $diff   = $this->createGitDiffOperator(['foo/file1.php', 'foo/file2.php', 'README.md', 'foo.txt']);
 
-        $log->expects($this->once())
-            ->method('getChangedFilesSince')
-            ->willReturn(['foo/file1.php', 'foo/file2.php', 'README.md']);
         $info->expects($this->once())
              ->method('getCurrentBranch')
              ->willReturn('foo');
 
-        $repo->expects($this->atLeastOnce())->method('getLogOperator')->willReturn($log);
+        $repo->expects($this->atLeastOnce())->method('getDiffOperator')->willReturn($diff);
         $repo->expects($this->atLeastOnce())->method('getInfoOperator')->willReturn($info);
 
         $placeholder = new BranchFiles($io, $config, $repo);
@@ -150,16 +143,13 @@ class BranchFilesTest extends TestCase
         $config = $this->createConfigMock();
         $repo   = $this->createRepositoryMock();
         $info   = $this->createGitInfoOperator();
-        $log    = $this->createGitLogOperator();
+        $diff   = $this->createGitDiffOperator(['foo/file1.php', 'foo/file2.php', 'README.md']);
 
-        $log->expects($this->once())
-            ->method('getChangedFilesSince')
-            ->willReturn(['foo/file1.php', 'foo/file2.php', 'README.md']);
         $info->expects($this->once())
             ->method('getCurrentBranch')
             ->willReturn('foo');
 
-        $repo->expects($this->atLeastOnce())->method('getLogOperator')->willReturn($log);
+        $repo->expects($this->atLeastOnce())->method('getDiffOperator')->willReturn($diff);
         $repo->expects($this->atLeastOnce())->method('getInfoOperator')->willReturn($info);
 
         $placeholder = new BranchFiles($io, $config, $repo);

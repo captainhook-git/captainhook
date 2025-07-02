@@ -46,7 +46,7 @@ class BranchFiles extends Foundation
             $this->io->write('could not find branch start');
             return '';
         }
-        $files = $this->repository->getLogOperator()->getChangedFilesSince($start, ['A', 'C', 'M', 'R']);
+        $files = $this->repository->getDiffOperator()->getChangedFiles($start, $branch, ['A', 'C', 'M', 'R']);
 
         return implode(($options['separated-by'] ?? ' '), FileList::filter($files, $options));
     }
