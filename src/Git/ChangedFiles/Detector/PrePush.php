@@ -61,7 +61,7 @@ class PrePush extends Detector
         if (count($files) > 0 || !$this->reflogFallback) {
             return $files;
         }
-        // by now we should have found something but if the "branch: created" entry is gone from the reflog
+        // by now we should have found something, but if the "branch: created" entry is gone from the reflog,
         // try to find as many commits belonging to this branch as possible
         $branch    = $ranges[0]->to()->branch();
         $revisions = $this->repository->getLogOperator()->getBranchRevsFromRefLog($branch);
