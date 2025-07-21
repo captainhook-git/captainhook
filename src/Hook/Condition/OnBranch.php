@@ -24,7 +24,7 @@ use SebastianFeldmann\Git\Repository;
  * @author     Sebastian Feldmann <sf@sebastian-feldmann.info>
  * @link       https://github.com/captainhook-git/captainhook
  * @since      Class available since Release 5.0.0
- * @deprecated Replaced be CaptainHook\App\Hook\Condition\Branch\CurrentlyOn
+ * @deprecated Replaced be CaptainHook\App\Hook\Condition\Branch\On
  */
 class OnBranch extends Condition\Branch\On
 {
