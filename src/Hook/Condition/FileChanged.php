@@ -12,7 +12,7 @@
 namespace CaptainHook\App\Hook\Condition;
 
 use CaptainHook\App\Console\IO;
-use CaptainHook\App\Git\ChangedFiles\Detector\Factory;
+use CaptainHook\App\Git;
 use CaptainHook\App\Hook\Restriction;
 use CaptainHook\App\Hooks;
 use SebastianFeldmann\Git\Repository;
@@ -86,9 +86,6 @@ abstract class FileChanged extends File
      */
     protected function getChangedFiles(IO $io, Repository $repository): array
     {
-        $factory  = new Factory();
-        $detector = $factory->getDetector($io, $repository);
-
-        return $detector->getChangedFiles($this->filter);
+        return Git\ChangedFiles::getChangedFiles($io, $repository, $this->filter);
     }
 }

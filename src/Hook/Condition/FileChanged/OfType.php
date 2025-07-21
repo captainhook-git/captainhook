@@ -76,11 +76,10 @@ class OfType implements Condition, Constrained
      */
     public function isTrue(IO $io, Repository $repository): bool
     {
-        $factory  = new Git\ChangedFiles\Detector\Factory();
-        $detector = $factory->getDetector($io, $repository);
-
-        $files = $detector->getChangedFiles(['A', 'C', 'M', 'R']);
-        $files = FileList::filterByType($files, ['of-type' => $this->suffix]);
+        $files = FileList::filterByType(
+            Git\ChangedFiles::getChangedFiles($io, $repository, ['A', 'C', 'M', 'R']),
+            ['of-type' => $this->suffix]
+        );
 
         if (count($files) > 0) {
             return true;
