@@ -39,11 +39,7 @@ class ChangedFiles extends Foundation
      */
     public function replacement(array $options): string
     {
-        $factory  = new Git\ChangedFiles\Detector\Factory();
-        $detector = $factory->getDetector($this->io, $this->repository);
-
-        $files = $detector->getChangedFiles(['A', 'C', 'M', 'R']);
-
+        $files = Git\ChangedFiles::getChangedFiles($this->io, $this->repository, ['A', 'C', 'M', 'R']);
         return implode(($options['separated-by'] ?? ' '), FileList::filter($files, $options));
     }
 }
