@@ -119,8 +119,11 @@ abstract class ConfigAware extends Command
      */
     protected function determineVerbosity(OutputInterface $out, Config $config): void
     {
-        $confVerbosity = IOUtil::mapConfigVerbosity($config->getVerbosity());
+        $verbosity     = IOUtil::mapConfigVerbosity($config->getVerbosity());
         $cliVerbosity  = $out->getVerbosity();
-        $out->setVerbosity(max($confVerbosity, $cliVerbosity));
+        if ($cliVerbosity !== OutputInterface::VERBOSITY_NORMAL) {
+            $verbosity = $cliVerbosity;
+        }
+        $out->setVerbosity($verbosity);
     }
 }
