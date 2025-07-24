@@ -50,11 +50,10 @@ abstract class ChangedFiles
      * @param  array<string>               $files
      * @return void
      */
-
     private static function displayFilesFound(IO $io, array $files): void
     {
         if ($io->isVerbose()) {
-            $io->write('  <info>Changed files</info>', true, IO::VERBOSE);
+            $io->write('  <comment>Changed files</comment>', true, IO::VERBOSE);
             foreach ($files as $file) {
                 $io->write('   - ' . $file, true, IO::VERBOSE);
             }
