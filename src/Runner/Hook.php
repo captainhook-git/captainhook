@@ -176,7 +176,7 @@ abstract class Hook extends RepositoryAware
     {
         $hookConfig = $this->config->getHookConfigToExecute($this->hook);
         $actions    = $hookConfig->getActions();
-        // are any actions configured
+        // are any actions configured?
         if (count($actions) === 0) {
             $this->io->write(' - no actions to execute');
         } else {
@@ -310,10 +310,10 @@ abstract class Hook extends RepositoryAware
         } catch (Exception  $e) {
             $status = ActionLog::ACTION_FAILED;
             $this->printer->actionFailed($action);
-            $io->write('<fg=yellow>' . $e->getMessage() . '</>');
             if (!$action->isFailureAllowed($this->config->isFailureAllowed())) {
                 throw $e;
             }
+            $io->write('<fg=yellow>' . $e->getMessage() . '</>');
         } finally {
             $this->hookLog->addActionLog(new ActionLog($action, $status, $io->getMessages()));
             $this->afterAction($action);
