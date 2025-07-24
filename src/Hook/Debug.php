@@ -76,7 +76,7 @@ abstract class Debug implements Action
     {
         $out = '  <comment>Original arguments:</comment>' . PHP_EOL;
         foreach ($args as $name => $value) {
-            $out .= '    <comment>' . $name . '</comment> =>  ' . $value . PHP_EOL;
+            $out .= '    <question>' . $name . '</question> =>  ' . $value . PHP_EOL;
         }
         return $out;
     }
