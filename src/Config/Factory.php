@@ -191,7 +191,7 @@ final class Factory
      */
     private function configureHook(Config\Hook $config, array $json): void
     {
-        $config->setEnabled($json['enabled']);
+        $config->setEnabled($json['enabled'] ?? true);
         foreach ($json['actions'] as $actionJson) {
             $options    = $this->extractOptions($actionJson);
             $conditions = $this->extractConditions($actionJson);
