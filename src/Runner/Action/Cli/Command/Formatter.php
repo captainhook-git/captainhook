@@ -174,6 +174,7 @@ class Formatter
                 return '';
             }
 
+            $this->io->write('  <fg=cyan>Placeholder: ' . $placeholder . '</>', true, IO::VERBOSE);
             $processor = $this->createPlaceholder($placeholder);
             $this->cache($rawPlaceholder, $processor->replacement($options));
         }
