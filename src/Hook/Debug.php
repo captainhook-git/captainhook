@@ -14,6 +14,7 @@ namespace CaptainHook\App\Hook;
 use CaptainHook\App\Config;
 use CaptainHook\App\Console\IO;
 use CaptainHook\App\Exception\ActionFailed;
+use Exception;
 use SebastianFeldmann\Git\Repository;
 
 /**
@@ -48,7 +49,13 @@ abstract class Debug implements Action
     protected function debugOutput(IO $io, Repository $repository): void
     {
         $originalHookArguments = $io->getArguments();
-        $currentGitTag         = $repository->getInfoOperator()->getCurrentTag();
+
+        $currentGitTag = 'no tags yet';
+        try {
+            $currentGitTag = $repository->getInfoOperator()->getCurrentTag();
+        } catch (Exception $e) {
+            // ignore it, it just means there are no tags yet
+        }
 
         $io->write(['', '']);
         $io->write('<info>Executing Dummy action</info>');
