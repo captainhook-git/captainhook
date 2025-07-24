@@ -57,8 +57,7 @@ abstract class Debug implements Action
             // ignore it, it just means there are no tags yet
         }
 
-        $io->write(['', '']);
-        $io->write('<info>Executing Dummy action</info>');
+        $io->write('<info>Debug Action</info>');
         $io->write($this->getArgumentOutput($originalHookArguments));
         $io->write('  Current git-tag: <comment>' . $currentGitTag . '</comment>');
         $io->write('  StandardInput: ' . PHP_EOL . '    ' . implode(PHP_EOL . '    ', $io->getStandardInput()));
@@ -72,10 +71,10 @@ abstract class Debug implements Action
      */
     protected function getArgumentOutput(array $args): string
     {
-        $out = '  Original arguments:' . PHP_EOL;
+        $out = 'Original arguments:' . PHP_EOL;
         foreach ($args as $name => $value) {
             $out .= '    ' . $name . ' => <comment>' . $value . '</comment>' . PHP_EOL;
         }
-        return trim($out);
+        return '  ' . trim($out);
     }
 }
