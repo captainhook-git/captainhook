@@ -56,25 +56,28 @@ abstract class Debug implements Action
         } catch (Exception $e) {
             // ignore it, it just means there are no tags yet
         }
-
-        $io->write('<info>Debug Action</info>');
-        $io->write($this->getArgumentOutput($originalHookArguments));
-        $io->write('  Current git-tag: <comment>' . $currentGitTag . '</comment>');
-        $io->write('  StandardInput: ' . PHP_EOL . '    ' . implode(PHP_EOL . '    ', $io->getStandardInput()));
+        $io->write($this->getArgumentOutput($originalHookArguments), false);
+        $io->write('  <comment>Current git-tag:</comment> ' . $currentGitTag);
+        $io->write(
+            '  <comment>StandardInput:</comment> ' . PHP_EOL .
+            '    ' . implode(PHP_EOL . '    ', $io->getStandardInput())
+        );
     }
 
     /**
      * Format output to display original hook arguments
+     *
+     * Returns a string with a newline character at the end.
      *
      * @param  array<string> $args
      * @return string
      */
     protected function getArgumentOutput(array $args): string
     {
-        $out = 'Original arguments:' . PHP_EOL;
+        $out = '  <comment>Original arguments:</comment>' . PHP_EOL;
         foreach ($args as $name => $value) {
-            $out .= '    ' . $name . ' => <comment>' . $value . '</comment>' . PHP_EOL;
+            $out .= '    <comment>' . $name . '</comment> =>  ' . $value . PHP_EOL;
         }
-        return '  ' . trim($out);
+        return $out;
     }
 }
