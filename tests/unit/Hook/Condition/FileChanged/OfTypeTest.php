@@ -66,6 +66,7 @@ class OfTypeTest extends TestCase
     public function testChangedFileButNoneOfType(): void
     {
         $io = $this->createIOMock();
+        $io->method('isVerbose')->willReturn(true);
         $io->method('getArgument')->willReturn('hook:pre-push');
         $io->expects($this->atLeastOnce())
             ->method('getStandardInput')
