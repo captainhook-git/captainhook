@@ -27,14 +27,14 @@ class Condition
      *
      * @var string
      */
-    private $exec;
+    private string $exec;
 
     /**
      * Condition arguments
      *
      * @var array<mixed>
      */
-    private $args;
+    private array $args;
 
     /**
      * Condition constructor

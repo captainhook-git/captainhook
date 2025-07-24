@@ -29,14 +29,14 @@ class Plugin
      *
      * @var string
      */
-    private $plugin;
+    private string $plugin;
 
     /**
      * Map of options name => value
      *
      * @var Options
      */
-    private $options;
+    private Options $options;
 
     /**
      * Plugin constructor

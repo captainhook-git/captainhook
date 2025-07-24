@@ -30,9 +30,9 @@ abstract class Command extends SymfonyCommand
     /**
      * Input output handler
      *
-     * @var \CaptainHook\App\Console\IO
+     * @var \CaptainHook\App\Console\IO|null
      */
-    private $io;
+    private ?IO $io = null;
 
     /**
      * Runtime resolver

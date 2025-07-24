@@ -64,8 +64,8 @@ abstract class IOUtil
     /**
      * Create formatted cli headline
      *
-     * >>>> HEADLINE <<<<
-     * ==== HEADLINE ====
+     * ">>>> HEADLINE <<<<"
+     * "==== HEADLINE ===="
      *
      * @param  string $headline
      * @param  int    $length
@@ -93,7 +93,7 @@ abstract class IOUtil
      * @param  string                         $default
      * @return string
      */
-    public static function argToString($arg, string $default = ''): string
+    public static function argToString(mixed $arg, string $default = ''): string
     {
         return is_string($arg) ? $arg : $default;
     }
@@ -105,7 +105,7 @@ abstract class IOUtil
      * @param  bool                           $default
      * @return bool
      */
-    public static function argToBool($arg, bool $default = false): bool
+    public static function argToBool(mixed $arg, bool $default = false): bool
     {
         return is_bool($arg) ? $arg : $default;
     }

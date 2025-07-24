@@ -26,7 +26,7 @@ class Options
      *
      * @var array<string, mixed>
      */
-    private $options;
+    private array $options;
 
     /**
      * Options constructor

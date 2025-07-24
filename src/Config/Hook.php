@@ -27,14 +27,14 @@ class Hook
      *
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * Is hook enabled
      *
      * @var bool
      */
-    private $isEnabled = false;
+    private bool $isEnabled;
 
     /**
      * List of Actions
