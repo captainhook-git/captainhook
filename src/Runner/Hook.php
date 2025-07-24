@@ -346,7 +346,7 @@ abstract class Hook extends RepositoryAware
     {
         $conditionRunner = new Condition($collectorIO, $this->repository, $this->config, $this->hook);
         foreach ($conditions as $config) {
-            $collectorIO->write('  <fg=cyan>' . $config->getExec() . '</>', true, IO::VERBOSE);
+            $collectorIO->write('  <fg=cyan>Condition: ' . $config->getExec() . '</>', true, IO::VERBOSE);
             if (!$conditionRunner->doesConditionApply($config)) {
                 return false;
             }
