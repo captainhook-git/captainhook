@@ -118,6 +118,24 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
+    public function testExecuteByShorthand(): void
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessageMatches('/debugging/i');
+
+        $config = $this->createConfigMock();
+        $io     = $this->createIOMock();
+        $repo   = $this->createRepositoryMock();
+        $action = $this->createActionConfigMock();
+        $events = new Dispatcher($io, $config, $repo);
+        $class  = 'CaptainHook.Debug.fail';
+
+        $action->expects($this->once())->method('getAction')->willReturn($class);
+
+        $php = new PHP('pre-commit', $events);
+        $php->execute($config, $io, $repo, $action);
+    }
+
     public function testExecuteNoAction(): void
     {
         $this->expectException(Exception::class);
