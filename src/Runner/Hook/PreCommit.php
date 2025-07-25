@@ -29,5 +29,5 @@ class PreCommit extends Hook
      *
      * @var string
      */
-    protected $hook = Hooks::PRE_COMMIT;
+    protected string $hook = Hooks::PRE_COMMIT;
 }

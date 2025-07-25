@@ -45,7 +45,7 @@ abstract class Hook extends RepositoryAware
      *
      * @var string
      */
-    protected $hook;
+    protected string $hook;
 
     /**
      * Set to `true` to skip processing this hook's actions
@@ -112,7 +112,7 @@ abstract class Hook extends RepositoryAware
     }
 
     /**
-     * Execute stuff before every actions
+     * Execute stuff before every action
      *
      * @param Config\Action $action
      * @return void
@@ -123,7 +123,7 @@ abstract class Hook extends RepositoryAware
     }
 
     /**
-     * Execute stuff after every actions
+     * Execute stuff after every action
      *
      * @param Config\Action $action
      * @return void

@@ -68,7 +68,7 @@ class HookTest extends TestCase
         $repo = $this->createRepositoryMock();
 
         $runner = new class ($io, $config, $repo) extends Hook {
-            protected $hook = Hooks::PRE_COMMIT;
+            protected string $hook = Hooks::PRE_COMMIT;
         };
 
         $this->assertSame('pre-commit', $runner->getName());
@@ -81,7 +81,7 @@ class HookTest extends TestCase
         $repo = $this->createRepositoryMock();
 
         $runner = new class ($io, $config, $repo) extends Hook {
-            protected $hook = Hooks::PRE_COMMIT;
+            protected string $hook = Hooks::PRE_COMMIT;
         };
 
         $this->assertFalse($runner->shouldSkipActions());
@@ -94,7 +94,7 @@ class HookTest extends TestCase
         $repo = $this->createRepositoryMock();
 
         $runner = new class ($io, $config, $repo) extends Hook {
-            protected $hook = Hooks::PRE_COMMIT;
+            protected string $hook = Hooks::PRE_COMMIT;
         };
 
         $this->assertTrue($runner->shouldSkipActions(true));
@@ -108,7 +108,7 @@ class HookTest extends TestCase
         $repo = $this->createRepositoryMock();
 
         $runner = new class ($io, $config, $repo) extends Hook {
-            protected $hook = Hooks::PRE_COMMIT;
+            protected string $hook = Hooks::PRE_COMMIT;
         };
 
         $runner->shouldSkipActions(true);
@@ -160,7 +160,7 @@ class HookTest extends TestCase
         $io->expects($this->atLeast(1))->method('write');
 
         $runner = new class ($io, $config, $repo) extends Hook {
-            protected $hook = Hooks::PRE_COMMIT;
+            protected string $hook = Hooks::PRE_COMMIT;
         };
         $runner->run();
 
@@ -197,7 +197,7 @@ class HookTest extends TestCase
         $io->expects($this->atLeast(1))->method('write');
 
         $runner = new class ($io, $config, $repo) extends Hook {
-            protected $hook = Hooks::PRE_COMMIT;
+            protected string $hook = Hooks::PRE_COMMIT;
         };
         $runner->run();
 
@@ -243,7 +243,7 @@ class HookTest extends TestCase
         $io->expects($this->atLeast(1))->method('write');
 
         $runner = new class ($io, $config, $repo) extends Hook {
-            protected $hook = Hooks::PRE_COMMIT;
+            protected string $hook = Hooks::PRE_COMMIT;
         };
         $runner->run();
 

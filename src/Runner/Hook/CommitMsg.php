@@ -30,7 +30,7 @@ class CommitMsg extends Hook
      *
      * @var string
      */
-    protected $hook = Hooks::COMMIT_MSG;
+    protected string $hook = Hooks::COMMIT_MSG;
 
     /**
      * Read the commit message from file

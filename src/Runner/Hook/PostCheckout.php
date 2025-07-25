@@ -29,5 +29,5 @@ class PostCheckout extends Hook
      *
      * @var string
      */
-    protected $hook = Hooks::POST_CHECKOUT;
+    protected string $hook = Hooks::POST_CHECKOUT;
 }

@@ -29,5 +29,5 @@ class PrePush extends Hook
      *
      * @var string
      */
-    protected $hook = Hooks::PRE_PUSH;
+    protected string $hook = Hooks::PRE_PUSH;
 }

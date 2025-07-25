@@ -29,5 +29,5 @@ class PostRewrite extends Hook
      *
      * @var string
      */
-    protected $hook = Hooks::POST_REWRITE;
+    protected string $hook = Hooks::POST_REWRITE;
 }

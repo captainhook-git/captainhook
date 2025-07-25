@@ -7,10 +7,10 @@ use CaptainHook\App\Runner\Hook as RunnerHook;
 
 class DummyHookPlugin extends Hook\Base
 {
-    public static $beforeHookCalled = 0;
-    public static $beforeActionCalled = 0;
-    public static $afterActionCalled = 0;
-    public static $afterHookCalled = 0;
+    public static int $beforeHookCalled = 0;
+    public static int $beforeActionCalled = 0;
+    public static int $afterActionCalled = 0;
+    public static int $afterHookCalled = 0;
 
     public function beforeHook(RunnerHook $hook): void
     {
