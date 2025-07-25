@@ -77,7 +77,6 @@ Here's an example *captainhook.json* configuration file.
 ```json
 {
   "commit-msg": {
-    "enabled": true,
     "actions": [
       {
         "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams"
@@ -85,19 +84,14 @@ Here's an example *captainhook.json* configuration file.
     ]
   },
   "pre-commit": {
-    "enabled": true,
     "actions": [
       {
         "action": "phpunit"
       },
       {
-        "action": "phpcs --standard=psr2 src"
+        "action": "phpcs --standard=psr12 src"
       }
     ]
-  },
-  "pre-push": {
-    "enabled": false,
-    "actions": []
   }
 }
 ```
