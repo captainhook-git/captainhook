@@ -62,6 +62,12 @@ abstract class Hook extends RepositoryAware
             InputOption::VALUE_OPTIONAL,
             'Original hook stdIn'
         );
+        $this->addOption(
+            'no-plugins',
+            null,
+            InputOption::VALUE_NONE,
+            'Disable all hook plugins'
+        );
     }
 
     /**
@@ -70,7 +76,7 @@ abstract class Hook extends RepositoryAware
      * @param  \Symfony\Component\Console\Input\InputInterface   $input
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return int
-     * @throws \Exception
+     * @throws \Throwable
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -94,6 +100,7 @@ abstract class Hook extends RepositoryAware
             $class = '\\CaptainHook\\App\\Runner\\Hook\\' . Util::getHookCommand($this->hookName);
             /** @var \CaptainHook\App\Runner\Hook $hook */
             $hook  = new $class($io, $config, $repository);
+            $hook->setPluginsDisabled($input->getOption('no-plugins'));
             $hook->run();
 
             return 0;
@@ -124,8 +131,8 @@ abstract class Hook extends RepositoryAware
                 require $bootstrapFile;
             } catch (Throwable $t) {
                 throw new RuntimeException(
-                    'Bootstrapping failed:' . PHP_EOL .
-                    '  Please fix your bootstrap file `' . $bootstrapFile . '`' . PHP_EOL
+                    'Loading bootstrap file failed: ' . $bootstrapFile . PHP_EOL .
+                    $t->getMessage() . PHP_EOL
                 );
             }
         }

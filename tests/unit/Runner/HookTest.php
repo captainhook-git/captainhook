@@ -252,4 +252,35 @@ class HookTest extends TestCase
         $this->assertSame(3, DummyHookPlugin::$afterActionCalled);
         $this->assertSame(1, DummyHookPlugin::$afterHookCalled);
     }
+
+    public function testRunHookWhenPluginsAreDisabled(): void
+    {
+        $pluginConfig1 = new Config\Plugin(DummyHookPlugin::class);
+        $pluginConfig2 = new Config\Plugin(DummyHookPlugin::class);
+
+        $config = $this->createConfigMock();
+        $config->method('failOnFirstError')->willReturn(false);
+        $config->method('getPlugins')->willReturn([$pluginConfig1, $pluginConfig2]);
+
+        $io           = $this->createIOMock();
+        $repo         = $this->createRepositoryMock();
+        $hookConfig   = $this->createHookConfigMock();
+        $actionConfig = $this->createActionConfigMock();
+        $actionConfig->expects($this->atLeastOnce())->method('getAction')->willReturn(CH_PATH_FILES . '/bin/success');
+        $hookConfig->method('isEnabled')->willReturn(true);
+        $hookConfig->expects($this->once())->method('getActions')->willReturn([$actionConfig, clone $actionConfig]);
+        $config->method('isHookEnabled')->willReturn(true);
+        $config->expects($this->once())->method('getHookConfigToExecute')->willReturn($hookConfig);
+
+        $runner = new class ($io, $config, $repo) extends Hook {
+            protected string $hook = Hooks::PRE_COMMIT;
+        };
+        $runner->setPluginsDisabled(true);
+        $runner->run();
+
+        $this->assertSame(0, DummyHookPlugin::$beforeHookCalled);
+        $this->assertSame(0, DummyHookPlugin::$beforeActionCalled);
+        $this->assertSame(0, DummyHookPlugin::$afterActionCalled);
+        $this->assertSame(0, DummyHookPlugin::$afterHookCalled);
+    }
 }

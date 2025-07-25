@@ -82,6 +82,20 @@ abstract class Hook extends RepositoryAware
      */
     private HookLog $hookLog;
 
+    /**
+     * Should the plugins be disabled?
+     *
+     * @var boolean
+     */
+    private bool $pluginsDisabled = false;
+
+    /**
+     * Set up the hook runner
+     *
+     * @param \CaptainHook\App\Console\IO       $io
+     * @param \CaptainHook\App\Config           $config
+     * @param \SebastianFeldmann\Git\Repository $repository
+     */
     public function __construct(IO $io, Config $config, Repository $repository)
     {
         $this->dispatcher = new Dispatcher($io, $config, $repository);
@@ -89,6 +103,17 @@ abstract class Hook extends RepositoryAware
         $this->hookLog    = new HookLog();
 
         parent::__construct($io, $config, $repository);
+    }
+
+    /**
+     * Allow plugins to be disabled
+     *
+     * @param  bool $disabled
+     * @return void
+     */
+    public function setPluginsDisabled(bool $disabled): void
+    {
+        $this->pluginsDisabled = $disabled;
     }
 
     /**
@@ -156,6 +181,10 @@ abstract class Hook extends RepositoryAware
         if (!$this->config->isHookEnabled($this->hook)) {
             $this->io->write(' - hook is disabled');
             return;
+        }
+
+        if ($this->pluginsDisabled) {
+            $this->io->write('<fg=magenta>Running with plugins disabled</>');
         }
 
         $this->checkHookScript();
@@ -412,6 +441,10 @@ abstract class Hook extends RepositoryAware
      */
     private function executeHookPluginsFor(string $method, ?Config\Action $action = null): void
     {
+        if ($this->pluginsDisabled) {
+            return;
+        }
+
         $plugins = $this->getHookPlugins();
 
         if (count($plugins) === 0) {
