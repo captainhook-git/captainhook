@@ -87,6 +87,16 @@ class Hook
     }
 
     /**
+     * Check if a hook config has actions
+     *
+     * @return bool
+     */
+    public function hasActions(): bool
+    {
+        return !empty($this->actions);
+    }
+
+    /**
      * Add an action to the list
      *
      * @param \CaptainHook\App\Config\Action ...$actions
@@ -118,7 +128,9 @@ class Hook
     {
         $config = ['enabled' => $this->isEnabled, 'actions' => []];
         foreach ($this->actions as $action) {
-            $config['actions'][] = $action->getJsonData();
+            if (!$action->isIncluded()) {
+                $config['actions'][] = $action->getJsonData();
+            }
         }
         return $config;
     }

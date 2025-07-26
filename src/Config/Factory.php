@@ -291,7 +291,7 @@ final class Factory
                 // empty hook config just to enable the included actions feels a bit dull.
                 // Since the main hook is processed last (if one is configured) the enabled flag will be overwritten
                 // once again by the main config value. This is to make sure that if somebody disables a hook in its
-                // main configuration no actions will get executed, even if we have enabled hooks in any include file.
+                // main configuration, no actions will get executed, even if we have enabled hooks in any include file.
                 $this->copyActionsFromTo($includedHook, $hook);
             }
         }
@@ -326,6 +326,7 @@ final class Factory
     private function copyActionsFromTo(Hook $sourceConfig, Hook $targetConfig): void
     {
         foreach ($sourceConfig->getActions() as $action) {
+            $action->markIncluded();
             $targetConfig->addAction($action);
         }
     }

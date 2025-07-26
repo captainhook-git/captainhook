@@ -412,7 +412,9 @@ class Config
             $data['config']['custom'] = $this->custom;
         }
         foreach (Hooks::getValidHooks() as $hook => $value) {
-            $data[$hook] = $this->hooks[$hook]->getJsonData();
+            if ($this->hooks[$hook]->isEnabled() || $this->hooks[$hook]->hasActions()) {
+                $data[$hook] = $this->hooks[$hook]->getJsonData();
+            }
         }
         return $data;
     }

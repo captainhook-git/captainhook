@@ -157,15 +157,17 @@ class ConfigTest extends TestCase
         $this->assertFalse($config->failOnFirstError());
     }
 
-    public function testCanBeExportedToJsonData(): void
+    public function testExportsOnlyEnabledHooksOrHooksWithActionsToJsonData(): void
     {
         $config = new Config('./no-config.json');
+        $config->getHookConfig('pre-commit')->setEnabled(true);
+        $config->getHookConfig('pre-push')->addAction(new Action('foo'));
         $json   = $config->getJsonData();
 
         $this->assertIsArray($json);
         $this->assertIsArray($json['pre-commit']);
-        $this->assertIsArray($json['commit-msg']);
         $this->assertIsArray($json['pre-push']);
+        $this->assertFalse(array_key_exists('commit-msg', $json));
     }
 
     public function testCanBeExportedToJsonDataWithSettings(): void
@@ -180,9 +182,6 @@ class ConfigTest extends TestCase
         $this->assertIsArray($json);
         $this->assertIsArray($json['config']);
         $this->assertIsArray($json['config']['run']);
-        $this->assertIsArray($json['pre-commit']);
-        $this->assertIsArray($json['commit-msg']);
-        $this->assertIsArray($json['pre-push']);
     }
 
     public function testGetJsonDataWithoutEmptyConfig(): void
@@ -202,6 +201,21 @@ class ConfigTest extends TestCase
         $this->assertIsArray($json['config']);
         $this->assertEquals('foo', $json['config']['run']['exec']);
         $this->assertArrayNotHasKey('plugins', $json);
+    }
+
+    public function testDoesNotExportIncludedActionsToJson(): void
+    {
+        $localAction    = new Action('foo');
+        $includedAction = new Action('bar');
+        $includedAction->markIncluded();
+
+        $config = new Config('foo.json', true, []);
+        $config->getHookConfig('pre-commit')->setEnabled(true);
+        $config->getHookConfig('pre-commit')->addAction($localAction);
+        $config->getHookConfig('pre-commit')->addAction($includedAction);
+
+        $json = $config->getJsonData();
+        $this->assertCount(1, $json['pre-commit']['actions']);
     }
 
     public function testGetPluginsReturnsEmptyArray(): void

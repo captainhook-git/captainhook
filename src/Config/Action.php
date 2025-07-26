@@ -62,6 +62,13 @@ class Action
     ];
 
     /**
+     * Indicates if an action config was included from another file
+     *
+     * @var bool
+     */
+    private bool $isIncluded = false;
+
+    /**
      * Action constructor
      *
      * @param string               $action
@@ -112,6 +119,26 @@ class Action
                 $this->settings[$setting] = $settings[$setting];
             }
         }
+    }
+
+    /**
+     * Marks a action config as included
+     *
+     * @return void
+     */
+    public function markIncluded(): void
+    {
+        $this->isIncluded = true;
+    }
+
+    /**
+     * Check if an action config was included
+     *
+     * @return bool
+     */
+    public function isIncluded(): bool
+    {
+        return $this->isIncluded;
     }
 
     /**

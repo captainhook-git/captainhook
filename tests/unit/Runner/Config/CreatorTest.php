@@ -76,7 +76,6 @@ class CreatorTest extends TestCase
         $configFileContentAfter = $configDir->getChild('captainhook.json')->getContent();
         $this->assertFileExists($configFile);
         $this->assertStringContainsString('pre-commit', $configFileContentAfter);
-        $this->assertStringContainsString('pre-push', $configFileContentAfter);
         $this->assertStringContainsString('phpunit', $configFileContentAfter);
     }
 }
