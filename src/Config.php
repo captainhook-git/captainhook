@@ -408,6 +408,9 @@ class Config
         if (!empty($this->plugins)) {
             $data['config']['plugins'] = $this->getPluginsJsonData();
         }
+        if (!empty($this->custom)) {
+            $data['config']['custom'] = $this->custom;
+        }
         foreach (Hooks::getValidHooks() as $hook => $value) {
             $data[$hook] = $this->hooks[$hook]->getJsonData();
         }
