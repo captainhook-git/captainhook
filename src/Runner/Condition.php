@@ -109,7 +109,7 @@ class Condition
         }
 
         /** @var class-string<\CaptainHook\App\Hook\Condition> $class */
-        $class = $config->getExec();
+        $class = $this->getConditionClass($config->getExec());
         if (!class_exists($class)) {
             throw new RuntimeException('could not find condition class: ' . $class);
         }
@@ -164,5 +164,16 @@ class Condition
     private function isLogicCondition(Config\Condition $config): bool
     {
         return in_array(strtolower($config->getExec()), ['and', 'or']);
+    }
+
+    /**
+     * Returns the condition class
+     *
+     * @param string $exec
+     * @return string
+     */
+    private function getConditionClass(string $exec): string
+    {
+        return Shorthand::isShorthand($exec) ? Shorthand::getConditionClass($exec) : $exec;
     }
 }
