@@ -396,27 +396,41 @@ class Config
      */
     public function getJsonData(): array
     {
-        $data = [];
-        if (!empty($this->settings)) {
-            $data['config'] = $this->settings;
+        $data   = [];
+        $config = $this->getConfigJsonData();
+
+        if (!empty($config)) {
+            $data['config'] = $config;
         }
 
-        $runConfigData = $this->runConfig->getJsonData();
-        if (!empty($runConfigData)) {
-            $data['config']['run'] = $runConfigData;
-        }
-        if (!empty($this->plugins)) {
-            $data['config']['plugins'] = $this->getPluginsJsonData();
-        }
-        if (!empty($this->custom)) {
-            $data['config']['custom'] = $this->custom;
-        }
         foreach (Hooks::getValidHooks() as $hook => $value) {
             if ($this->hooks[$hook]->isEnabled() || $this->hooks[$hook]->hasActions()) {
                 $data[$hook] = $this->hooks[$hook]->getJsonData();
             }
         }
         return $data;
+    }
+
+    /**
+     * Build the "config" JSON section of the configuration file
+     *
+     * @return array<string, mixed>
+     */
+    private function getConfigJsonData(): array
+    {
+        $config = !empty($this->settings) ? $this->settings : [];
+
+        $runConfigData = $this->runConfig->getJsonData();
+        if (!empty($runConfigData)) {
+            $config['run'] = $runConfigData;
+        }
+        if (!empty($this->plugins)) {
+            $config['plugins'] = $this->getPluginsJsonData();
+        }
+        if (!empty($this->custom)) {
+            $config['custom'] = $this->custom;
+        }
+        return $config;
     }
 
     /**
