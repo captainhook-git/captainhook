@@ -46,4 +46,32 @@ class UtilTest extends TestCase
         $this->assertTrue(Util::isTypeValid('cli'));
         $this->assertFalse(Util::isTypeValid('foo'));
     }
+
+    /**
+     * Tests Util::getEnv
+     */
+    public function testCanReadEnvVar(): void
+    {
+        $_ENV['foo'] = 'bar';
+        $this->assertEquals('bar', Util::getEnv('foo'));
+        unset($_ENV['foo']);
+    }
+
+    /**
+     * Tests Util::getEnv
+     */
+    public function testUsesServerSuperglobalAsFallback(): void
+    {
+        $_SERVER['foo'] = 'bar';
+        $this->assertEquals('bar', Util::getEnv('foo'));
+        unset($_SERVER['foo']);
+    }
+
+    /**
+     * Tests Util::getEnv
+     */
+    public function testReturnsDefaultIdEnvNotSet(): void
+    {
+        $this->assertEquals('baz', Util::getEnv('fiz', 'baz'));
+    }
 }

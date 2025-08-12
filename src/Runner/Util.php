@@ -47,4 +47,17 @@ final class Util
     {
         return substr($action, 0, 1) === '\\' ? 'php' : 'cli';
     }
+
+    /**
+     * Try to read an environment variable
+     *
+     * @param  string $name
+     * @param  string $default
+     * @return string
+     */
+    public static function getEnv(string $name, string $default = ''): string
+    {
+        $var = getenv($name);
+        return $var ?: $_ENV[$name] ?? $_SERVER[$name] ?? $default;
+    }
 }
