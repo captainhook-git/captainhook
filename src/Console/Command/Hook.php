@@ -12,8 +12,9 @@
 namespace CaptainHook\App\Console\Command;
 
 use CaptainHook\App\Config;
-use CaptainHook\App\Hook\Util;
+use CaptainHook\App\Hook\Util as HookUtil;
 use CaptainHook\App\Runner\Bootstrap\Util as BootstrapUtil;
+use CaptainHook\App\Runner\Util as RunnerUtil;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -97,7 +98,7 @@ abstract class Hook extends RepositoryAware
         try {
             $this->handleBootstrap($config);
 
-            $class = '\\CaptainHook\\App\\Runner\\Hook\\' . Util::getHookCommand($this->hookName);
+            $class = '\\CaptainHook\\App\\Runner\\Hook\\' . HookUtil::getHookCommand($this->hookName);
             /** @var \CaptainHook\App\Runner\Hook $hook */
             $hook  = new $class($io, $config, $repository);
             $hook->setPluginsDisabled($input->getOption('no-plugins'));
@@ -148,7 +149,7 @@ abstract class Hook extends RepositoryAware
     private function shouldHooksBeSkipped(): bool
     {
         foreach (['CAPTAINHOOK_SKIP_HOOKS', 'CI'] as $envVar) {
-            $skip = (int) ($_SERVER[$envVar] ?? 0);
+            $skip = (int) RunnerUtil::getEnv($envVar, "0");
             if ($skip === 1) {
                 return true;
             }

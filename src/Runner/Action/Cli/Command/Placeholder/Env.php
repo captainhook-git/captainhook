@@ -11,6 +11,8 @@
 
 namespace CaptainHook\App\Runner\Action\Cli\Command\Placeholder;
 
+use CaptainHook\App\Runner\Util;
+
 /**
  * Class Env
  *
@@ -36,6 +38,6 @@ class Env extends Foundation
         $var     = $options['value-of'];
         $default = $options['default'] ?? '';
 
-        return (string) ($_ENV[$var] ?? $default);
+        return Util::getEnv($var, $default);
     }
 }
