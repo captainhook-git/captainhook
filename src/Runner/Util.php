@@ -45,7 +45,18 @@ final class Util
      */
     public static function getExecType(string $action): string
     {
-        return substr($action, 0, 1) === '\\' ? 'php' : 'cli';
+        return self::isPHPType($action) ? 'php' : 'cli';
+    }
+
+    /**
+     * Check if the action type is PHP
+     *
+     * @param  string $action
+     * @return bool
+     */
+    private static function isPHPType(string $action): bool
+    {
+        return str_starts_with($action, '\\') || Shorthand::isShorthand($action);
     }
 
     /**
