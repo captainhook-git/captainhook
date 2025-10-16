@@ -28,8 +28,12 @@ jobs:
             experimental: false
           - php: 8.4
             buildphar: true
-            runtests: false
+            runtests: true
             experimental: false
+          - php: 8.5
+            buildphar: false
+            runtests: true
+            experimental: true
     env:
       PHAR: build/phar/captainhook.phar
 
