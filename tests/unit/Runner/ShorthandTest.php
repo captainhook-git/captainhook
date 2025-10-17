@@ -25,11 +25,12 @@ class ShorthandTest extends TestCase
         $this->assertFalse(Shorthand::isShorthand('foo'));
         $this->assertFalse(Shorthand::isShorthand('\\CaptainHook\\App'));
         $this->assertFalse(Shorthand::isShorthand('CaptainHook.'));
+        $this->assertFalse(Shorthand::isShorthand('captainhook.sh'));
 
         // positive
-        $this->assertTrue(Shorthand::isShorthand('CaptainHook.foo'));
-        $this->assertTrue(Shorthand::isShorthand('captainhook.bar'));
-        $this->assertTrue(Shorthand::isShorthand('CAPTAINHOOK.baz'));
+        $this->assertTrue(Shorthand::isShorthand('CaptainHook.foo.fiz'));
+        $this->assertTrue(Shorthand::isShorthand('captainhook.Bar.Baz'));
+        $this->assertTrue(Shorthand::isShorthand('CAPTAINHOOK.FOO.BAR'));
     }
 
     /**

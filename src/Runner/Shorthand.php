@@ -12,6 +12,7 @@
 namespace CaptainHook\App\Runner;
 
 use CaptainHook\App\Hook;
+use PHPUnit\Framework\MockObject\MockObject;
 use RuntimeException;
 
 /**
@@ -84,14 +85,14 @@ class Shorthand
     ];
 
     /**
-     * Check if a configured action value is actually shorthand for an internal action
+     * Check if a configured action or condition value is actually a shorthand for an internal action
      *
-     * @param  string $action
+     * @param  string $shorthand
      * @return bool
      */
-    public static function isShorthand(string $action): bool
+    public static function isShorthand(string $shorthand): bool
     {
-        return (bool) preg_match('#^captainhook\.[a-z]+#i', $action);
+        return preg_match('#^captainhook\.[a-z]+\.[a-z]+$#i', $shorthand);
     }
 
     /**
