@@ -18,7 +18,20 @@ use CaptainHook\App\Hook\Condition;
 use SebastianFeldmann\Git\Repository;
 
 /**
- * NotOn condition
+ * NotOn Branch condition
+ *
+ * Example configuration:
+ * <code>
+ * {
+ *   "action": "some-action",
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.Status.NotOnBranch",
+ *       "args": ["not-on-this-branch"]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

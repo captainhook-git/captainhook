@@ -18,7 +18,20 @@ use CaptainHook\App\Hook\Condition;
 use SebastianFeldmann\Git\Repository;
 
 /**
- * OnMatching condition
+ * OnMatching Branch condition
+ *
+ * Example configuration:
+ * <code>
+ * {
+ *   "action": "some-action",
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.Status.OnMatchingBranch",
+ *       "args": ["#^branches-names/matching[0-9]+-this-regex$#i"]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

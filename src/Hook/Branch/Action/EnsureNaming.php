@@ -22,6 +22,20 @@ use SebastianFeldmann\Git\Repository;
 /**
  * Class EnsureNaming
  *
+ * This Action makes sure you are on a branch that follows your naming conventions.
+ *
+ * Example configuration:
+ * <code>
+ * {
+ *   "action": "CaptainHook.Branch.EnsureNaming",
+ *   "options": {
+ *     "regex": "#feature/issue[0-9]+-.*#i",
+ *     "error": "Arr matey! Ye be on the wrong branch!",
+ *     "success": "All clear, Captain! Full speed ahead!",
+ *   }
+ * }
+ * </code>
+ *
  * @package CaptainHook
  * @author  Felix Edelmann <fxedel@gmail.com>
  * @link    https://github.com/captainhook-git/captainhook

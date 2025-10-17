@@ -18,7 +18,20 @@ use CaptainHook\App\Hook\Condition;
 use SebastianFeldmann\Git\Repository;
 
 /**
- * On condition
+ * On Branch condition
+ *
+ * Example configuration:
+ * <code>
+ * {
+ *   "action": "some-action",
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.Status.OnBranch",
+ *       "args": ["only-on-this-branch"]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
