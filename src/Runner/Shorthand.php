@@ -75,7 +75,10 @@ class Shorthand
                 'thatis' => Hook\Condition\FileStaged\ThatIs::class,
             ],
             'status'      => [
-                'onbranch' => Hook\Condition\Branch\On::class,
+                'onbranch'            => Hook\Condition\Branch\On::class,
+                'onmatchingbranch'    => Hook\Condition\Branch\OnMatching::class,
+                'notonbranch'         => Hook\Condition\Branch\NotOn::class,
+                'notonmatchingbranch' => Hook\Condition\Branch\NotOnMatching::class,
             ]
         ]
     ];
