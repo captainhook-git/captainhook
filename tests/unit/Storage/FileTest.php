@@ -18,9 +18,6 @@ use RuntimeException;
 
 class FileTest extends TestCase
 {
-    /**
-     * Tests File::getRoot
-     */
     public function testGetPath(): void
     {
         $file = new File(__FILE__);
@@ -28,9 +25,6 @@ class FileTest extends TestCase
         $this->assertEquals(__FILE__, $file->getPath());
     }
 
-    /**
-     * Tests File::read
-     */
     public function testRead(): void
     {
         $file    = new File(__FILE__);
@@ -39,9 +33,6 @@ class FileTest extends TestCase
         $this->assertStringContainsString('<?php', $content);
     }
 
-    /**
-     * Tests File::read
-     */
     public function testReadFail(): void
     {
         $this->expectException(Exception::class);
@@ -50,9 +41,6 @@ class FileTest extends TestCase
         $file->read();
     }
 
-    /**
-     * Tests File::write
-     */
     public function testWrite(): void
     {
         $tmpDir = sys_get_temp_dir();
@@ -64,9 +52,6 @@ class FileTest extends TestCase
         $this->assertTrue(unlink($path));
     }
 
-    /**
-     * Tests File::isLink
-     */
     public function testIsLink(): void
     {
         $tmpDir = sys_get_temp_dir();
@@ -83,9 +68,6 @@ class FileTest extends TestCase
         $this->assertTrue(unlink($target));
     }
 
-    /**
-     * Tests File::linkTarget
-     */
     public function testLinkTarget(): void
     {
         $this->expectException(RuntimeException::class);
@@ -94,9 +76,6 @@ class FileTest extends TestCase
         $file->linkTarget();
     }
 
-    /**
-     * Tests File::write
-     */
     public function testWriteFailNoDir(): void
     {
         $this->expectException(Exception::class);
@@ -106,9 +85,6 @@ class FileTest extends TestCase
         $file->write('foo');
     }
 
-    /**
-     * Tests File::write
-     */
     public function testNoWritePermission(): void
     {
         $this->expectException(Exception::class);
@@ -118,9 +94,6 @@ class FileTest extends TestCase
         $file->write('test');
     }
 
-    /**
-     * Tests File::write
-     */
     public function testCantCreateDirectory(): void
     {
         $this->expectException(Exception::class);

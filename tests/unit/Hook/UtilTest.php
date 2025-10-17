@@ -11,6 +11,7 @@
 
 namespace CaptainHook\App\Hook;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use CaptainHook\App\Console\IO\Mockery;
@@ -19,9 +20,6 @@ class UtilTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests Util::isValid
-     */
     public function testIsValid(): void
     {
         $this->assertTrue(Util::isValid('pre-commit'));
@@ -30,9 +28,6 @@ class UtilTest extends TestCase
         $this->assertFalse(Util::isValid('foo'));
     }
 
-    /**
-     * Tests Util::isInstallable
-     */
     public function testIsInstallable(): void
     {
         $this->assertTrue(Util::isInstallable('pre-commit'));
@@ -41,9 +36,6 @@ class UtilTest extends TestCase
         $this->assertFalse(Util::isInstallable('post-change'));
     }
 
-    /**
-     * Tests Util::getValidHooks
-     */
     public function testGetValidHooks(): void
     {
         $this->assertArrayHasKey('pre-commit', Util::getValidHooks());
@@ -51,14 +43,7 @@ class UtilTest extends TestCase
         $this->assertArrayHasKey('commit-msg', Util::getValidHooks());
     }
 
-    /**
-     * Tests Util::getHookCommand
-     *
-     * @dataProvider providerValidCommands
-     *
-     * @param string $class
-     * @param string $hook
-     */
+    #[DataProvider('providerValidCommands')]
     public function testGetHookCommandValid(string $class, string $hook): void
     {
         $this->assertEquals($class, Util::getHookCommand($hook));
@@ -67,10 +52,7 @@ class UtilTest extends TestCase
         $this->assertEquals('PrePush', Util::getHookCommand('pre-push'));
     }
 
-    /**
-     * @return array
-     */
-    public function providerValidCommands(): array
+    public static function providerValidCommands(): array
     {
         return [
             ['CommitMsg', 'commit-msg'],
@@ -80,11 +62,7 @@ class UtilTest extends TestCase
         ];
     }
 
-    /**
-     * Tests Util::getHookCommand
-     *
-     * @dataProvider providerInvalidCommands
-     */
+    #[DataProvider('providerInvalidCommands')]
     public function testGetHookCommandInvalid(string $hook): void
     {
         $this->expectException(RuntimeException::class);
@@ -92,10 +70,7 @@ class UtilTest extends TestCase
         $this->assertEquals('', Util::getHookCommand($hook));
     }
 
-    /**
-     * @return array
-     */
-    public function providerInvalidCommands(): array
+    public static function providerInvalidCommands(): array
     {
         return [
             [''],
@@ -103,9 +78,6 @@ class UtilTest extends TestCase
         ];
     }
 
-    /**
-     * Tests Util::getHooks
-     */
     public function testGetHooks(): void
     {
         $this->assertContains('pre-commit', Util::getHooks());
@@ -113,9 +85,6 @@ class UtilTest extends TestCase
         $this->assertContains('commit-msg', Util::getHooks());
     }
 
-    /**
-     * Tests Util::findPreviousHead
-     */
     public function testFindPreviousHeadFallback(): void
     {
         $io = $this->createIOMock();
@@ -126,9 +95,7 @@ class UtilTest extends TestCase
 
         $this->assertEquals('HEAD@{1}', $prev);
     }
-    /**
-     * Tests Util::findPreviousHead
-     */
+
     public function testFindPreviousHeadFromStdIn(): void
     {
         $io = $this->createIOMock();

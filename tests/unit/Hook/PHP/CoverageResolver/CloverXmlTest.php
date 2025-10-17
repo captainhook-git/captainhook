@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class CloverXMLTest extends TestCase
 {
-    /**
-     * Tests CloverXML::getCoverage
-     */
     public function testValid(): void
     {
         $resolver = new CloverXML(CH_PATH_FILES . '/coverage/valid.xml');
@@ -27,9 +24,6 @@ class CloverXMLTest extends TestCase
         $this->assertEquals(95, $coverage);
     }
 
-    /**
-     * Tests CloverXML::getCoverage
-     */
     public function testValid100Percent(): void
     {
         $resolver = new CloverXML(CH_PATH_FILES . '/coverage/valid-100.xml');
@@ -38,9 +32,6 @@ class CloverXMLTest extends TestCase
         $this->assertEquals(100, $coverage);
     }
 
-    /**
-     * Tests CloverXML::__construct
-     */
     public function testFileNotFound(): void
     {
         $this->expectException(Exception::class);
@@ -49,9 +40,6 @@ class CloverXMLTest extends TestCase
         $this->assertNull($resolver);
     }
 
-    /**
-     * Tests CloverXML::__construct
-     */
     public function testCrapMetrics(): void
     {
         $this->expectException(Exception::class);
@@ -60,9 +48,6 @@ class CloverXMLTest extends TestCase
         $resolver->getCoverage();
     }
 
-    /**
-     * Tests CloverXML::__construct
-     */
     public function testInvalidXML(): void
     {
         $this->expectException(Exception::class);
@@ -71,9 +56,6 @@ class CloverXMLTest extends TestCase
         $this->assertNull($resolver);
     }
 
-    /**
-     * Tests CloverXML::__construct
-     */
     public function testInvalidMetrics(): void
     {
         $this->expectException(Exception::class);

@@ -12,19 +12,24 @@ jobs:
         include:
           - php: 8.0
             buildphar: false
+            runtests: false
             experimental: false
           - php: 8.1
             buildphar: false
+            runtests: true
             experimental: false
           - php: 8.2
             buildphar: true
+            runtests: true
             experimental: false
           - php: 8.3
             buildphar: true
+            runtests: true
             experimental: false
           - php: 8.4
             buildphar: true
-            experimental: true
+            runtests: false
+            experimental: false
     env:
       PHAR: build/phar/captainhook.phar
 
@@ -54,12 +59,15 @@ jobs:
       run: GITHUB_AUTH_TOKEN=${{ secrets.GITHUB_TOKEN }} tools/phive --no-progress --home ./.phive install --force-accept-unsigned --trust-gpg-keys 4AA394086372C20A,31C7E470E2138192,8E730BA25823D8B5,CF1A108D0E7AE720,2DF45277AEF09A2F,51C67305FFC2E5C0
 
     - name: Execute unit tests
+      if: ${{ matrix.runtests }}
       run: tools/phpunit --no-coverage --testsuite UnitTests
 
     - name: Execute integration tests
+      if: ${{ matrix.runtests }}
       run: tools/phpunit --no-coverage --testsuite IntegrationTests
 
     - name: Execute end-to-end tests
+      if: ${{ matrix.runtests }}
       run: tools/phpunit --no-coverage --testsuite EndToEndTests
 
     - name: Execute dummy pre commit

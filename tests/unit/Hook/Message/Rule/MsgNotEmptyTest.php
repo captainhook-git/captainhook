@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class MsgNotEmptyTest extends TestCase
 {
-    /**
-     * Tests MsgNotEmpty::pass
-     */
     public function testPassSuccess(): void
     {
         $msg  = new CommitMessage('Foo bar');
@@ -27,9 +24,6 @@ class MsgNotEmptyTest extends TestCase
         $this->assertTrue($rule->pass($msg));
     }
 
-    /**
-     * Tests MsgNotEmpty::pass
-     */
     public function testPassFail(): void
     {
         $msg  = new CommitMessage('');

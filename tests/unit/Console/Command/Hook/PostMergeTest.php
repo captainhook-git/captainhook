@@ -19,11 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class PostMergeTest extends TestCase
 {
-    /**
-     * Tests PostMerge::run
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $repo   = new DummyRepo();

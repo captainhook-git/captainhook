@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
 
 class LogTest extends TestCase
 {
-    # @Test
     public function testHasMessageForVerbosityEmptyLog(): void
     {
         $log = new Log();
@@ -30,7 +29,6 @@ class LogTest extends TestCase
         $this->assertFalse($log->hasMessageForVerbosity(IO::NORMAL));
     }
 
-    # @Test
     public function testHasMessageForVerbositySingleLog(): void
     {
         $log = new Log();
@@ -48,7 +46,6 @@ class LogTest extends TestCase
         $this->assertFalse($log->hasMessageForVerbosity(IO::NORMAL), 'should not have message for normal');
     }
 
-    # @Test
     public function testHasMessageForVerbosityMultiLog(): void
     {
         $log = new Log();

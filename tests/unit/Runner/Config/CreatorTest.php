@@ -25,20 +25,19 @@ class CreatorTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Creator::run
-     */
     public function testFailConfigFileExists(): void
     {
         $this->expectException(Exception::class);
 
-        $config = $this->createConfigMock(true);
-        $io     = $this->createIOMock();
-        $io->method('ask')->will(
-            $this->onConsecutiveCalls(
-                ...['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n']
-            )
-        );
+        $invocations = $this->atLeast(0);
+        $config      = $this->createConfigMock(true);
+        $io          = $this->createIOMock();
+        $io->expects($invocations)
+           ->method('ask')
+           ->willReturnCallback(function ($parameters) use ($invocations) {
+               $results = ['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'];
+               return $results[$invocations->numberOfInvocations() - 1] ?? '';
+           });
 
         $runner = new Creator($io, $config);
         $runner->advanced(true)
@@ -46,9 +45,8 @@ class CreatorTest extends TestCase
     }
 
     /**
-     * Tests Creator::run
-     *
-     * Check if a previously defined configuration will not be deleted if we extend the configuration.
+     * Check if a previously defined configuration will not be deleted
+     * if we extend the configuration.
      *
      * @throws \Exception
      */
@@ -56,16 +54,18 @@ class CreatorTest extends TestCase
     {
         $configFileContentBefore = '{"pre-commit": {"enabled": false,"actions": [{"action": "phpunit"}]}}';
 
-        $configDir  = vfsStream::setup('root', null, ['captainhook.json' => $configFileContentBefore]);
-        $configFile = $configDir->url() . '/captainhook.json';
-        $config     = Config\Factory::create($configFile);
+        $configDir   = vfsStream::setup('root', null, ['captainhook.json' => $configFileContentBefore]);
+        $configFile  = $configDir->url() . '/captainhook.json';
+        $config      = Config\Factory::create($configFile);
+        $invocations = $this->atLeast(3);
 
         $io = $this->createIOMock();
-        $io->method('ask')->will(
-            $this->onConsecutiveCalls(
-                ...['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n']
-            )
-        );
+        $io->expects($invocations)
+           ->method('ask')
+           ->willReturnCallback(function ($parameters) use ($invocations) {
+               $results = ['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'];
+               return $results[$invocations->numberOfInvocations() - 1] ?? '';
+           });
         $io->expects($this->once())->method('askAndValidate')->willReturn('foo:bar');
 
         $runner = new Creator($io, $config);

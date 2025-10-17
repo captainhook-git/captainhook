@@ -20,9 +20,6 @@ class OnTest extends TestCase
     use IOMockery;
     use AppMockery;
 
-    /**
-     * Tests On::isTrue
-     */
     public function testConditionTrue(): void
     {
         $io           = $this->createIOMock();
@@ -36,9 +33,6 @@ class OnTest extends TestCase
         $this->assertTrue($condition->isTrue($io, $repository));
     }
 
-    /**
-     * Tests On::isTrue
-     */
     public function testConditionFalse(): void
     {
         $io           = $this->createIOMock();

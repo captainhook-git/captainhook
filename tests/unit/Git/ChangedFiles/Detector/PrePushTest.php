@@ -28,9 +28,6 @@ class PrePushTest extends TestCase
     use IOMockery;
     use AppMockery;
 
-    /**
-     * Tests: PrePush::getChangedFiles
-     */
     public function testGetChangedFilesNoRanges(): void
     {
         $io    = $this->createIOMock();
@@ -46,9 +43,6 @@ class PrePushTest extends TestCase
         $this->assertEquals([], $files);
     }
 
-    /**
-     * Tests: PrePush::getChangedFiles
-     */
     public function testGetChangedFilesRemoteExists(): void
     {
         $io    = $this->createIOMock();
@@ -74,9 +68,6 @@ class PrePushTest extends TestCase
         $this->assertEquals('foo.txt', $files[0]);
     }
 
-    /**
-     * Tests: PrePush::getChangedFiles
-     */
     public function testGetChangedFilesNewBranch(): void
     {
         $io    = $this->createIOMock();
@@ -107,10 +98,6 @@ class PrePushTest extends TestCase
         $this->assertEquals('foo.txt', $files[0]);
     }
 
-
-    /**
-     * Tests: PrePush::getChangedFiles
-     */
     public function testGetChangedFilesNewBranchNoReflog(): void
     {
         $io    = $this->createIOMock();

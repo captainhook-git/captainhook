@@ -23,11 +23,6 @@ class PrePushTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PrePush::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabled(): void
     {
         $dummy = new DummyRepo(['hooks' => ['pre-push' => '# hook script']]);
@@ -48,11 +43,6 @@ class PrePushTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PrePush::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabledNoActions(): void
     {
         $dummy = new DummyRepo(['hooks' => ['pre-push' => '# hook script']]);
@@ -72,11 +62,6 @@ class PrePushTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PrePush::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookDisabled(): void
     {
         $io           = $this->createIOMock();

@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 class OptionsTest extends TestCase
 {
-    /**
-     * Tests Options::get
-     */
     public function testGet(): void
     {
         $options = new Options(['foo' => 'bar']);
@@ -25,9 +22,6 @@ class OptionsTest extends TestCase
         $this->assertEquals('bar', $options->get('foo'));
     }
 
-    /**
-     * Tests Options::getOptions
-     */
     public function testGetAll(): void
     {
         $options = new Options(['foo']);

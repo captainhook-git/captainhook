@@ -20,11 +20,6 @@ use Symfony\Component\Console\Output\NullOutput;
 
 class EnableTest extends TestCase
 {
-    /**
-     * Tests Enable::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteNoConfig(): void
     {
         $resolver = new Resolver();
@@ -40,11 +35,6 @@ class EnableTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-    /**
-     * Tests Enable::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteEnablePrePush(): void
     {
         $resolver   = new Resolver();

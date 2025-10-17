@@ -21,9 +21,6 @@ class EnsureNamingTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests EnsureNaming::getRestriction
-     */
     public function testConstraint(): void
     {
         $this->assertTrue(EnsureNaming::getRestriction()->isApplicableFor('pre-commit'));
@@ -32,11 +29,6 @@ class EnsureNamingTest extends TestCase
         $this->assertFalse(EnsureNaming::getRestriction()->isApplicableFor('post-commit'));
     }
 
-    /**
-     * Tests EnsureNaming::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteDefaultSuccess(): void
     {
         $io = $this->createPartialMock(NullIO::class, ['write']);
@@ -57,11 +49,6 @@ class EnsureNamingTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests EnsureNaming::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteCustomSuccess(): void
     {
         $successMessage = 'Regex matched';
@@ -88,11 +75,6 @@ class EnsureNamingTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests EnsureNaming::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteInvalidOption(): void
     {
         $this->expectException(Exception::class);
@@ -106,11 +88,6 @@ class EnsureNamingTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests EnsureNaming::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteNoMatchDefaultErrorMessage(): void
     {
         $this->expectException(Exception::class);
@@ -128,11 +105,6 @@ class EnsureNamingTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests EnsureNaming::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteNoMatchCustomErrorMessage(): void
     {
         $this->expectException(Exception::class);

@@ -12,6 +12,7 @@
 namespace CaptainHook\App\Git;
 
 use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
 
 class DummyRepo
 {
@@ -20,14 +21,14 @@ class DummyRepo
      *
      * @var string
      */
-    private $path;
+    private string $path;
 
     /**
      * Default empty hook git dir structure
      *
      * @var array
      */
-    private static $defaultStructure = [
+    private static array $defaultStructure = [
         'config' => '# fake git config',
         'hooks'  => [
             'pre-commit.sample' => '# fake pre-commit sample file',
@@ -40,7 +41,7 @@ class DummyRepo
      *
      * @var \org\bovigo\vfs\vfsStreamDirectory
      */
-    private $repo;
+    private vfsStreamDirectory $repo;
 
     /**
      * DummyRepo constructor
@@ -61,7 +62,7 @@ class DummyRepo
      * @param  array $files
      * @return array
      */
-    private function setupRepo(array $gitDir, array $files)
+    private function setupRepo(array $gitDir, array $files): array
     {
         $dotGit = empty($gitDir) ? self::$defaultStructure : $gitDir;
 
@@ -87,7 +88,7 @@ class DummyRepo
      *
      * @return string
      */
-    public function getRoot()
+    public function getRoot(): string
     {
         return $this->path;
     }
@@ -97,7 +98,7 @@ class DummyRepo
      *
      * @return string
      */
-    public function getGitDir()
+    public function getGitDir(): string
     {
         return $this->getRoot() . '/.git';
     }
@@ -107,7 +108,7 @@ class DummyRepo
      *
      * @return string
      */
-    public function getHookDir()
+    public function getHookDir(): string
     {
         return $this->getGitDir() . '/hooks';
     }

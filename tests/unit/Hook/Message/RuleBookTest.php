@@ -19,9 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class RuleBookTest extends TestCase
 {
-    /**
-     * Tests RuleBook::validate
-     */
     public function testValidOnEmptyRuleList(): void
     {
         $msg = new CommitMessage('Foo');
@@ -31,9 +28,6 @@ class RuleBookTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests RuleBook::setRules
-     */
     public function testSetRulesValid(): void
     {
         $msg = new CommitMessage('Foo');
@@ -44,9 +38,6 @@ class RuleBookTest extends TestCase
         $this->assertEquals([], $problems);
     }
 
-    /**
-     * Tests RuleBook::setRules
-     */
     public function testSetRulesInvalid(): void
     {
         $msg = new CommitMessage('');
@@ -56,9 +47,6 @@ class RuleBookTest extends TestCase
         $this->assertCount(1, $problems);
     }
 
-    /**
-     * Tests RuleBook::setRules
-     */
     public function testAddRuleInvalid(): void
     {
         $msg = new CommitMessage('foo bar baz');
@@ -70,9 +58,6 @@ class RuleBookTest extends TestCase
         $this->assertCount(1, $problems);
     }
 
-    /**
-     * Tests RuleBook::setRules
-     */
     public function testAddRuleInvalidMultiLineProblem(): void
     {
         $msg = new CommitMessage('fixed bar baz');

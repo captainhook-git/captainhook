@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class XmlTest extends TestCase
 {
-    /**
-     * Tests Xml::read
-     */
     public function testRead(): void
     {
         $this->expectException(Exception::class);

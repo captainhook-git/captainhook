@@ -25,7 +25,6 @@ class ReaderTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-
     public function testOnlyWorksIfConfigIsLoadedFromFile(): void
     {
         $this->expectException(Exception::class);

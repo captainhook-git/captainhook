@@ -18,9 +18,6 @@ use PHPUnit\Framework\TestCase;
  */
 class UtilTest extends TestCase
 {
-    /**
-     * Tests: Util::isZeroHash
-     */
     public function testIsZeroHash()
     {
         $this->assertTrue(Util::isZeroHash('00000000000000000'));
@@ -28,9 +25,6 @@ class UtilTest extends TestCase
         $this->assertFalse(Util::isZeroHash('ef65da'));
     }
 
-    /**
-     * Tests: Util::extractBranchInfo
-     */
     public function testExtractBranchInfoDefaultRemote()
     {
         $info = Util::extractBranchInfo('foo-bar-baz');
@@ -38,9 +32,6 @@ class UtilTest extends TestCase
         $this->assertEquals('foo-bar-baz', $info['branch']);
     }
 
-    /**
-     * Tests: Util::extractBranchInfo
-     */
     public function testExtractBranchInfoWithRef()
     {
         $info = Util::extractBranchInfo('refs/origin/foo');
@@ -48,9 +39,6 @@ class UtilTest extends TestCase
         $this->assertEquals('foo', $info['branch']);
     }
 
-    /**
-     * Tests: Util::extractBranchInfo
-     */
     public function testExtractBranchInfoWithSlashInBranchName()
     {
         $info = Util::extractBranchInfo('refs/source/feature/foo');

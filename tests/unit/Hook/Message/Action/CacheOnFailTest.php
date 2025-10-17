@@ -24,9 +24,6 @@ class CacheOnFailTest extends TestCase
     use ConfigMockery;
     use CHMockery;
 
-    /**
-     * Tests CacheOnFail::getEventHandlers
-     */
     public function testExecute(): void
     {
         $io     = new NullIO();
@@ -43,11 +40,6 @@ class CacheOnFailTest extends TestCase
         $this->assertInstanceOf(WriteCacheFile::class, $handlers['onHookFailure'][0]);
     }
 
-    /**
-     * Tests CacheOnFail::getEventHandlers
-     *
-     * @throws \Exception
-     */
     public function testExecuteFail(): void
     {
         $this->expectException(Exception::class);

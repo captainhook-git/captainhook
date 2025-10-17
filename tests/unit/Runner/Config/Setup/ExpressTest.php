@@ -22,17 +22,18 @@ class ExpressTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Express::configureHooks
-     *
-     * @throws \Exception
-     */
     public function testConfigureExpress(): void
     {
-        $io     = $this->createIOMock();
-        $config = $this->createConfigMock();
+        $invokedCount = $this->atLeast(6);
+        $io           = $this->createIOMock();
+        $config       = $this->createConfigMock();
         $config->expects($this->exactly(2))->method('getHookConfig')->willReturn($this->createHookConfigMock());
-        $io->method('ask')->will($this->onConsecutiveCalls('y', 'y', 'y', 'phpunit', 'y', 'phpcs'));
+        $io->expects($invokedCount)
+           ->method('ask')
+           ->willReturnCallback(function ($parameters) use ($invokedCount) {
+               $results = ['y', 'y', 'y', 'phpunit', 'y', 'phpcs'];
+               return $results[$invokedCount->numberOfInvocations() - 1] ?? '';
+           });
 
         $setup  = new Express($io);
         $setup->configureHooks($config);

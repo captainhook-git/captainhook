@@ -20,9 +20,6 @@ class OnBranchTest extends TestCase
     use IOMockery;
     use AppMockery;
 
-    /**
-     * Tests OnBranch::isTrue
-     */
     public function testConditionTrue(): void
     {
         $io           = $this->createIOMock();
@@ -36,9 +33,6 @@ class OnBranchTest extends TestCase
         $this->assertTrue($condition->isTrue($io, $repository));
     }
 
-    /**
-     * Tests OnBranch::isTrue
-     */
     public function testConditionFalse(): void
     {
         $io           = $this->createIOMock();

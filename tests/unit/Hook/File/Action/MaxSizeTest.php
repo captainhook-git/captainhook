@@ -18,15 +18,13 @@ use CaptainHook\App\Hooks;
 use CaptainHook\App\Mockery;
 use Exception;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use RuntimeException;
 
 class MaxSizeTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests MaxSite::getRestriction
-     */
     public function testRestrictions(): void
     {
         $restriction = MaxSize::getRestriction();
@@ -35,11 +33,6 @@ class MaxSizeTest extends TestCase
         $this->assertFalse($restriction->isApplicableFor(Hooks::POST_CHECKOUT));
     }
 
-    /**
-     * Tests MaxSize::execute
-     *
-     * @throws \Exception
-     */
     public function testPass(): void
     {
         $io       = new NullIO();
@@ -54,11 +47,6 @@ class MaxSizeTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests MaxSize::execute
-     *
-     * @throws \Exception
-     */
     public function testFail(): void
     {
         $this->expectException(ActionFailed::class);
@@ -75,11 +63,6 @@ class MaxSizeTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests MaxSize::execute
-     *
-     * @throws \Exception
-     */
     public function testInvalidSize(): void
     {
         $this->expectException(Exception::class);
@@ -96,9 +79,7 @@ class MaxSizeTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * @dataProvider toBytesProvider
-     */
+    #[DataProvider('toBytesProvider')]
     public function testToBytes(string $input, int $expected): void
     {
         $maxSize = new MaxSize();
@@ -106,15 +87,15 @@ class MaxSizeTest extends TestCase
         $this->assertSame($expected, $maxSize->toBytes($input));
     }
 
-    public function toBytesProvider(): array
+    public static function toBytesProvider(): array
     {
         return [
-            ['input' => '512B', 'expected' => 512],
-            ['input' => '1K', 'expected' => 1024],
-            ['input' => '5M', 'expected' => 5242880],
-            ['input' => '2G', 'expected' => 2147483648],
-            ['input' => '3T', 'expected' => 3298534883328],
-            ['input' => '4P', 'expected' => 4503599627370496],
+            ['512B', 512],
+            ['1K', 1024],
+            ['5M', 5242880],
+            ['2G', 2147483648],
+            ['3T', 3298534883328],
+            ['4P', 4503599627370496],
         ];
     }
 

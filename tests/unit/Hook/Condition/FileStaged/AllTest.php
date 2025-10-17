@@ -20,18 +20,12 @@ class AllTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests OfType::getRestriction
-     */
     public function testPreCommitRestriction(): void
     {
         $this->assertTrue(All::getRestriction()->isApplicableFor('pre-commit'));
         $this->assertFalse(All::getRestriction()->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests All::isTrue
-     */
     public function testIsFalse(): void
     {
         $io         = $this->createIOMock();
@@ -44,9 +38,6 @@ class AllTest extends TestCase
         $this->assertFalse($fileStaged->isTrue($io, $repository));
     }
 
-    /**
-     * Tests All::isTrue
-     */
     public function testWithWildcardIsFalse(): void
     {
         $io         = $this->createIOMock();
@@ -59,9 +50,6 @@ class AllTest extends TestCase
         $this->assertFalse($fileStaged->isTrue($io, $repository));
     }
 
-    /**
-     * Tests All::isTrue
-     */
     public function testIsTrue(): void
     {
         $io         = $this->createIOMock();
@@ -74,9 +62,6 @@ class AllTest extends TestCase
         $this->assertTrue($fileStaged->isTrue($io, $repository));
     }
 
-    /**
-     * Tests All::isTrue
-     */
     public function testWithWildcardIsTrue(): void
     {
         $io = $this->createIOMock();

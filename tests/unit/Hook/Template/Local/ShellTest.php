@@ -20,9 +20,6 @@ class ShellTest extends TestCase
 {
     use ConfigMockery;
 
-    /**
-     * Tests Shell::getCode
-     */
     public function testTemplate(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -43,9 +40,6 @@ class ShellTest extends TestCase
         $this->assertStringContainsString('vendor/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests Shell::getCode
-     */
     public function testTemplateWithoutBootstrap(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -65,9 +59,6 @@ class ShellTest extends TestCase
         $this->assertStringContainsString('vendor/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests Shell::getCode
-     */
     public function testTemplateWithDefinedPHP(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -88,9 +79,6 @@ class ShellTest extends TestCase
         $this->assertStringContainsString('vendor/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests Shell::getCode
-     */
     public function testTemplateWithDefinedPHPAndRunPath(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -113,9 +101,6 @@ class ShellTest extends TestCase
         $this->assertStringContainsString('tools/captainhook.phar $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests Shell::getCode
-     */
     public function testTemplateExtExecutable(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -136,9 +121,6 @@ class ShellTest extends TestCase
         $this->assertStringContainsString('/usr/local/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests Shell::getCode
-     */
     public function testTemplateExtExecutableWithDefinedPHP(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -160,9 +142,6 @@ class ShellTest extends TestCase
         $this->assertStringContainsString('/usr/local/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests Shell::getCode
-     */
     public function testTemplateExtExecutableWithUserInput(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -183,11 +162,6 @@ class ShellTest extends TestCase
         $this->assertStringContainsString($this->getTtyRedirectionLines(), $code);
     }
 
-    /**
-     * Returns the expected TTY redirection lines
-     *
-     * @return string
-     */
     private function getTtyRedirectionLines(): string
     {
         return <<<'EOD'

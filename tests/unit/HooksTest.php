@@ -16,26 +16,17 @@ use PHPUnit\Framework\TestCase;
 
 class HooksTest extends TestCase
 {
-    /**
-     * Tests Hooks::getOriginalHookArguments
-     */
     public function testHookArguments(): void
     {
         $this->assertEquals('', Hooks::getOriginalHookArguments('pre-commit'));
         $this->assertEquals(' {$PREVIOUSHEAD} {$NEWHEAD} {$MODE}', Hooks::getOriginalHookArguments('post-checkout'));
     }
 
-    /**
-     * Tests Hooks::getVirtualHook
-     */
     public function testGetVirtualHook(): void
     {
         $this->assertEquals('post-change', Hooks::getVirtualHook('post-rewrite'));
     }
 
-    /**
-     * Tests Hooks::getNativeHooksForVirtualHook
-     */
     public function testGetNativeHooksForVirtualHookWithVirtual(): void
     {
         $hooks = Hooks::getNativeHooksForVirtualHook(Hooks::POST_CHANGE);
@@ -45,9 +36,6 @@ class HooksTest extends TestCase
         $this->assertTrue(in_array(Hooks::POST_REWRITE, $hooks));
     }
 
-    /**
-     * Tests Hooks::getNativeHooksForVirtualHook
-     */
     public function testGetNativeHooksForVirtualHookWithNative(): void
     {
         $hooks = Hooks::getNativeHooksForVirtualHook(Hooks::PRE_COMMIT);
@@ -55,9 +43,6 @@ class HooksTest extends TestCase
         $this->assertTrue(empty($hooks));
     }
 
-    /**
-     * Tests Hooks::getVirtualHook
-     */
     public function testGetVirtualHookFail(): void
     {
         $this->expectException(Exception::class);

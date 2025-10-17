@@ -23,11 +23,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PreCommitTest extends TestCase
 {
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteLib(): void
     {
         $repo   = new DummyRepo();
@@ -45,11 +40,6 @@ class PreCommitTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteSkip(): void
     {
         $repo   = new DummyRepo();
@@ -71,11 +61,6 @@ class PreCommitTest extends TestCase
         $_SERVER['CAPTAINHOOK_SKIP_HOOKS'] = 0;
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testExecutePhar(): void
     {
         $resolver = $this->createMock(Resolver::class);
@@ -98,11 +83,6 @@ class PreCommitTest extends TestCase
         $this->assertTrue(defined('CH_BOOTSTRAP_WORKED'));
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testExecutePharBootstrapNotFound(): void
     {
         $resolver = $this->createMock(Resolver::class);
@@ -122,9 +102,6 @@ class PreCommitTest extends TestCase
         $this->assertEquals(1, $cmd->run($input, $output));
     }
 
-    /**
-     * Tests PreCommit::run
-     */
     public function testExecutePharBootstrapNotSet(): void
     {
         $resolver = $this->createMock(Resolver::class);
@@ -143,11 +120,6 @@ class PreCommitTest extends TestCase
         $this->assertEquals(0, $cmd->run($input, $output));
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailingActionInDebugMode(): void
     {
         $this->expectException(Exception::class);
@@ -171,11 +143,6 @@ class PreCommitTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailingActionInVerboseMode(): void
     {
         $output = $this->createMock(NullOutput::class);

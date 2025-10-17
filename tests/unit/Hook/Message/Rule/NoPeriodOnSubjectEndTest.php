@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class NoPeriodOnSubjectEndTest extends TestCase
 {
-    /**
-     * Tests NoPeriodOnSubjectEnd::pass
-     */
     public function testPassSuccess(): void
     {
         $msg  = new CommitMessage('Foo bar');
@@ -27,9 +24,6 @@ class NoPeriodOnSubjectEndTest extends TestCase
         $this->assertTrue($rule->pass($msg));
     }
 
-    /**
-     * Tests NoPeriodOnSubjectEnd::pass
-     */
     public function testPassFail(): void
     {
         $msg  = new CommitMessage('Foo bar.');

@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 class ExtractorTest extends TestCase
 {
-    /**
-     * Tests Extractor::extractNotification
-     */
     public function testExtractMultilineNotification()
     {
         $message = 'Foo' . PHP_EOL . 'git-notify: FIZ' . PHP_EOL . 'baz' . PHP_EOL . 'biz';
@@ -26,9 +23,6 @@ class ExtractorTest extends TestCase
         $this->assertEquals(3, $notification->length());
     }
 
-    /**
-     * Tests Extractor::extractNotification
-     */
     public function testExtractNotificationWithoutPrefix()
     {
         $message = 'Foo' . PHP_EOL . 'bar';

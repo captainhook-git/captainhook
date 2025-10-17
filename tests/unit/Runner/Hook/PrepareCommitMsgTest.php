@@ -27,11 +27,6 @@ class PrepareCommitMsgTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PrepareCommitMsg::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabled(): void
     {
         $io           = $this->createIOMock();
@@ -66,11 +61,6 @@ class PrepareCommitMsgTest extends TestCase
         $this->assertEquals('Prepared commit msg', file_get_contents($commitMessageFile));
     }
 
-    /**
-     * Tests PrepareCommitMsg::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookNoMessageException(): void
     {
         $this->expectException(Exception::class);

@@ -22,9 +22,6 @@ class FormatterTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests Formatter::format
-     */
     public function testFormatArgumentPlaceholders(): void
     {
         $config = $this->createConfigMock();
@@ -38,9 +35,6 @@ class FormatterTest extends TestCase
         $this->assertEquals('cmd argument bar', $command);
     }
 
-    /**
-     * Tests Formatter::format
-     */
     public function testFormatInvalidPlaceholderReplacedWithEmptyString(): void
     {
         $config = $this->createConfigMock();
@@ -54,9 +48,6 @@ class FormatterTest extends TestCase
         $this->assertEquals('cmd argument ', $command);
     }
 
-    /**
-     * Tests Formatter::format
-     */
     public function testCachedPlaceholder(): void
     {
         $io     = $this->createIOMock();
@@ -77,10 +68,6 @@ class FormatterTest extends TestCase
         $this->assertEquals('cmd3 argument foo/file1.php bar/file2.php baz/file3.php', $command3);
     }
 
-
-    /**
-     * Tests Formatter::format
-     */
     public function testComplexPlaceholder(): void
     {
         $io     = $this->createIOMock();

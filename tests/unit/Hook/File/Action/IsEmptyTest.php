@@ -21,11 +21,6 @@ class IsEmptyTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests IsEmpty::execute
-     *
-     * @throws \Exception
-     */
     public function testInvalidConfiguration(): void
     {
         $this->expectException(Exception::class);
@@ -42,11 +37,6 @@ class IsEmptyTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests IsEmpty::execute
-     *
-     * @throws \Exception
-     */
     public function testCommitEmptyFile(): void
     {
         $io     = new NullIO();
@@ -66,11 +56,6 @@ class IsEmptyTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests IsEmpty::execute
-     *
-     * @throws \Exception
-     */
     public function testCommitUnwatchedEmptyFile(): void
     {
         $io     = new NullIO();
@@ -89,11 +74,6 @@ class IsEmptyTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests IsEmpty::execute
-     *
-     * @throws \Exception
-     */
     public function testFailCommitFileWithContents(): void
     {
         $this->expectException(Exception::class);

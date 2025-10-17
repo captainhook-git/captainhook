@@ -16,9 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class IOUtilTest extends TestCase
 {
-    /**
-     * Tests IOUtil::mapConfigVerbosity
-     */
     public function testMapConfigVerbosity(): void
     {
         $this->assertEquals(OutputInterface::VERBOSITY_QUIET, IOUtil::mapConfigVerbosity('quiet'));
@@ -27,17 +24,11 @@ class IOUtilTest extends TestCase
         $this->assertEquals(OutputInterface::VERBOSITY_DEBUG, IOUtil::mapConfigVerbosity('debug'));
     }
 
-    /**
-     * Tests IOUtil::mapConfigVerbosity
-     */
     public function testMapConfigVerbosityNotFound(): void
     {
         $this->assertEquals(OutputInterface::VERBOSITY_NORMAL, IOUtil::mapConfigVerbosity('foobar'));
     }
 
-    /**
-     * Tests IOUtil::answerToBool
-     */
     public function testAnswerToBool(): void
     {
         $this->assertTrue(IOUtil::answerToBool('y'));
@@ -47,9 +38,6 @@ class IOUtilTest extends TestCase
         $this->assertFalse(IOUtil::answerToBool('foo'));
     }
 
-    /**
-     * Tests IOUtil::formatHeadline
-     */
     public function testFormatHeadlineLong(): void
     {
         $long     = str_repeat('x', 90);
@@ -58,9 +46,6 @@ class IOUtilTest extends TestCase
         $this->assertEquals($long, $headline);
     }
 
-    /**
-     * Tests IOUtil::formatHeadline
-     */
     public function testFormatHeadlineShort(): void
     {
         $text     = str_repeat('x', 70) ;

@@ -10,7 +10,7 @@ class DummyConstrainedHookPlugin extends DummyHookPlugin implements Constrained
     /**
      * @var Restriction|null
      */
-    public static $restriction;
+    public static ?Restriction $restriction;
 
     public static function getRestriction(): Restriction
     {

@@ -22,41 +22,36 @@ class AdvancedTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Advanced::configureHooks
-     *
-     * @throws \Exception
-     */
     public function testConfigureCliHook(): void
     {
-        $io     = $this->createIOMock();
-        $config = $this->createConfigMock();
+        $invocations = $this->atLeast(3);
+        $io          = $this->createIOMock();
+        $config      = $this->createConfigMock();
         $config->expects($this->exactly(9))->method('getHookConfig')->willReturn($this->createHookConfigMock());
-        $io->method('ask')->will(
-            $this->onConsecutiveCalls(
-                ...['y', 'y', 'echo \'foo\'', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n']
-            )
-        );
+        $io->expects($invocations)
+           ->method('ask')
+           ->willReturnCallback(function ($parameters) use ($invocations) {
+               $results = ['y', 'y', 'echo \'foo\'', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'];
+               return $results[$invocations->numberOfInvocations() - 1] ?? '';
+           });
 
         $setup  = new Advanced($io);
         $setup->configureHooks($config);
     }
 
-    /**
-     * Tests Advanced::configureHooks
-     *
-     * @throws \Exception
-     */
     public function testConfigurePHPHook(): void
     {
-        $io     = $this->createIOMock();
-        $config = $this->createConfigMock();
+        $invocations = $this->atLeast(3);
+        $io          = $this->createIOMock();
+        $config      = $this->createConfigMock();
         $config->method('getHookConfig')->willReturn($this->createHookConfigMock());
-        $io->method('ask')->will(
-            $this->onConsecutiveCalls(
-                ...['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n']
-            )
-        );
+        $io->expects($invocations)
+           ->method('ask')
+           ->willReturnCallback(function ($parameters) use ($invocations) {
+               $results = ['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'];
+               return $results[$invocations->numberOfInvocations() - 1] ?? '';
+           });
+
         $io->expects($this->once())->method('askAndValidate')->willReturn('foo:bar');
 
         $setup  = new Advanced($io);

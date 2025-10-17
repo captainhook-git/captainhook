@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 class FilterUtilTest extends TestCase
 {
-    /**
-     * Tests FilterUtil::sanitize
-     */
     public function testSanitize(): void
     {
         $sanitized = FilterUtil::sanitize(['A', 'C', 'Z']);
@@ -27,9 +24,6 @@ class FilterUtilTest extends TestCase
         $this->assertTrue(in_array('C', $sanitized));
     }
 
-    /**
-     * Tests FilterUtil::sanitize
-     */
     public function testSanitizeEmpty(): void
     {
         $sanitized = FilterUtil::sanitize(['Q', 'L', 'Z']);
@@ -37,9 +31,6 @@ class FilterUtilTest extends TestCase
         $this->assertEmpty($sanitized);
     }
 
-    /**
-     * Tests FilterUtil::filterFromConfigValue
-     */
     public function testFromConfigValue(): void
     {
         $this->assertEmpty(FilterUtil::filterFromConfigValue('FOO'));

@@ -22,20 +22,12 @@ class RegexTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests Regex::getRestriction
-     */
     public function testConstraint(): void
     {
         $this->assertTrue(Regex::getRestriction()->isApplicableFor('commit-msg'));
         $this->assertFalse(Regex::getRestriction()->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests RegexCheck::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteDefaultSuccess(): void
     {
         $io = $this->createPartialMock(NullIO::class, ['write']);
@@ -53,11 +45,6 @@ class RegexTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests RegexCheck::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteCustomSuccess(): void
     {
         $successMessage = 'Regex matched';
@@ -82,11 +69,6 @@ class RegexTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests RegexCheck::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteInvalidOption(): void
     {
         $this->expectException(Exception::class);
@@ -100,12 +82,6 @@ class RegexTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-
-    /**
-     * Tests RegexCheck::execute
-     *
-     * @throws \Exception
-     */
     public function testMerging(): void
     {
         $io     = new NullIO();
@@ -120,11 +96,6 @@ class RegexTest extends TestCase
         $this->assertTrue(true, 'Since we are merging nothing should happen');
     }
 
-    /**
-     * Tests RegexCheck::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteNoMatchCustomErrorMessage(): void
     {
         $this->expectException(Exception::class);

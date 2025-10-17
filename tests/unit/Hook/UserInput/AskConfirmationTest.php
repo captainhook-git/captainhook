@@ -25,9 +25,6 @@ class AskConfirmationTest extends TestCase
     use ConfigMockery;
     use CHMockery;
 
-    /**
-     * Tests CacheOnFail::getEventHandlers
-     */
     public function testExecute(): void
     {
         $io     = new NullIO();

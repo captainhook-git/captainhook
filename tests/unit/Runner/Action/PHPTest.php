@@ -24,9 +24,6 @@ class PHPTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PHP::execute
-     */
     public function testExecuteSuccess(): void
     {
         $config = $this->createConfigMock();
@@ -42,9 +39,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::execute
-     */
     public function testExecuteEventSubscriber(): void
     {
         $config = $this->createConfigMock();
@@ -60,9 +54,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::execute
-     */
     public function testExecuteConstraintApplicable(): void
     {
         $config = $this->createConfigMock();
@@ -78,9 +69,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::execute
-     */
     public function testExecuteConstraintNotApplicable(): void
     {
         $config = $this->createConfigMock();
@@ -96,11 +84,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::execute
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteFailure(): void
     {
         $this->expectException(Exception::class);
@@ -118,11 +101,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::execute
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteError(): void
     {
         $this->expectException(Exception::class);
@@ -140,11 +118,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::execute
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteNoAction(): void
     {
         $this->expectException(Exception::class);
@@ -162,11 +135,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::executeStatic
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteStaticClassNotFound(): void
     {
         $this->expectException(Exception::class);
@@ -185,11 +153,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests PHP::executeStatic
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteStaticMethodNotFound(): void
     {
         $this->expectException(Exception::class);
@@ -208,12 +171,6 @@ class PHPTest extends TestCase
         $php->execute($config, $io, $repo, $action);
     }
 
-
-    /**
-     * Tests PHP::executeStatic
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteStaticSuccess(): void
     {
         $config = $this->createConfigMock();

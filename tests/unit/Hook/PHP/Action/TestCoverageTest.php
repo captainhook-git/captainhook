@@ -21,11 +21,6 @@ class TestCoverageTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests TestCoverage::execute
-     *
-     * @throws \Exception
-     */
     public function testCoverageViaCloverXML(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -45,11 +40,6 @@ class TestCoverageTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests TestCoverage::execute
-     *
-     * @throws \Exception
-     */
     public function testCoverageLow(): void
     {
         $this->expectException(Exception::class);
@@ -68,11 +58,6 @@ class TestCoverageTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests TestCoverage::execute
-     *
-     * @throws \Exception
-     */
     public function testCoverageViaPHPUnit(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {

@@ -21,11 +21,6 @@ class DoesNotContainRegexTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests DoesNotContainRegex::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteInvalidOption(): void
     {
         $this->expectException(Exception::class);
@@ -40,11 +35,6 @@ class DoesNotContainRegexTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests DoesNotContainRegex::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteSuccess(): void
     {
         $io     = new NullIO();
@@ -65,11 +55,6 @@ class DoesNotContainRegexTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests DoesNotContainRegex::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailure(): void
     {
         $this->expectException(Exception::class);
@@ -90,11 +75,6 @@ class DoesNotContainRegexTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests DoesNotContainRegex::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteMissConfiguration(): void
     {
         $this->expectException(Exception::class);
@@ -115,11 +95,7 @@ class DoesNotContainRegexTest extends TestCase
         $standard = new DoesNotContainRegex();
         $standard->execute($config, $io, $repo, $action);
     }
-    /**
-     * Tests DoesNotContainRegex::execute
-     *
-     * @throws \Exception
-     */
+
     public function testExecuteFailureWithCount(): void
     {
         $this->expectException(Exception::class);
@@ -141,11 +117,6 @@ class DoesNotContainRegexTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests DoesNotContainRegex::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteSuccessWithFileExtension(): void
     {
         $io     = new NullIO();
@@ -174,11 +145,6 @@ class DoesNotContainRegexTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests DoesNotContainRegex::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailureWithFileExtension(): void
     {
         $this->expectException(Exception::class);

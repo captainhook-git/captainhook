@@ -22,9 +22,6 @@ class ArgTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests Arg::replacement
-     */
     public function testArgValue(): void
     {
         $expected = '.git/EDIT.msg';
@@ -40,9 +37,6 @@ class ArgTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    /**
-     * Tests Arg::replacement
-     */
     public function testNoValueOf(): void
     {
         $io     = $this->createIOMock();
@@ -56,9 +50,6 @@ class ArgTest extends TestCase
         $this->assertEquals('', $result);
     }
 
-    /**
-     * Tests Arg::replacement
-     */
     public function testDefault(): void
     {
         $io     = $this->createIOMock();

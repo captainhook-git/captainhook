@@ -23,11 +23,6 @@ class CliTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Cli::execute
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteSuccess(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -49,11 +44,6 @@ class CliTest extends TestCase
         $cli->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Cli::execute
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteSuccessWithReplacements(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -74,11 +64,6 @@ class CliTest extends TestCase
         $cli->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Cli::execute
-     *
-     * @throws \CaptainHook\App\Exception\ActionFailed
-     */
     public function testExecuteFailure(): void
     {
         $this->expectException(Exception::class);

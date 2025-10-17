@@ -17,9 +17,6 @@ use PHPUnit\Framework\TestCase;
 
 class UtilTest extends TestCase
 {
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testEnabledMissing(): void
     {
         $this->expectException(Exception::class);
@@ -27,9 +24,6 @@ class UtilTest extends TestCase
         Util::validateJsonConfiguration(['pre-commit' => ['actions' => []]]);
     }
 
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testActionsMissing(): void
     {
         $this->expectException(Exception::class);
@@ -37,9 +31,6 @@ class UtilTest extends TestCase
         Util::validateJsonConfiguration(['pre-commit' => ['enabled' => true]]);
     }
 
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testActionsNoArray(): void
     {
         $this->expectException(Exception::class);
@@ -47,9 +38,6 @@ class UtilTest extends TestCase
         Util::validateJsonConfiguration(['pre-commit' => ['enabled' => true, 'actions' => false]]);
     }
 
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testActionMissing(): void
     {
         $this->expectException(Exception::class);
@@ -68,9 +56,6 @@ class UtilTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testActionEmpty(): void
     {
         $this->expectException(Exception::class);
@@ -87,9 +72,6 @@ class UtilTest extends TestCase
         );
     }
 
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testConditionExecMissing(): void
     {
         $this->expectException(Exception::class);
@@ -116,9 +98,6 @@ class UtilTest extends TestCase
         );
     }
 
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testConditionArgsNoArray(): void
     {
         $this->expectException(Exception::class);
@@ -143,10 +122,6 @@ class UtilTest extends TestCase
         );
     }
 
-
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testValid(): void
     {
         Util::validateJsonConfiguration(
@@ -163,9 +138,6 @@ class UtilTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Util::validateJsonConfiguration
-     */
     public function testValidWithCondition(): void
     {
         Util::validateJsonConfiguration(

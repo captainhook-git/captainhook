@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 class NotificationTest extends TestCase
 {
-    /**
-     * Tests Notification::banner
-     */
     public function testBanner()
     {
         $banner = PHP_EOL

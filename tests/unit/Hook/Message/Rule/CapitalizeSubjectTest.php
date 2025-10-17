@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class CapitalizeSubjectTest extends TestCase
 {
-    /**
-     * Tests CapitalizeSubject::pass
-     */
     public function testPassSuccess(): void
     {
         $msg  = new CommitMessage('Foo');
@@ -27,9 +24,6 @@ class CapitalizeSubjectTest extends TestCase
         $this->assertTrue($rule->pass($msg));
     }
 
-    /**
-     * Tests CapitalizeSubject::pass
-     */
     public function testPassFail(): void
     {
         $msg  = new CommitMessage('foo');
@@ -38,9 +32,6 @@ class CapitalizeSubjectTest extends TestCase
         $this->assertFalse($rule->pass($msg));
     }
 
-    /**
-     * Tests CapitalizeSubject::pass
-     */
     public function testPassFailOnEmptyMessage(): void
     {
         $msg  = new CommitMessage('');

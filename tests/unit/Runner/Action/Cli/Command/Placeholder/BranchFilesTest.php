@@ -30,9 +30,6 @@ class BranchFilesTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests BranchFiles::replacement
-     */
     public function testFindStarByReflogWithCustomSeparator(): void
     {
         $io     = $this->createIOMock();
@@ -59,9 +56,6 @@ class BranchFilesTest extends TestCase
         $this->assertEquals('file1.php,file2.php,README.md', $replaced);
     }
 
-    /**
-     * Tests BranchFiles::replacement
-     */
     public function testCantFindStartByReflog(): void
     {
         $io     = $this->createIOMock();
@@ -86,9 +80,6 @@ class BranchFilesTest extends TestCase
         $this->assertEquals('', $replaced);
     }
 
-    /**
-     * Tests BranchFiles::replacement
-     */
     public function testCompareToOfType(): void
     {
         $io     = $this->createIOMock();
@@ -110,9 +101,6 @@ class BranchFilesTest extends TestCase
         $this->assertEquals('file1.php file2.php', $replaced);
     }
 
-    /**
-     * Tests BranchFiles::replacement
-     */
     public function testFilterByDirectory(): void
     {
         $io     = $this->createIOMock();
@@ -134,9 +122,6 @@ class BranchFilesTest extends TestCase
         $this->assertEquals('foo/file1.php foo/file2.php', $replaced);
     }
 
-    /**
-     * Tests BranchFiles::replacement
-     */
     public function testReplaceWith(): void
     {
         $io     = $this->createIOMock();

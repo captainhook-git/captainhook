@@ -25,9 +25,6 @@ class AskConfirmationTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests AskConfirmation::handle
-     */
     public function testHandleYes(): void
     {
         $dummy   = new DummyRepo();
@@ -42,9 +39,6 @@ class AskConfirmationTest extends TestCase
         $handler->handle($event);
     }
 
-    /**
-     * Tests AskConfirmation::handle
-     */
     public function testHandleNo(): void
     {
         $this->expectException(Exception::class);

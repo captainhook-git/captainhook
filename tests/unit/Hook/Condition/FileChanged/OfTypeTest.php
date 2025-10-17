@@ -28,18 +28,12 @@ class OfTypeTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests OfType::getRestriction
-     */
     public function testRestriction(): void
     {
         $this->assertTrue(OfType::getRestriction()->isApplicableFor('pre-push'));
         $this->assertFalse(OfType::getRestriction()->isApplicableFor('pre-commit'));
     }
 
-    /**
-     * Tests OfType::isTrue
-     */
     public function testIsTrue(): void
     {
         $io = $this->createIOMock();
@@ -60,9 +54,6 @@ class OfTypeTest extends TestCase
         $this->assertTrue($fileChange->isTrue($io, $repository));
     }
 
-    /**
-     * Tests OfType::isTrue
-     */
     public function testChangedFileButNoneOfType(): void
     {
         $io = $this->createIOMock();
@@ -84,10 +75,6 @@ class OfTypeTest extends TestCase
         $this->assertFalse($fileChange->isTrue($io, $repository));
     }
 
-
-    /**
-     * Tests OfType::isTrue
-     */
     public function testIsZeroHash(): void
     {
         $io = $this->createIOMock();
@@ -107,9 +94,6 @@ class OfTypeTest extends TestCase
         $this->assertFalse($fileChange->isTrue($io, $repository));
     }
 
-    /**
-     * Tests OfType::isTrue
-     */
     public function testIsFalse(): void
     {
         $io = $this->createIOMock();

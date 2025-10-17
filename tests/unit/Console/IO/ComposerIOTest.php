@@ -21,9 +21,6 @@ class ComposerIOTest extends TestCase
      */
     private $io;
 
-    /**
-     * Test setup
-     */
     protected function setUp(): void
     {
         $mock = $this->getMockBuilder(IOInterface::class)
@@ -39,49 +36,31 @@ class ComposerIOTest extends TestCase
         $this->io = new ComposerIO($mock);
     }
 
-    /**
-     * Test tear down
-     */
     protected function tearDown(): void
     {
         $this->io = null;
     }
 
-    /**
-     * Tests ComposerIO::isInteractive
-     */
     public function testIsInteractive(): void
     {
         $this->assertFalse($this->io->isInteractive());
     }
 
-    /**
-     * Tests ComposerIO::isDebug
-     */
     public function testIsDebug(): void
     {
         $this->assertFalse($this->io->isDebug());
     }
 
-    /**
-     * Tests ComposerIO::isVerbose
-     */
     public function testIsVerbose(): void
     {
         $this->assertFalse($this->io->isVerbose());
     }
 
-    /**
-     * Tests ComposerIO::isVeryVerbose
-     */
     public function testIsVeryVerbose(): void
     {
         $this->assertFalse($this->io->isVeryVerbose());
     }
 
-    /**
-     * Tests ComposerIO::write
-     */
     public function testWrite(): void
     {
         $this->io->write('foo');
@@ -89,9 +68,6 @@ class ComposerIOTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests ComposerIO::writeError
-     */
     public function testWriteError(): void
     {
         $this->io->writeError('foo');
@@ -99,27 +75,16 @@ class ComposerIOTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests ComposerIO::ask
-     */
     public function testAsk(): void
     {
         $this->assertEquals('bar', $this->io->ask('foo', 'bar'));
     }
 
-    /**
-     * Tests ComposerIO::askConfirmation
-     */
     public function testAskConfirmation(): void
     {
         $this->assertEquals(true, $this->io->askConfirmation('foo', true));
     }
 
-    /**
-     * Tests ComposerIO::askAbdValidate
-     *
-     * @throws \Exception
-     */
     public function testAskAndValidate(): void
     {
         $this->assertEquals(

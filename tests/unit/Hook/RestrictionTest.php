@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 class RestrictionTest extends TestCase
 {
-    /**
-     * Tests Restriction::isApplicable
-     */
     public function testIsApplicableFromArray(): void
     {
         $restriction = Restriction::fromArray(['pre-commit', 'pre-push']);
@@ -27,9 +24,6 @@ class RestrictionTest extends TestCase
         $this->assertFalse($restriction->isApplicableFor('post-push'));
     }
 
-    /**
-     * Tests Restriction::isApplicable
-     */
     public function testIsApplicableFromString(): void
     {
         $restriction = Restriction::fromString('pre-commit');
@@ -38,9 +32,6 @@ class RestrictionTest extends TestCase
         $this->assertFalse($restriction->isApplicableFor('post-push'));
     }
 
-    /**
-     * Tests Restriction::isApplicable
-     */
     public function testIsApplicableEmpty(): void
     {
         $restriction = Restriction::empty();
@@ -49,9 +40,6 @@ class RestrictionTest extends TestCase
         $this->assertFalse($restriction->isApplicableFor('post-push'));
     }
 
-    /**
-     * Tests Restriction::isApplicable
-     */
     public function testIsApplicableEmptyAddingRestrictions(): void
     {
         $restriction = Restriction::empty()->with('pre-commit');
@@ -60,9 +48,6 @@ class RestrictionTest extends TestCase
         $this->assertFalse($restriction->isApplicableFor('post-push'));
     }
 
-    /**
-     * Tests Restriction::isApplicable
-     */
     public function testIsApplicableWithAlreadyApplicableRestrictions(): void
     {
         $restriction = Restriction::fromString('pre-commit')->with('pre-commit');
@@ -71,9 +56,6 @@ class RestrictionTest extends TestCase
         $this->assertFalse($restriction->isApplicableFor('post-push'));
     }
 
-    /**
-     * Tests Restriction::isApplicable
-     */
     public function testIsApplicableWithVirtualHook(): void
     {
         $restriction = Restriction::fromString('post-change');

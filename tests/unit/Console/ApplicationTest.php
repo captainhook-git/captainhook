@@ -17,11 +17,6 @@ use Symfony\Component\Console\Output\NullOutput;
 
 class ApplicationTest extends TestCase
 {
-    /**
-     * Tests Cli::run
-     *
-     * @throws \Exception
-     */
     public function testVersionOutput(): void
     {
         $input = new ArrayInput(['--version' => true]);
@@ -37,12 +32,6 @@ class ApplicationTest extends TestCase
         $app->run($input, $output);
     }
 
-
-    /**
-     * Tests Cli::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteDefaultHelp(): void
     {
         $input = new ArrayInput(['--help' => true]);
@@ -56,11 +45,6 @@ class ApplicationTest extends TestCase
         $this->assertEquals(0, $app->run($input, $output));
     }
 
-    /**
-     * Tests Cli::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteList(): void
     {
         $input = new ArrayInput(['command' => 'list']);

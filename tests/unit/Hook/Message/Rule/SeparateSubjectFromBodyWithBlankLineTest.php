@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class SeparateSubjectFromBodyWithBlankLineTest extends TestCase
 {
-    /**
-     * Tests SeparateSubjectFromBodyWithBlankLine::pass
-     */
     public function testPassSuccessOnSubjectOnly(): void
     {
         $msg  = new CommitMessage('Foo bar');
@@ -27,9 +24,6 @@ class SeparateSubjectFromBodyWithBlankLineTest extends TestCase
         $this->assertTrue($rule->pass($msg));
     }
 
-    /**
-     * Tests SeparateSubjectFromBodyWithBlankLine::pass
-     */
     public function testPassSuccessWithBody(): void
     {
         $msg  = new CommitMessage('Foo bar' . PHP_EOL . PHP_EOL . 'Foo Bar Baz.');
@@ -38,9 +32,6 @@ class SeparateSubjectFromBodyWithBlankLineTest extends TestCase
         $this->assertTrue($rule->pass($msg));
     }
 
-    /**
-     * Tests SeparateSubjectFromBodyWithBlankLine::pass
-     */
     public function testPassFailNoEmptyLine(): void
     {
         $msg  = new CommitMessage('Foo bar' . PHP_EOL . 'Foo Bar Baz.');

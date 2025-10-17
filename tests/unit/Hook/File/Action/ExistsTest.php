@@ -21,11 +21,6 @@ class ExistsTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests Exists::execute
-     *
-     * @throws \Exception
-     */
     public function testInvalidConfiguration(): void
     {
         $this->expectException(Exception::class);
@@ -43,11 +38,6 @@ class ExistsTest extends TestCase
         $exists->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Exists::execute
-     *
-     * @throws \Exception
-     */
     public function testFileExists(): void
     {
         $io     = new NullIO();
@@ -69,11 +59,6 @@ class ExistsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Exists::execute
-     *
-     * @throws \Exception
-     */
     public function testFileDoesNotExist(): void
     {
         $this->expectException(Exception::class);

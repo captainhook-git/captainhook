@@ -12,6 +12,7 @@
 namespace CaptainHook\App\Hook\Template;
 
 use CaptainHook\App\Config\Run;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use CaptainHook\App\Config\Mockery as ConfigMockery;
 
@@ -19,9 +20,6 @@ class DockerTest extends TestCase
 {
     use ConfigMockery;
 
-    /**
-     * Tests Docker::getCode
-     */
     public function testTemplateCaptainHookDevelopment(): void
     {
         $repo       = realpath(CH_PATH_FILES . '/template-ch');
@@ -42,9 +40,6 @@ class DockerTest extends TestCase
         $this->assertStringContainsString('./bin/captainhook', $code);
     }
 
-    /**
-     * Tests Docker::getCode
-     */
     public function testTemplateCaptainHookAsLibrary(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -64,9 +59,6 @@ class DockerTest extends TestCase
         $this->assertStringContainsString('./vendor/bin/captainhook', $code);
     }
 
-    /**
-     * Tests Docker::getCode
-     */
     public function testTemplateCustomPath(): void
     {
         $repo       = realpath(CH_PATH_FILES . '/template-ch');
@@ -90,11 +82,7 @@ class DockerTest extends TestCase
         $this->assertStringContainsString('bootstrap=vendor/autoload.php', $code);
     }
 
-    /**
-     * Tests Docker::getCode
-     *
-     * @dataProvider replacementPossibilitiesWithoutGitMapping
-     */
+    #[DataProvider('replacementPossibilitiesWithoutGitMapping')]
     public function testDockerCommandOptimizationWithoutGitMapping(string $exec, string $expected, string $msg): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -117,12 +105,7 @@ class DockerTest extends TestCase
         $this->assertStringContainsString('/usr/local/bin/captainhook', $code);
     }
 
-    /**
-     * The testDockerCommandOptimization data provider
-     *
-     * @return array
-     */
-    public function replacementPossibilitiesWithoutGitMapping(): array
+    public static function replacementPossibilitiesWithoutGitMapping(): array
     {
         return [
             ['cap-container', '-i cap-container', 'none'],
@@ -137,11 +120,7 @@ class DockerTest extends TestCase
         ];
     }
 
-    /**
-     * Tests Docker::getCode
-     *
-     * @dataProvider replacementPossibilitiesWithGitMapping
-     */
+    #[DataProvider('replacementPossibilitiesWithGitMapping')]
     public function testDockerCommandOptimizationWithGitMapping(string $exec, string $expected, string $msg): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -167,12 +146,7 @@ class DockerTest extends TestCase
         $this->assertStringNotContainsString('docker exec' . $expected, $codePush, $msg);
     }
 
-    /**
-     * The testDockerCommandOptimization data provider
-     *
-     * @return array
-     */
-    public function replacementPossibilitiesWithGitMapping(): array
+    public static function replacementPossibilitiesWithGitMapping(): array
     {
         $env = ' -e GIT_INDEX_FILE="/docker/.git/$(basename $GIT_INDEX_FILE)"';
         return [

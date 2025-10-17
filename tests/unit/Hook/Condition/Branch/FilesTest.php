@@ -20,9 +20,6 @@ class FilesTest extends TestCase
     use AppMockery;
     use IOMockery;
 
-    /**
-     * Tests Files::isTrue
-     */
     public function testBranchFilesWithReflog(): void
     {
         $io   = $this->createIOMock();
@@ -47,9 +44,6 @@ class FilesTest extends TestCase
         $this->assertTrue($files->isTrue($io, $repo));
     }
 
-    /**
-     * Tests Files::isTrue
-     */
     public function testBranchFilesWithEmptyReflog(): void
     {
         $io   = $this->createIOMock();
@@ -71,9 +65,6 @@ class FilesTest extends TestCase
         $this->assertFalse($files->isTrue($io, $repo));
     }
 
-    /**
-     * Tests Files::isTrue
-     */
     public function testComparedToInDirectory(): void
     {
         $io   = $this->createIOMock();

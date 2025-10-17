@@ -20,17 +20,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConfigurationTest extends TestCase
 {
-    /**
-     * Tests Configure::run
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
-        $resolver  = new Resolver();
-        $config    = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5(mt_rand(0, 9999)) . '.json';
-        $output    = new NullOutput();
-        $input     = new ArrayInput(['--configuration' => $config]);
+        $resolver = new Resolver();
+        $config   = sys_get_temp_dir() . DIRECTORY_SEPARATOR . md5(mt_rand(0, 9999)) . '.json';
+        $output   = new NullOutput();
+        $input    = new ArrayInput(['--configuration' => $config]);
 
         $configure = new Configuration($resolver);
         $configure->setIO(new NullIO());
@@ -41,19 +36,14 @@ class ConfigurationTest extends TestCase
         unlink($config);
     }
 
-    /**
-     * Tests Configure::run
-     *
-     * @throws \Exception
-     */
     public function testConfigFailure(): void
     {
-        $resolver  = new Resolver();
-        $config    = '/foo/bar/fiz/baz/config.json';
-        $input     = new ArrayInput(['--configuration' => $config]);
-        $output    = $this->getMockBuilder(OutputInterface::class)
-                          ->disableOriginalConstructor()
-                          ->getMock();
+        $resolver = new Resolver();
+        $config   = '/foo/bar/fiz/baz/config.json';
+        $input    = new ArrayInput(['--configuration' => $config]);
+        $output   = $this->getMockBuilder(OutputInterface::class)
+                         ->disableOriginalConstructor()
+                         ->getMock();
         $output->method('isVerbose')->willReturn(true);
 
         $configure = new Configuration($resolver);

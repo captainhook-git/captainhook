@@ -23,11 +23,6 @@ class PostCheckoutTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PostCheckout::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabled(): void
     {
         $io     = $this->createIOMock();
@@ -56,11 +51,6 @@ class PostCheckoutTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PostCheckout::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookDisabled(): void
     {
         $io           = $this->createIOMock();

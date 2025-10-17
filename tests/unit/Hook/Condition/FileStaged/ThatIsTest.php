@@ -20,18 +20,12 @@ class ThatIsTest extends TestCase
     use AppMockery;
     use IOMockery;
 
-    /**
-     * Tests ThatIs::getRestriction
-     */
     public function testPreCommitRestriction(): void
     {
         $this->assertTrue(ThatIs::getRestriction()->isApplicableFor('pre-commit'));
         $this->assertFalse(ThatIs::getRestriction()->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedTrueType(): void
     {
         $io    = $this->createIOMock();
@@ -43,9 +37,6 @@ class ThatIsTest extends TestCase
         $this->assertTrue($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedTrueMultipleType(): void
     {
         $io    = $this->createIOMock();
@@ -57,9 +48,6 @@ class ThatIsTest extends TestCase
         $this->assertTrue($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedFalseMultipleType(): void
     {
         $io    = $this->createIOMock();
@@ -71,9 +59,6 @@ class ThatIsTest extends TestCase
         $this->assertFalse($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedTrueDirectory(): void
     {
         $io    = $this->createIOMock();
@@ -85,9 +70,6 @@ class ThatIsTest extends TestCase
         $this->assertTrue($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedFalsePartialDirectory(): void
     {
         $io    = $this->createIOMock();
@@ -99,9 +81,6 @@ class ThatIsTest extends TestCase
         $this->assertFalse($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedTrueMultipleDirectory(): void
     {
         $io = $this->createIOMock();
@@ -113,9 +92,6 @@ class ThatIsTest extends TestCase
         $this->assertTrue($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedFalseMultipleDirectory(): void
     {
         $io = $this->createIOMock();
@@ -127,9 +103,6 @@ class ThatIsTest extends TestCase
         $this->assertFalse($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs::isTrue
-     */
     public function testStagedFalseDirectoryAndType(): void
     {
         $io    = $this->createIOMock();
@@ -141,9 +114,6 @@ class ThatIsTest extends TestCase
         $this->assertFalse($thatIs->isTrue($io, $repo));
     }
 
-    /**
-     * Tests ThatIs:isTrue
-     */
     public function testStagedFalse(): void
     {
         $io    = $this->createIOMock();

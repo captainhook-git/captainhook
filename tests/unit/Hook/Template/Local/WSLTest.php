@@ -20,9 +20,6 @@ class WSLTest extends ShellTest
 {
     use ConfigMockery;
 
-    /**
-     * Tests WSL::getCode
-     */
     public function testTemplate(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -43,9 +40,6 @@ class WSLTest extends ShellTest
         $this->assertStringContainsString('wsl.exe vendor/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests WSL::getCode
-     */
     public function testTemplateWithDefinedPHP(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -66,9 +60,6 @@ class WSLTest extends ShellTest
         $this->assertStringContainsString('wsl.exe /usr/bin/php7.4 vendor/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests WSL::getCode
-     */
     public function testTemplateWithDefinedPHPAndRunPath(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -91,9 +82,6 @@ class WSLTest extends ShellTest
         $this->assertStringContainsString('wsl.exe /usr/bin/php7.4 tools/captainhook.phar $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests WSL::getCode
-     */
     public function testTemplateExtExecutable(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -114,9 +102,6 @@ class WSLTest extends ShellTest
         $this->assertStringContainsString('wsl.exe /usr/local/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests WSL::getCode
-     */
     public function testTemplateExtExecutableWithDefinedPHP(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -138,9 +123,6 @@ class WSLTest extends ShellTest
         $this->assertStringContainsString('wsl.exe /usr/bin/php7.4 /usr/local/bin/captainhook $INTERACTIVE', $code);
     }
 
-    /**
-     * Tests WSL::getCode
-     */
     public function testTemplateExtExecutableWithUserInput(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);

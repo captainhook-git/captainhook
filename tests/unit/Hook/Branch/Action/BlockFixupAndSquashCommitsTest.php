@@ -26,18 +26,12 @@ class BlockFixupAndSquashCommitsTest extends TestCase
     use IOMockery;
     use ConfigMockery;
 
-    /**
-     * Tests BlockFixupAndSquashCommits::getRestriction
-     */
     public function testConstraint(): void
     {
         $this->assertTrue(BlockFixupAndSquashCommits::getRestriction()->isApplicableFor('pre-push'));
         $this->assertFalse(BlockFixupAndSquashCommits::getRestriction()->isApplicableFor('pre-commit'));
     }
 
-    /**
-     * Tests BlockFixupAndSquashCommits::execute
-     */
     public function testExecuteSuccess(): void
     {
         $input    = ['refs/heads/main 12345 refs/heads/main 98765'];
@@ -57,9 +51,6 @@ class BlockFixupAndSquashCommitsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests BlockFixupAndSquashCommits::execute
-     */
     public function testExecuteSuccessBecauseOfUnprotectedBranch(): void
     {
         $input    = ['refs/heads/foo 12345 refs/heads/foo 98765'];
@@ -80,9 +71,6 @@ class BlockFixupAndSquashCommitsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests BlockFixupAndSquashCommits::execute
-     */
     public function testExecuteSuccessWithNoChangesFromLocalAndRemote(): void
     {
         $input    = ['refs/tags/5.14.2 4d89c05 refs/tags/5.14.2 0000000000000000000000000000000000000000'];
@@ -102,9 +90,6 @@ class BlockFixupAndSquashCommitsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests BlockFixupAndSquashCommits::execute
-     */
     public function testExecuteBlockFixup(): void
     {
         $this->expectException(Exception::class);
@@ -124,9 +109,6 @@ class BlockFixupAndSquashCommitsTest extends TestCase
         $blocker->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockFixupAndSquashCommits::execute
-     */
     public function testExecuteBlockFixupForProtectedBranch(): void
     {
         $this->expectException(Exception::class);
@@ -147,9 +129,6 @@ class BlockFixupAndSquashCommitsTest extends TestCase
         $blocker->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockFixupAndSquashCommits::execute
-     */
     public function testExecuteBlockSquash(): void
     {
         $this->expectException(Exception::class);
@@ -169,9 +148,6 @@ class BlockFixupAndSquashCommitsTest extends TestCase
         $blocker->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockFixupAndSquashCommits::execute
-     */
     public function testExecuteNoPushInfo(): void
     {
         $input    = [''];

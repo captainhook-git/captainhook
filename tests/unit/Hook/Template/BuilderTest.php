@@ -25,9 +25,6 @@ class BuilderTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildDockerTemplate(): void
     {
         $repo = new DummyRepo(
@@ -60,9 +57,6 @@ class BuilderTest extends TestCase
         $this->assertStringContainsString('--bootstrap=vendor/autoload.php', $code);
     }
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildDockerTemplateWithoutBootstrapFromPHAR(): void
     {
         $repo = new DummyRepo(
@@ -94,9 +88,6 @@ class BuilderTest extends TestCase
         $this->assertStringNotContainsString('--bootstrap=', $code);
     }
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildDockerTemplateWithBinaryOutsideRepo(): void
     {
         $repo = new DummyRepo(
@@ -126,9 +117,6 @@ class BuilderTest extends TestCase
         $this->assertStringContainsString($executable, $code);
     }
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildLocalTemplateWithoutBootstrapFromPHAR(): void
     {
         $resolver   = $this->createResolverMock(CH_PATH_FILES . '/bin/captainhook', true);
@@ -146,9 +134,6 @@ class BuilderTest extends TestCase
         $this->assertStringNotContainsString('--bootstrap=', $code);
     }
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildLocalTemplate(): void
     {
         $resolver   = $this->createResolverMock(CH_PATH_FILES . '/bin/captainhook', false);
@@ -166,9 +151,6 @@ class BuilderTest extends TestCase
         $this->assertStringContainsString('$captainHook->run', $code);
     }
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildWSLTemplate(): void
     {
         $resolver   = $this->createResolverMock(CH_PATH_FILES . '/bin/captainhook', false);
@@ -186,9 +168,6 @@ class BuilderTest extends TestCase
         $this->assertStringContainsString('wsl.exe', $code);
     }
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildBootstrapNotFound(): void
     {
         $this->expectException(Exception::class);
@@ -208,9 +187,6 @@ class BuilderTest extends TestCase
         $this->assertStringContainsString('$captainHook->run', $code);
     }
 
-    /**
-     * Tests Builder::build
-     */
     public function testBuildInvalidVendor(): void
     {
         $this->expectException(Exception::class);

@@ -19,11 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class PrePushTest extends TestCase
 {
-    /**
-     * Tests PrePush::run
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $repo   = new DummyRepo();

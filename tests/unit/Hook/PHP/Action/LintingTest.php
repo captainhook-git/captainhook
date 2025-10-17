@@ -21,11 +21,6 @@ class LintingTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests Linter::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteValidPHP(): void
     {
         $io       = new NullIO();
@@ -42,11 +37,6 @@ class LintingTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Linter::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteInvalidPHP(): void
     {
         $this->expectException(Exception::class);

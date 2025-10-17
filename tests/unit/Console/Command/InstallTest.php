@@ -22,11 +22,6 @@ use Symfony\Component\Console\Output\NullOutput;
 
 class InstallTest extends TestCase
 {
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testFailMissingConfig(): void
     {
         $output = new NullOutput();
@@ -44,11 +39,6 @@ class InstallTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testFailInvalidRepository(): void
     {
         $output = new NullOutput();
@@ -67,11 +57,6 @@ class InstallTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testFailMissingRunExecOption(): void
     {
         $repo   = new DummyRepo();
@@ -91,12 +76,6 @@ class InstallTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallPreCommitHook(): void
     {
         $repo   = new DummyRepo();
@@ -115,11 +94,6 @@ class InstallTest extends TestCase
         $this->assertTrue($repo->hookExists('pre-commit'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallMultipleHooks(): void
     {
         $repo   = new DummyRepo();
@@ -140,11 +114,6 @@ class InstallTest extends TestCase
         $this->assertTrue($repo->hookExists('post-checkout'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallMultipleHooksWithSpacesAfterAndBetweenSeparator(): void
     {
         $repo   = new DummyRepo();
@@ -165,11 +134,6 @@ class InstallTest extends TestCase
         $this->assertTrue($repo->hookExists('post-checkout'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallMultipleHooksWithOneWrong(): void
     {
         $repo   = new DummyRepo();
@@ -188,12 +152,6 @@ class InstallTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallMultipleHooksWithMultipleWrong(): void
     {
         $repo   = new DummyRepo();
@@ -212,11 +170,6 @@ class InstallTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallOnlyEnabled(): void
     {
         $repo = new DummyRepo();
@@ -240,11 +193,6 @@ class InstallTest extends TestCase
         $this->assertFalse($repo->hookExists('post-commit'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallOnlyEnabledOnlyVirtual(): void
     {
         $repo = new DummyRepo();
@@ -269,11 +217,6 @@ class InstallTest extends TestCase
         $this->assertFalse($repo->hookExists('post-commit'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallOnlyEnabledNotOnlyVirtual(): void
     {
         $repo = new DummyRepo();
@@ -298,11 +241,6 @@ class InstallTest extends TestCase
         $this->assertFalse($repo->hookExists('post-commit'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallOnlyEnabledNotOnlyVirtualOverlaps(): void
     {
         $repo = new DummyRepo();
@@ -327,11 +265,6 @@ class InstallTest extends TestCase
         $this->assertFalse($repo->hookExists('post-commit'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallOnlyEnabledNotOnlyVirtualOverlapsDisabled(): void
     {
         $repo = new DummyRepo();
@@ -356,11 +289,6 @@ class InstallTest extends TestCase
         $this->assertFalse($repo->hookExists('post-commit'));
     }
 
-    /**
-     * Tests Install::run
-     *
-     * @throws \Exception
-     */
     public function testInstallOnlyEnabledAndHook(): void
     {
         $repo = new DummyRepo();

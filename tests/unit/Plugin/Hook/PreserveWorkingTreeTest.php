@@ -201,12 +201,12 @@ class PreserveWorkingTreeTest extends TestCase
         $this->statusOperator
             ->expects($this->once())
             ->method('restoreWorkingTree')
-            ->will($this->returnCallback(function (): bool {
+            ->willReturnCallback(function (): bool {
                 if (getenv(PreserveWorkingTree::SKIP_POST_CHECKOUT_VAR) != '1') {
                     $this->fail(PreserveWorkingTree::SKIP_POST_CHECKOUT_VAR . ' did not have the correct value');
                 }
                 return true;
-            }));
+            });
 
         $this->diffOperator
             ->expects($this->once())

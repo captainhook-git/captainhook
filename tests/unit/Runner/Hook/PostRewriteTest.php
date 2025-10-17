@@ -23,11 +23,6 @@ class PostRewriteTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PrePush::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabled(): void
     {
         $dummy = new DummyRepo(['hooks' => ['post-rewrite' => '# hook script']]);

@@ -22,20 +22,12 @@ class BeamsTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests Beams::getRestriction
-     */
     public function testConstraint(): void
     {
         $this->assertTrue(Beams::getRestriction()->isApplicableFor('commit-msg'));
         $this->assertFalse(Beams::getRestriction()->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests Beams::execute
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $io     = new NullIO();
@@ -50,11 +42,6 @@ class BeamsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Beams::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteImperativeBeginning(): void
     {
         $this->expectException(Exception::class);
@@ -71,11 +58,6 @@ class BeamsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Beams::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFail(): void
     {
         $this->expectException(Exception::class);

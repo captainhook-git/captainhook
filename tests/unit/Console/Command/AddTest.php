@@ -21,11 +21,6 @@ use Symfony\Component\Console\Output\NullOutput;
 
 class AddTest extends TestCase
 {
-    /**
-     * Tests Add::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteNoConfig(): void
     {
         $resolver = new Resolver();
@@ -44,9 +39,6 @@ class AddTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-    /**
-     * Tests Add::run
-     */
     public function testExecutePreCommit(): void
     {
         $resolver = new Resolver();
@@ -67,7 +59,14 @@ class AddTest extends TestCase
                    ->disableOriginalConstructor()
                    ->getMock();
 
-        $io->method('ask')->will($this->onConsecutiveCalls('\\Foo\\Bar', 'n'));
+        $invokedCount = $this->atLeast(2);
+        $io->expects($invokedCount)
+           ->method('ask')
+           ->willReturnCallback(function ($parameters) use ($invokedCount) {
+               $results = ['\\Foo\\Bar', 'n'];
+               return $results[$invokedCount->numberOfInvocations() - 1] ?? '';
+           });
+
         $io->expects($this->once())->method('write');
 
         $add->setIO($io);

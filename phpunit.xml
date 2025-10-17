@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
          colors="true"
          bootstrap="tests/bootstrap.php"
-         defaultTestSuite="UnitTests">
+         defaultTestSuite="UnitTests"
+         displayDetailsOnPhpunitDeprecations="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerWarnings="true">
   <coverage>
-    <include>
-      <directory>src</directory>
-    </include>
     <report>
       <clover outputFile="build/logs/clover.xml"/>
       <html outputDirectory="build/coverage" lowUpperBound="35" highLowerBound="70"/>
@@ -27,4 +26,9 @@
   <logging>
     <junit outputFile="build/logs/junit.xml"/>
   </logging>
+  <source>
+    <include>
+      <directory>src</directory>
+    </include>
+  </source>
 </phpunit>

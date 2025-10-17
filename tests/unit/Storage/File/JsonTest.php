@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class JsonTest extends TestCase
 {
-    /**
-     * Tests Json::readAssoc
-     */
     public function testReadInvalid(): void
     {
         $this->expectException(Exception::class);
@@ -28,9 +25,6 @@ class JsonTest extends TestCase
         $json->readAssoc();
     }
 
-    /**
-     * Tests Json::readAssoc
-     */
     public function testReadAssoc(): void
     {
         $path = realpath(CH_PATH_FILES . '/storage/test.json');
@@ -40,9 +34,6 @@ class JsonTest extends TestCase
         $this->assertEquals('bar', $data['foo']);
     }
 
-    /**
-     * Test Json::write
-     */
     public function testWrite(): void
     {
         $path = tempnam(sys_get_temp_dir(), 'json');

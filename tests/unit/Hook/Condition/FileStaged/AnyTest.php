@@ -20,9 +20,6 @@ class AnyTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Any::isTrue
-     */
     public function testIsTrue(): void
     {
         $io = $this->createIOMock();
@@ -35,9 +32,6 @@ class AnyTest extends TestCase
         $this->assertTrue($fileStaged->isTrue($io, $repository));
     }
 
-    /**
-     * Tests Any::isTrue
-     */
     public function testIsTrueWithStringFilter(): void
     {
         $io = $this->createIOMock();
@@ -50,9 +44,6 @@ class AnyTest extends TestCase
         $this->assertTrue($fileStaged->isTrue($io, $repository));
     }
 
-    /**
-     * Tests Any::isTrue
-     */
     public function testWithWildcardIsTrue(): void
     {
         $io = $this->createIOMock();
@@ -65,9 +56,6 @@ class AnyTest extends TestCase
         $this->assertTrue($fileStaged->isTrue($io, $repository));
     }
 
-    /**
-     * Tests Any::isTrue
-     */
     public function testIsFalse(): void
     {
         $io = $this->createIOMock();
@@ -80,9 +68,6 @@ class AnyTest extends TestCase
         $this->assertFalse($fileStaged->isTrue($io, $repository));
     }
 
-    /**
-     * Tests Any::isTrue
-     */
     public function testWithWildcardIsFalse(): void
     {
         $io = $this->createIOMock();
