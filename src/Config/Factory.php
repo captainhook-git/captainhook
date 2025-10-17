@@ -138,9 +138,12 @@ final class Factory
 
         $this->appendIncludedConfigurations($config, $json);
 
+        // fallback to $json->HOOK_NAME if $json->HOOKS->HOOK_NAME does not exist
+        $hooks = $json['hooks'] ?? $json;
+
         foreach (HookUtil::getValidHooks() as $hook => $class) {
-            if (isset($json[$hook])) {
-                $this->configureHook($config->getHookConfig($hook), $json[$hook]);
+            if (isset($hooks[$hook])) {
+                $this->configureHook($config->getHookConfig($hook), $hooks[$hook]);
             }
         }
 

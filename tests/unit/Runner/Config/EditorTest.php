@@ -24,11 +24,6 @@ class EditorTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Editor::run
-     *
-     * @throws \Exception
-     */
     public function testInvalidHook(): void
     {
         $this->expectException(Exception::class);
@@ -42,9 +37,6 @@ class EditorTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Editor::run
-     */
     public function testNoHook(): void
     {
         $this->expectException(Exception::class);
@@ -58,11 +50,6 @@ class EditorTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Editor::run
-     *
-     * @throws \Exception
-     */
     public function testNoChange(): void
     {
         $this->expectException(Exception::class);
@@ -76,11 +63,6 @@ class EditorTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Editor::run
-     *
-     * @throws \Exception
-     */
     public function testInvalidChange(): void
     {
         $this->expectException(Exception::class);
@@ -95,11 +77,6 @@ class EditorTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Editor::run
-     *
-     * @throws \Exception
-     */
     public function testMissingHook(): void
     {
         $this->expectException(Exception::class);
@@ -113,11 +90,6 @@ class EditorTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Editor::run
-     *
-     * @throws \Exception
-     */
     public function testMissingChange(): void
     {
         $this->expectException(Exception::class);
@@ -131,11 +103,6 @@ class EditorTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Editor::run
-     *
-     * @throws \Exception
-     */
     public function testNoConfiguration()
     {
         $this->expectException(Exception::class);
@@ -150,21 +117,19 @@ class EditorTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Editor::run
-     */
     public function testConfigureFileExtend()
     {
-        $configDir = vfsStream::setup('root', null, ['captainhook.json' => '{}']);
-
-        $io     = $this->createIOMock();
-        $config = $this->createConfigMock(true, $configDir->url() . '/captainhook.json');
+        $configDir   = vfsStream::setup('root', null, ['captainhook.json' => '{}']);
+        $invocations = $this->atLeast(3);
+        $io          = $this->createIOMock();
+        $config      = $this->createConfigMock(true, $configDir->url() . '/captainhook.json');
         $config->method('getHookConfig')->willReturn($this->createHookConfigMock());
-        $io->method('ask')->will(
-            $this->onConsecutiveCalls(
-                ...['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n']
-            )
-        );
+        $io->expects($invocations)
+           ->method('ask')
+           ->willReturnCallback(function ($parameters) use ($invocations) {
+               $results = ['y', 'y', '\\Foo\\Bar', 'y', 'foo:bar', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'];
+               return $results[$invocations->numberOfInvocations() - 1] ?? '';
+           });
         $io->expects($this->once())->method('askAndValidate')->willReturn('foo:bar');
 
         $runner = new Creator($io, $config);

@@ -32,11 +32,6 @@ class InstallerTest extends TestCase
     use CHMockery;
     use HookMockery;
 
-    /**
-     * Tests Installer::setHook
-     *
-     * @throws \CaptainHook\App\Exception\InvalidHookName
-     */
     public function testSetInvalidHook(): void
     {
         $this->expectException(InvalidHookName::class);
@@ -50,11 +45,6 @@ class InstallerTest extends TestCase
         $runner->setHook('itDoNotExist');
     }
 
-    /**
-     * Tests Installer::setHook
-     *
-     * @throws \CaptainHook\App\Exception\InvalidHookName
-     */
     public function testSetMultipleInvalidHooks(): void
     {
         $this->expectException(InvalidHookName::class);
@@ -68,11 +58,6 @@ class InstallerTest extends TestCase
         $runner->setHook('itDoNotExist1,itDoNotExist2,itDontExist3');
     }
 
-    /**
-     * Tests Installer::setHook
-     *
-     * @throws \CaptainHook\App\Exception\InvalidHookName
-     */
     public function testSetHookAndEnabledOnly(): void
     {
         $this->expectException(Exception::class);
@@ -87,11 +72,6 @@ class InstallerTest extends TestCase
         $runner->setHook('pre-push');
     }
 
-    /**
-     * Tests Installer::setHook
-     *
-     * @throws \CaptainHook\App\Exception\InvalidHookName
-     */
     public function testMoveAfterSkippingFail(): void
     {
         $this->expectException(RuntimeException::class);
@@ -107,11 +87,6 @@ class InstallerTest extends TestCase
         $runner->setMoveExistingTo('/tmp/');
     }
 
-    /**
-     * Tests Installer::setHook
-     *
-     * @throws \CaptainHook\App\Exception\InvalidHookName
-     */
     public function testSkipAfterMovingFail(): void
     {
         $this->expectException(RuntimeException::class);
@@ -127,9 +102,6 @@ class InstallerTest extends TestCase
         $runner->setSkipExisting(true);
     }
 
-    /**
-     * Tests Installer::run
-     */
     public function testHookInstallationDeclined(): void
     {
         $fakeRepo = new DummyRepo();
@@ -149,9 +121,6 @@ class InstallerTest extends TestCase
         $this->assertFileDoesNotExist($fakeRepo->getHookDir() . '/pre-push');
     }
 
-    /**
-     * Tests Installer::run
-     */
     public function testWriteHook(): void
     {
         $fakeRepo = new DummyRepo();
@@ -191,9 +160,6 @@ class InstallerTest extends TestCase
         $this->assertFileDoesNotExist($fakeRepo->getHookDir() . '/pre-commit');
     }
 
-    /**
-     * Tests Installer::checkForBrokenSymlinks
-     */
     public function testBrokenSymlinkDetectionOnExistingFile(): void
     {
         $io       = $this->createIOMock();
@@ -213,9 +179,6 @@ class InstallerTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Installer::checkForBrokenSymlinks
-     */
     public function testBrokenSymlinkDetectionOnBrokenAbsoluteSymlink(): void
     {
         $this->expectException(Exception::class);
@@ -236,9 +199,6 @@ class InstallerTest extends TestCase
         $runner->checkSymlink($file);
     }
 
-    /**
-     * Tests Installer::checkForBrokenSymlinks
-     */
     public function testBrokenSymlinkDetectionOnBrokenRelativeSymlink(): void
     {
         $this->expectException(Exception::class);
@@ -259,9 +219,6 @@ class InstallerTest extends TestCase
         $runner->checkSymlink($file);
     }
 
-    /**
-     * Tests Installer::run
-     */
     public function testWriteMultipleHooks(): void
     {
         $fakeRepo = new DummyRepo();
@@ -280,9 +237,6 @@ class InstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getHookDir() . '/post-checkout');
     }
 
-    /**
-     * Tests Installer::run
-     */
     public function testMoveExistingHook(): void
     {
         $fakeRepo = new DummyRepo(
@@ -319,9 +273,6 @@ class InstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getRoot() . '/foo/bar/pre-commit');
     }
 
-    /**
-     * Tests Installer::run
-     */
     public function testMoveNotExistingHook(): void
     {
         $fakeRepo = new DummyRepo(
@@ -356,9 +307,6 @@ class InstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getHookDir() . '/pre-commit');
     }
 
-    /**
-     * Tests Installer::run
-     */
     public function testMoveExistingHookTargetIsFile(): void
     {
         $this->expectException(RuntimeException::class);
@@ -389,9 +337,6 @@ class InstallerTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Installer::writeHookFile
-     */
     public function testSkipExisting(): void
     {
         $io       = $this->createIOMock();
@@ -408,9 +353,6 @@ class InstallerTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests Installer::writeHookFile
-     */
     public function testOnlyEnabledAndHooksToHandle(): void
     {
         $this->expectException(Exception::class);
@@ -425,9 +367,6 @@ class InstallerTest extends TestCase
         $runner->setOnlyEnabled(true);
     }
 
-    /**
-     * Tests Installer::writeHookFile
-     */
     public function testDeclineOverwrite(): void
     {
         $io       = $this->createIOMock();

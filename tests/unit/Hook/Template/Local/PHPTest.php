@@ -19,9 +19,6 @@ class PHPTest extends TestCase
 {
     use ConfigMockery;
 
-    /**
-     * Tests PHP::getCode
-     */
     public function testSrcTemplate(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -39,9 +36,6 @@ class PHPTest extends TestCase
         $this->assertStringContainsString('$captainHook->run(', $code);
     }
 
-    /**
-     * Tests PHP::getCode
-     */
     public function testSrcStdInHook(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -59,9 +53,6 @@ class PHPTest extends TestCase
         $this->assertStringContainsString('$captainHook->run(', $code);
     }
 
-    /**
-     * Tests PHP::getCode
-     */
     public function testSrcTemplateExtExecutable(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -80,9 +71,6 @@ class PHPTest extends TestCase
         $this->assertStringContainsString('$captainHook->run(', $code);
     }
 
-    /**
-     * Tests PHP::getCode
-     */
     public function testPharAbsoluteExecutablePath(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -101,9 +89,6 @@ class PHPTest extends TestCase
         $this->assertStringContainsString('/usr/local/bin/captainhook', $code);
     }
 
-    /**
-     * Tests PHP::getCode
-     */
     public function testPharTemplate(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);
@@ -122,9 +107,6 @@ class PHPTest extends TestCase
         $this->assertStringContainsString('tools/captainhook.phar', $code);
     }
 
-    /**
-     * Tests PHP::getCode
-     */
     public function testPharStdIn(): void
     {
         $pathInfo = $this->createMock(PathInfo::class);

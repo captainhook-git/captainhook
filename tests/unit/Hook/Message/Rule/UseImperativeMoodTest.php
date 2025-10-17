@@ -11,20 +11,18 @@
 
 namespace CaptainHook\App\Hook\Message\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use SebastianFeldmann\Git\CommitMessage;
 use PHPUnit\Framework\TestCase;
 
 class UseImperativeMoodTest extends TestCase
 {
     /**
-     * Tests UseImperativeMood::pass
-     *
-     * @dataProvider passProvider
-     *
      * @param string $string
      * @param bool   $begin
      * @param bool   $expectedResult
      */
+    #[DataProvider('passProvider')]
     public function testPass(string $string, bool $begin, bool $expectedResult): void
     {
         $msg  = new CommitMessage($string);
@@ -32,12 +30,7 @@ class UseImperativeMoodTest extends TestCase
         $this->assertSame($expectedResult, $rule->pass($msg));
     }
 
-    /**
-     * The testPass data provider
-     *
-     * @return array
-     */
-    public function passProvider(): array
+    public static function passProvider(): array
     {
         return [
             ['foo bar baz', true, true],

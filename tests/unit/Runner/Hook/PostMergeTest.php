@@ -24,11 +24,6 @@ class PostMergeTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PostMerge::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabled(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -52,11 +47,6 @@ class PostMergeTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PostMerge::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookWithConditionsApply(): void
     {
         $dummy = new DummyRepo(['hooks' => ['post-merge' => '# hook script']]);
@@ -79,12 +69,6 @@ class PostMergeTest extends TestCase
         $runner->run();
     }
 
-
-    /**
-     * Tests PostMerge::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookWithConditionsFail()
     {
         $dummy = new DummyRepo(['hooks' => ['post-merge' => '# hook script']]);
@@ -107,11 +91,6 @@ class PostMergeTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PostMerge::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookDisabled()
     {
         $io           = $this->createIOMock();

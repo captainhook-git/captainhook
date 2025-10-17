@@ -30,11 +30,6 @@ class UninstallerTest extends TestCase
     use CHMockery;
     use HookMockery;
 
-    /**
-     * Tests Uninstaller::setHook
-     *
-     * @throws \CaptainHook\App\Exception\InvalidHookName
-     */
     public function testSetInvalidHook(): void
     {
         $this->expectException(InvalidHookName::class);
@@ -47,11 +42,6 @@ class UninstallerTest extends TestCase
         $runner->setHook('itDoesNotExist');
     }
 
-    /**
-     * Tests Uninstaller::setHook
-     *
-     * @throws \CaptainHook\App\Exception\InvalidHookName
-     */
     public function testSetHookAndEnabledOnly(): void
     {
         $this->expectException(Exception::class);
@@ -65,9 +55,6 @@ class UninstallerTest extends TestCase
         $runner->setOnlyDisabled(true);
     }
 
-    /**
-     * Tests Uninstaller::run
-     */
     public function testHookUninstallationDeclined(): void
     {
         $fakeRepo = new DummyRepo([
@@ -92,9 +79,6 @@ class UninstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getHookDir() . '/pre-push');
     }
 
-    /**
-     * Tests Uninstaller::run
-     */
     public function testForcedHookUninstallation(): void
     {
         $fakeRepo = new DummyRepo([
@@ -119,9 +103,6 @@ class UninstallerTest extends TestCase
         $this->assertFileDoesNotExist($fakeRepo->getHookDir() . '/pre-push');
     }
 
-    /**
-     * Tests Uninstaller::run
-     */
     public function testRemoveHook(): void
     {
         $fakeRepo = new DummyRepo(
@@ -146,9 +127,6 @@ class UninstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getHookDir() . '/pre-push');
     }
 
-    /**
-     * Tests Uninstaller::run
-     */
     public function testRemoveOnlyDisabled(): void
     {
         $fakeRepo = new DummyRepo(
@@ -180,9 +158,6 @@ class UninstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getHookDir() . '/pre-push');
     }
 
-    /**
-     * Tests Uninstaller::run
-     */
     public function testMoveExistingHook(): void
     {
         $fakeRepo = new DummyRepo(
@@ -208,9 +183,6 @@ class UninstallerTest extends TestCase
         $this->assertFileExists($fakeRepo->getRoot() . '/foo/bar/post-merge');
     }
 
-    /**
-     * Tests Uninstaller::run
-     */
     public function testMoveExistingHookTargetIsFile(): void
     {
         $this->expectException(RuntimeException::class);
@@ -240,9 +212,6 @@ class UninstallerTest extends TestCase
                ->run();
     }
 
-    /**
-     * Tests Uninstaller::run
-     */
     public function testMoveExistingHookWhenMoveExistingIsAnAbsolutePath(): void
     {
         $virtualFs = vfsStream::setup('root');

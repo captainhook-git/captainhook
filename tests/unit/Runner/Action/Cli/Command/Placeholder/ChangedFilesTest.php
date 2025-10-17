@@ -30,9 +30,6 @@ class ChangedFilesTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests ChangedFiles::replacement
-     */
     public function testCustomSeparator(): void
     {
         $io     = $this->createIOMock();
@@ -47,9 +44,6 @@ class ChangedFilesTest extends TestCase
         $this->assertEquals('file1.php, file2.php, README.md', $command);
     }
 
-    /**
-     * Tests ChangedFiles::replacement
-     */
     public function testOfType(): void
     {
         $io     = $this->createIOMock();
@@ -64,9 +58,6 @@ class ChangedFilesTest extends TestCase
         $this->assertEquals('file1.php file2.php', $command);
     }
 
-    /**
-     * Tests ChangedFiles::replacement
-     */
     public function testFilterByDirectory(): void
     {
         $io     = $this->createIOMock();
@@ -81,9 +72,6 @@ class ChangedFilesTest extends TestCase
         $this->assertEquals('foo/file1.php foo/file2.php', $command);
     }
 
-    /**
-     * Tests ChangedFiles::replacement
-     */
     public function testReplaceWith(): void
     {
         $io     = $this->createIOMock();

@@ -25,18 +25,12 @@ class NotifyTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests Notify::getRestriction
-     */
     public function testConstraint(): void
     {
         $this->assertTrue(Notify::getRestriction()->isApplicableFor('post-checkout'));
         $this->assertFalse(Notify::getRestriction()->isApplicableFor('commit-msg'));
     }
 
-    /**
-     * Tests Notify::execute
-     */
     public function testExecuteWithNotifications()
     {
         $io      = $this->createIOMock();
@@ -60,9 +54,6 @@ class NotifyTest extends TestCase
         $notify->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Notify::execute
-     */
     public function testExecuteWithoutNotifications()
     {
         $io      = $this->createIOMock();
@@ -86,9 +77,6 @@ class NotifyTest extends TestCase
         $notify->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Notify::execute
-     */
     public function testExecuteWithCustomPrefix()
     {
         $io      = $this->createIOMock();

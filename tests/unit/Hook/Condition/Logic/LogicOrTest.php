@@ -16,15 +16,11 @@ use CaptainHook\App\Hook\Condition;
 use CaptainHook\App\Mockery as AppMockery;
 use PHPUnit\Framework\TestCase;
 
-class LogicalOrTest extends TestCase
+class LogicOrTest extends TestCase
 {
     use IOMockery;
     use AppMockery;
 
-    /**
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicOr::isTrue
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicOr::fromConditionsArray
-     */
     public function testLogicOrReturnsTrueWithOneFailure(): void
     {
         $io         = $this->createIOMock();
@@ -40,10 +36,6 @@ class LogicalOrTest extends TestCase
         $this->assertTrue($condition->isTrue($io, $repository));
     }
 
-    /**
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicOr::isTrue
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicOr::fromConditionsArray
-     */
     public function testLogicOrReturnsFalseWithAllFailing(): void
     {
         $io         = $this->createIOMock();

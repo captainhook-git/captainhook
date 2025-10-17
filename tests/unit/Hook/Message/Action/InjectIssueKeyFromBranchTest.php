@@ -26,21 +26,12 @@ class InjectIssueKeyFromBranchTest extends TestCase
     use CHMockery;
     use IOMockery;
 
-
-    /**
-     * Tests Beams::getRestriction
-     */
     public function testConstraint(): void
     {
         $this->assertTrue(InjectIssueKeyFromBranch::getRestriction()->isApplicableFor('prepare-commit-msg'));
         $this->assertFalse(InjectIssueKeyFromBranch::getRestriction()->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testPrependSubject(): void
     {
         $repo = new RepoMock();
@@ -63,11 +54,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         $this->assertEquals('ABCD-12345 foo', $repo->getCommitMsg()->getSubject());
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testAppendSubject(): void
     {
         $repo = new RepoMock();
@@ -90,11 +76,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         $this->assertEquals('foo ABCD-12345', $repo->getCommitMsg()->getSubject());
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testAppendBodyWithPrefix(): void
     {
         $repo = new RepoMock();
@@ -121,12 +102,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         );
     }
 
-
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testAppendBodyWithPrefixWithComments(): void
     {
         $repo = new RepoMock();
@@ -159,11 +134,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         $this->assertStringContainsString('# some comment', $repo->getCommitMsg()->getRawContent());
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testIgnoreIssueKeyNotFound(): void
     {
         $repo = new RepoMock();
@@ -187,11 +157,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         $this->assertEquals('bar', $repo->getCommitMsg()->getBody());
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testFailIssueKeyNotFound(): void
     {
         $this->expectException(ActionFailed::class);
@@ -213,11 +178,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         $hook->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testIssueKeyAlreadyInMSG(): void
     {
         $repo = new RepoMock();
@@ -239,11 +199,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         $this->assertEquals('ABCD-12345 foo', $repo->getCommitMsg()->getSubject());
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testSubjectWithPattern(): void
     {
         $repo = new RepoMock();
@@ -267,11 +222,6 @@ class InjectIssueKeyFromBranchTest extends TestCase
         $this->assertEquals('ABCD-12345: foo', $repo->getCommitMsg()->getSubject());
     }
 
-    /**
-     * Tests InjectIssueKeyFromBranch::execute
-     *
-     * @throws \Exception
-     */
     public function testSubjectWithEmptyPattern(): void
     {
         $repo = new RepoMock();

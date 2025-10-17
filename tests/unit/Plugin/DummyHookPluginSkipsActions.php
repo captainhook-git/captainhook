@@ -21,7 +21,7 @@ class DummyHookPluginSkipsActions extends DummyHookPlugin
      *
      * @var int
      */
-    public static $skipStartAt = 1;
+    public static int $skipStartAt = 1;
 
     public function beforeHook(RunnerHook $hook): void
     {

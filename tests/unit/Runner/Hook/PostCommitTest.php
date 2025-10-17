@@ -23,11 +23,6 @@ class PostCommitTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabled(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -53,11 +48,6 @@ class PostCommitTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookDisabled(): void
     {
         $io           = $this->createIOMock();

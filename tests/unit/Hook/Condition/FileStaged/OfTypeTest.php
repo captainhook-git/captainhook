@@ -20,18 +20,12 @@ class OfTypeTest extends TestCase
     use AppMockery;
     use IOMockery;
 
-    /**
-     * Tests OfType::getRestriction
-     */
     public function testPreCommitRestriction(): void
     {
         $this->assertTrue(OfType::getRestriction()->isApplicableFor('pre-commit'));
         $this->assertFalse(OfType::getRestriction()->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests OfType::isTrue
-     */
     public function testStagedTrue(): void
     {
         $io    = $this->createIOMock();
@@ -44,9 +38,6 @@ class OfTypeTest extends TestCase
         $this->assertTrue($ofType->isTrue($io, $repo));
     }
 
-    /**
-     * Tests OfType::isTrue
-     */
     public function testStagedMultipleTrue(): void
     {
         $io    = $this->createIOMock();
@@ -59,9 +50,6 @@ class OfTypeTest extends TestCase
         $this->assertTrue($ofType->isTrue($io, $repo));
     }
 
-    /**
-     * Tests OfType:isTrue
-     */
     public function testStagedFalse(): void
     {
         $io    = $this->createIOMock();

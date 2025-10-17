@@ -26,11 +26,6 @@ class SuccessTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Debug::execute
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $config       = $this->createConfigMock(true);
@@ -49,9 +44,6 @@ class SuccessTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Debug::execute
-     */
     public function testExecuteWithoutTags(): void
     {
         $config       = $this->createConfigMock(true);

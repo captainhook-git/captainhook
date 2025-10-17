@@ -23,9 +23,6 @@ class FactoryTest extends TestCase
     use CHMockery;
     use IOMockery;
 
-    /**
-     * Tests HookFailed
-     */
     public function testCreateEvent(): void
     {
         $io     = $this->createIOMock();
@@ -38,9 +35,6 @@ class FactoryTest extends TestCase
         $this->assertInstanceOf(HookFailed::class, $event);
     }
 
-    /**
-     * Tests HookFailed
-     */
     public function testInvalidEvent(): void
     {
         $this->expectException(Exception::class);

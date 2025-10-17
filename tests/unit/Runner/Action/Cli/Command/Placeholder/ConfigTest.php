@@ -22,9 +22,6 @@ class ConfigTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests Config::replacement
-     */
     public function testConfigValue(): void
     {
         $io     = $this->createIOMock();
@@ -38,9 +35,6 @@ class ConfigTest extends TestCase
         $this->assertEquals('./.git', $gitDir);
     }
 
-    /**
-     * Tests Config::replacement
-     */
     public function testCustomConfigValue(): void
     {
         $io     = $this->createIOMock();
@@ -54,9 +48,6 @@ class ConfigTest extends TestCase
         $this->assertEquals('bar', $replace);
     }
 
-    /**
-     * Tests Config::replacement
-     */
     public function testCustomConfigValueNotFound(): void
     {
         $io     = $this->createIOMock();
@@ -70,9 +61,6 @@ class ConfigTest extends TestCase
         $this->assertEquals('', $replace);
     }
 
-    /**
-     * Tests Config::replacement
-     */
     public function testNoValueOf(): void
     {
         $io     = $this->createIOMock();
@@ -85,9 +73,6 @@ class ConfigTest extends TestCase
         $this->assertEquals('', $gitDir);
     }
 
-    /**
-     * Tests Config::replacement
-     */
     public function testInvalidConfigValue(): void
     {
         $io     = $this->createIOMock();

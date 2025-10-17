@@ -24,9 +24,6 @@ class CustomValueIsTruthyTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests CustomValueIsTruthy::isTrue
-     */
     public function testCustomValueIsTruthyIsTrue(): void
     {
         $io         = $this->createIOMock();
@@ -47,9 +44,6 @@ class CustomValueIsTruthyTest extends TestCase
         $this->assertFalse($condition->isTrue($io, $repository));
     }
 
-    /**
-     * Tests CustomValueIsTruthy::isTrue
-     */
     public function testIsTrueFailure(): void
     {
         $this->expectException(Exception::class);

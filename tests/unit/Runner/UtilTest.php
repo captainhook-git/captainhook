@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 class UtilTest extends TestCase
 {
-    /**
-     * Tests Util::getExecType
-     */
     public function testGetTypePHP(): void
     {
         $this->assertEquals('php', Util::getExecType('\\Foo\\Bar'));
@@ -25,9 +22,6 @@ class UtilTest extends TestCase
         $this->assertEquals('php', Util::getExecType('\\Fiz'));
     }
 
-    /**
-     * Tests Util::getExecType
-     */
     public function testGetTypeCli(): void
     {
         $this->assertEquals('cli', Util::getExecType('./my-binary'));
@@ -37,9 +31,6 @@ class UtilTest extends TestCase
         $this->assertEquals('cli', Util::getExecType('/usr/local/bin/phpunit.phar'));
     }
 
-    /**
-     * Tests Util::isTypeValid
-     */
     public function testIsTypeValid(): void
     {
         $this->assertTrue(Util::isTypeValid('php'));
@@ -47,9 +38,6 @@ class UtilTest extends TestCase
         $this->assertFalse(Util::isTypeValid('foo'));
     }
 
-    /**
-     * Tests Util::getEnv
-     */
     public function testCanReadEnvVar(): void
     {
         $_ENV['foo'] = 'bar';
@@ -57,9 +45,6 @@ class UtilTest extends TestCase
         unset($_ENV['foo']);
     }
 
-    /**
-     * Tests Util::getEnv
-     */
     public function testUsesServerSuperglobalAsFallback(): void
     {
         $_SERVER['foo'] = 'bar';
@@ -67,9 +52,6 @@ class UtilTest extends TestCase
         unset($_SERVER['foo']);
     }
 
-    /**
-     * Tests Util::getEnv
-     */
     public function testReturnsDefaultIdEnvNotSet(): void
     {
         $this->assertEquals('baz', Util::getEnv('fiz', 'baz'));

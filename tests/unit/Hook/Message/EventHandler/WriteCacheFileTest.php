@@ -24,9 +24,6 @@ class WriteCacheFileTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests WriteCacheFile::handle
-     */
     public function testHandle(): void
     {
         $dummy   = new DummyRepo();

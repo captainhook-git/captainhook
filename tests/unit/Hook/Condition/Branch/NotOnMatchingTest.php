@@ -20,9 +20,6 @@ class NotOnMatchingTest extends TestCase
     use IOMockery;
     use AppMockery;
 
-    /**
-     * Tests NotOnMatching::isTrue
-     */
     public function testConditionFalse(): void
     {
         $io           = $this->createIOMock();
@@ -35,9 +32,6 @@ class NotOnMatchingTest extends TestCase
         $this->assertFalse($condition->isTrue($io, $repository));
     }
 
-    /**
-     * Tests NotOnMatching::isTrue
-     */
     public function testConditionTrue(): void
     {
         $io           = $this->createIOMock();

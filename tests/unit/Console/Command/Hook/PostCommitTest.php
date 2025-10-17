@@ -19,11 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 class PostCommitTest extends TestCase
 {
-    /**
-     * Tests PostCommit::run
-     *
-     * @throws \Exception
-     */
     public function testExecuteWithRelativeConfigPath(): void
     {
         $cwd = getcwd();
@@ -46,9 +41,6 @@ class PostCommitTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests PostCommit::run
-     */
     public function testMissingBootstrapHandling(): void
     {
         $repo   = new DummyRepo();
@@ -70,10 +62,6 @@ class PostCommitTest extends TestCase
         $this->assertEquals(1, $cmd->run($input, $output));
     }
 
-
-    /**
-     * Tests PostCommit::run
-     */
     public function testCrashingBootstrapHandling(): void
     {
         if (version_compare(PHP_VERSION, '8.0', '<')) {

@@ -20,9 +20,6 @@ class NotOnTest extends TestCase
     use IOMockery;
     use AppMockery;
 
-    /**
-     * Tests NotOn::isTrue
-     */
     public function testConditionFalse(): void
     {
         $io           = $this->createIOMock();
@@ -36,9 +33,6 @@ class NotOnTest extends TestCase
         $this->assertFalse($condition->isTrue($io, $repository));
     }
 
-    /**
-     * Tests NotOn::isTrue
-     */
     public function testConditionTrue(): void
     {
         $io           = $this->createIOMock();

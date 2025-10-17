@@ -32,9 +32,6 @@ class BlockSecretsTest extends TestCase
     use AppMockery;
     use IOMockery;
 
-    /**
-     * Tests BlockSecrets::getRestriction
-     */
     public function testConstraint(): void
     {
         $this->assertTrue(BlockSecrets::getRestriction()->isApplicableFor('pre-commit'));
@@ -42,11 +39,6 @@ class BlockSecretsTest extends TestCase
         $this->assertFalse(BlockSecrets::getRestriction()->isApplicableFor('post-merge'));
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteSuccess(): void
     {
         $diffOperator = $this->createGitDiffOperator();
@@ -66,11 +58,6 @@ class BlockSecretsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteSuccessOnPush(): void
     {
         $diffOperator = $this->createGitDiffOperator();
@@ -92,12 +79,6 @@ class BlockSecretsTest extends TestCase
         $this->assertTrue(true);
     }
 
-
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteSuccessWithEntropyCheck(): void
     {
         $diffOperator = $this->createGitDiffOperator();
@@ -117,11 +98,6 @@ class BlockSecretsTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailure(): void
     {
         $this->expectException(Exception::class);
@@ -151,11 +127,6 @@ class BlockSecretsTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailureByEntropy(): void
     {
         $this->expectException(Exception::class);
@@ -177,11 +148,6 @@ class BlockSecretsTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailedByEntropyButAllowed(): void
     {
         $options = ['entropyThreshold' => 1, 'allowed' => ['#5ad7\\$\\-9Op0\\-x2§d#']];
@@ -201,11 +167,6 @@ class BlockSecretsTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFailedByEntropyBruteForce(): void
     {
         $this->expectException(Exception::class);
@@ -227,11 +188,6 @@ class BlockSecretsTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteProviderNotFound(): void
     {
         $this->expectException(Exception::class);
@@ -252,11 +208,6 @@ class BlockSecretsTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteInvalidProvider(): void
     {
         $this->expectException(Exception::class);
@@ -277,9 +228,6 @@ class BlockSecretsTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests BlockSecrets::execute
-     */
     public function testExecuteAllow(): void
     {
         $diffOperator = $this->createGitDiffOperator();

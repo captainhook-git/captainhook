@@ -23,9 +23,6 @@ class InspectorTest extends TestCase
     use IOMockery;
     use AppMockery;
 
-    /**
-     * Tests Inspector::inspect
-     */
     public function testInspectValid(): void
     {
         $io    = $this->createIOMock();
@@ -39,9 +36,6 @@ class InspectorTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Inspector::inspect
-     */
     public function testInspectInvalid(): void
     {
         $this->expectException(Exception::class);

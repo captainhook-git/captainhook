@@ -34,9 +34,6 @@ class CommitMsgTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests CommitMsg::run
-     */
     public function testRunHookEnabled(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -66,9 +63,6 @@ class CommitMsgTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests CommitMsg::run
-     */
     public function testRunHookSkippedBecauseOfFixup(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -100,11 +94,6 @@ class CommitMsgTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests CommitMsg::run
-     *
-     * @throws \Exception
-     */
     public function testRunWithoutCommitMsgFile(): void
     {
         $this->expectException(Exception::class);

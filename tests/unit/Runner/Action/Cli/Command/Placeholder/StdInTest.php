@@ -22,9 +22,6 @@ class StdInTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests StdIn::replacement
-     */
     public function testStdInValue(): void
     {
         $expected = 'refs/heads/main 9dfa0fa6221d75f48b2dfac359127324bedf8409'
@@ -41,9 +38,6 @@ class StdInTest extends TestCase
         $this->assertEquals(escapeshellarg($expected), $result);
     }
 
-    /**
-     * Tests StdIn::replacement
-     */
     public function testEmptyStdIn(): void
     {
         $io     = $this->createIOMock();

@@ -20,18 +20,12 @@ class InDirectoryTest extends TestCase
     use AppMockery;
     use IOMockery;
 
-    /**
-     * Tests InDirectory::getRestriction
-     */
     public function testPreCommitRestriction(): void
     {
         $this->assertTrue(InDirectory::getRestriction()->isApplicableFor('pre-commit'));
         $this->assertFalse(InDirectory::getRestriction()->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests InDirectory::isTrue
-     */
     public function testStagedTrue(): void
     {
         $io    = $this->createIOMock();
@@ -43,9 +37,6 @@ class InDirectoryTest extends TestCase
         $this->assertTrue($condition->isTrue($io, $repo));
     }
 
-    /**
-     * Tests InDirectory:isTrue
-     */
     public function testStagedFalse(): void
     {
         $io    = $this->createIOMock();

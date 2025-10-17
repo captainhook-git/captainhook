@@ -27,9 +27,6 @@ class ConditionTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Condition::doesConditionApply
-     */
     public function testPHPConditionApply(): void
     {
         $config = $this->createConfigMock();
@@ -52,9 +49,6 @@ class ConditionTest extends TestCase
         $this->assertTrue($runner->doesConditionApply($conditionConfig));
     }
 
-    /**
-     * Tests Condition::doesConditionApply
-     */
     public function testConditionNotExecutedDueToConstraint(): void
     {
         $config = $this->createConfigMock();
@@ -74,9 +68,6 @@ class ConditionTest extends TestCase
         $this->assertTrue($runner->doesConditionApply($conditionConfig));
     }
 
-    /**
-     * Test Condition::doesConditionApply
-     */
     public function testClassNotFound(): void
     {
         $this->expectException(Exception::class);
@@ -92,9 +83,6 @@ class ConditionTest extends TestCase
         $runner->doesConditionApply($conditionConfig);
     }
 
-    /**
-     * Test Condition::doesConditionApply
-     */
     public function testConfigDependantCondition(): void
     {
         $config = $this->createConfigMock();
@@ -111,9 +99,6 @@ class ConditionTest extends TestCase
         $this->assertTrue($runner->doesConditionApply($conditionConfig));
     }
 
-    /**
-     * Test Condition::doesConditionApply
-     */
     public function testDoesConditionApplyCli(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -129,9 +114,6 @@ class ConditionTest extends TestCase
         $this->assertTrue($runner->doesConditionApply($conditionConfig));
     }
 
-    /**
-     * Test Condition::doesConditionApply
-     */
     public function testAndConditionIsCorrectlyInterpreted(): void
     {
         $io = $this->createIOMock();
@@ -160,9 +142,6 @@ class ConditionTest extends TestCase
         $this->assertTrue($runner->doesConditionApply($conditionConfig));
     }
 
-    /**
-     * Test Condition::doesConditionApply
-     */
     public function testOrConditionIsCorrectlyInterpreted(): void
     {
         $io = $this->createIOMock();

@@ -23,7 +23,7 @@ class DummyPHPConstraint implements ActionInterface, ConstrainInterface
     /**
      * Execute static action without errors or exceptions
      */
-    public static function executeStatic()
+    public static function executeStatic(): void
     {
         // do something fooish statically
     }

@@ -20,11 +20,6 @@ use Symfony\Component\Console\Output\NullOutput;
 
 class PrepareCommitMsgTest extends TestCase
 {
-    /**
-     * Tests PrepareCommitMsg::run
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $repo   = new DummyRepo();

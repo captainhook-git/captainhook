@@ -15,9 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 class HookTest extends TestCase
 {
-    /**
-     * Tests Hook::__construct
-     */
     public function testDisabledByDefault(): void
     {
         $hook   = new Hook('pre-commit');
@@ -27,9 +24,6 @@ class HookTest extends TestCase
         $this->assertFalse($config['enabled']);
     }
 
-    /**
-     * Tests Hook::setEnabled
-     */
     public function testSetEnabled(): void
     {
         $hook   = new Hook('pre-commit');
@@ -40,9 +34,6 @@ class HookTest extends TestCase
         $this->assertTrue($config['enabled']);
     }
 
-    /**
-     * Tests Hook::__construct
-     */
     public function testEmptyActions(): void
     {
         $hook   = new Hook('pre-commit');
@@ -52,9 +43,6 @@ class HookTest extends TestCase
         $this->assertCount(0, $config['actions']);
     }
 
-    /**
-     * Tests Hook::addAction
-     */
     public function testAddAction(): void
     {
         $hook   = new Hook('pre-commit');
@@ -65,9 +53,6 @@ class HookTest extends TestCase
         $this->assertCount(1, $config['actions']);
     }
 
-    /**
-     * Tests Hook::addAction
-     */
     public function testAddMultiAction(): void
     {
         $hook   = new Hook('pre-commit');

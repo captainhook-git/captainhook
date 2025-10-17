@@ -25,11 +25,6 @@ class PreCommitTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookEnabled(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -58,11 +53,6 @@ class PreCommitTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookDontFailOnFirstError(): void
     {
         $this->expectException(ActionFailed::class);
@@ -106,9 +96,6 @@ class PreCommitTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PreCommit::run
-     */
     public function testRunHookDontFailEvenOnExceptions(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -146,12 +133,6 @@ class PreCommitTest extends TestCase
         $runner->run();
     }
 
-
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookAllowFailureGlobally(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -190,11 +171,6 @@ class PreCommitTest extends TestCase
         $runner->run();
     }
 
-    /**
-     * Tests PreCommit::run
-     *
-     * @throws \Exception
-     */
     public function testRunHookDisabled(): void
     {
         $io           = $this->createIOMock();

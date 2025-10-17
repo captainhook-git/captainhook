@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class LimitSubjectLengthTest extends TestCase
 {
-    /**
-     * Tests LimitSubjectLength::pass
-     */
     public function testPassSuccess(): void
     {
         $msg  = new CommitMessage('Foo Bar');
@@ -27,9 +24,6 @@ class LimitSubjectLengthTest extends TestCase
         $this->assertTrue($rule->pass($msg));
     }
 
-    /**
-     * Tests LimitSubjectLength::pass
-     */
     public function testPassFail(): void
     {
         $msg  = new CommitMessage('Foo Bar Baz Fiz Baz');

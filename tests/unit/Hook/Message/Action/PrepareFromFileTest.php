@@ -27,11 +27,6 @@ class PrepareFromFileTest extends TestCase
     use CHMockery;
     use IOMockery;
 
-    /**
-     * Tests PrepareFromFile::execute
-     *
-     * @throws \Exception
-     */
     public function testExecutePrepareMessageFromFile(): void
     {
         $dummy = new DummyRepo(['msg.cache' => 'prepared from file']);
@@ -49,11 +44,6 @@ class PrepareFromFileTest extends TestCase
         $this->assertEquals('prepared from file', $repo->getCommitMsg()->getRawContent());
     }
 
-    /**
-     * Tests PrepareFromFile::execute
-     *
-     * @throws \Exception
-     */
     public function testExecutePrepareMessageFileDoesNotExist(): void
     {
         $dummy = new DummyRepo();
@@ -71,9 +61,6 @@ class PrepareFromFileTest extends TestCase
         $this->assertEquals('', $repo->getCommitMsg()->getRawContent());
     }
 
-    /**
-     * Tests PrepareFromFile::execute
-     */
     public function testExecutePrepareMessageNoFileOptionFailure(): void
     {
         $this->expectException(ActionFailed::class);

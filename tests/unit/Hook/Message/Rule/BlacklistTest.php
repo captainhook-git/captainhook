@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class BlacklistTest extends TestCase
 {
-    /**
-     * Tests Blacklist::pass
-     */
     public function testCaseInsensitiveHit(): void
     {
         $msg  = new CommitMessage('Foo bar baz' . PHP_EOL . PHP_EOL . 'Some Body text that is longer');
@@ -29,9 +26,6 @@ class BlacklistTest extends TestCase
         $this->assertFalse($list->pass($msg));
     }
 
-    /**
-     * Tests Blacklist::pass
-     */
     public function testCaseSensitiveMiss(): void
     {
         $msg  = new CommitMessage('Foo bar baz' . PHP_EOL . PHP_EOL . 'Some Body text that is longer');

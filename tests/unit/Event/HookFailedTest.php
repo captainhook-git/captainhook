@@ -22,9 +22,6 @@ class HookFailedTest extends TestCase
     use CHMockery;
     use IOMockery;
 
-    /**
-     * Tests HookFailed
-     */
     public function testEvent(): void
     {
         $io     = $this->createIOMock();

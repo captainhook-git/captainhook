@@ -20,11 +20,6 @@ use PHPUnit\Framework\TestCase;
 
 class PrepareTest extends TestCase
 {
-    /**
-     * Tests RegexCheck::execute
-     *
-     * @throws \Exception
-     */
     public function testExecutePrepareMessage(): void
     {
         /** @var NullIO $io */

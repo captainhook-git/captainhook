@@ -13,9 +13,6 @@ namespace CaptainHook\App\Runner\Action;
 
 class DummyNoAction
 {
-    /**
-     * Barish
-     */
     public function dummy()
     {
         // do something barish

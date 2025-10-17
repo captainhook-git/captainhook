@@ -24,11 +24,6 @@ class RulesTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests Rulebook::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteEmptyRules(): void
     {
         $io     = new NullIO();
@@ -43,11 +38,6 @@ class RulesTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Rulebook::execute
-     *
-     * @throws \Exception
-     */
     public function testNoValidationOnMerging(): void
     {
         $io     = new NullIO();
@@ -62,9 +52,6 @@ class RulesTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Rulebook::execute
-     */
     public function testExecuteClassNotFound(): void
     {
         $this->expectException(Exception::class);
@@ -78,11 +65,6 @@ class RulesTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Rulebook::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteInvalidClass(): void
     {
         $this->expectException(Exception::class);
@@ -96,11 +78,6 @@ class RulesTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Rulebook::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteValidRule(): void
     {
         $io     = new NullIO();
@@ -115,11 +92,6 @@ class RulesTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests Rulebook::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteValidRuleWithArguments(): void
     {
         $io     = new NullIO();
@@ -139,11 +111,6 @@ class RulesTest extends TestCase
         }
     }
 
-    /**
-     * Tests Rulebook::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteLimitSubjectLengthRuleWithUnicode(): void
     {
         $io     = new NullIO();
@@ -163,11 +130,6 @@ class RulesTest extends TestCase
         }
     }
 
-    /**
-     * Tests Rule::execute
-     *
-     * @throws \Exception
-     */
     public function testNoRule(): void
     {
         $this->expectException(Exception::class);
@@ -182,11 +144,6 @@ class RulesTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests Rule::execute
-     *
-     * @throws \Exception
-     */
     public function testInvalidComplexRule(): void
     {
         $this->expectException(Exception::class);

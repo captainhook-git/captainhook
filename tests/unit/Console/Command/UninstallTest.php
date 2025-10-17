@@ -22,11 +22,6 @@ use Symfony\Component\Console\Output\NullOutput;
 
 class UninstallTest extends TestCase
 {
-    /**
-     * Tests Uninstall::run
-     *
-     * @throws \Exception
-     */
     public function testFailMissingConfig(): void
     {
         $output = new NullOutput();
@@ -44,11 +39,6 @@ class UninstallTest extends TestCase
         $this->assertEquals(1, $code);
     }
 
-    /**
-     * Tests Uninstall::run
-     *
-     * @throws \Exception
-     */
     public function testUninstallPreCommitHook(): void
     {
         $repo   = new DummyRepo([

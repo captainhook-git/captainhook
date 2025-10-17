@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class LimitBodyLineLengthTest extends TestCase
 {
-    /**
-     * Tests LimitBodyLineLength::pass
-     */
     public function testPassSuccess(): void
     {
         $msg  = new CommitMessage('Foo' . PHP_EOL . PHP_EOL . 'Bar');
@@ -27,9 +24,6 @@ class LimitBodyLineLengthTest extends TestCase
         $this->assertTrue($rule->pass($msg));
     }
 
-    /**
-     * Tests LimitBodyLineLength::pass
-     */
     public function testPassFail(): void
     {
         $msg  = new CommitMessage('Foo' . PHP_EOL . PHP_EOL . 'Bar Baz Fiz Baz');
@@ -38,9 +32,6 @@ class LimitBodyLineLengthTest extends TestCase
         $this->assertFalse($rule->pass($msg));
     }
 
-    /**
-     * Tests LimitBodyLineLength::pass
-     */
     public function testPassFailOnAnyLine(): void
     {
         $msg  = new CommitMessage('Foo' . PHP_EOL . PHP_EOL . 'Fooish' . PHP_EOL . 'Bar Baz Fiz Baz');

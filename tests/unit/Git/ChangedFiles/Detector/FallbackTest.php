@@ -30,9 +30,6 @@ class FallbackTest extends TestCase
 {
     use IOMockery;
 
-    /**
-     * Tests: Fallback::getRanges
-     */
     public function testGetRanges()
     {
         $io = $this->createIOMock();

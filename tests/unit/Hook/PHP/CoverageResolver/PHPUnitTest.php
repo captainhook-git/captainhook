@@ -16,9 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class PHPUnitTest extends TestCase
 {
-    /**
-     * Tests PHPUnit::getCoverage
-     */
     public function testValid(): void
     {
         if (defined('PHP_WINDOWS_VERSION_MAJOR')) {
@@ -31,9 +28,6 @@ class PHPUnitTest extends TestCase
         $this->assertEquals(95, $coverage);
     }
 
-    /**
-     * Tests PHPUnit::getCoverage
-     */
     public function testPHPUnitError(): void
     {
         $this->expectException(Exception::class);

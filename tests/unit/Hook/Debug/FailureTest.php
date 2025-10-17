@@ -25,11 +25,6 @@ class FailureTest extends TestCase
     use IOMockery;
     use CHMockery;
 
-    /**
-     * Tests Debug::execute
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $this->expectException(Exception::class);

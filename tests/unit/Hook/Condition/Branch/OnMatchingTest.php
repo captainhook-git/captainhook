@@ -20,9 +20,6 @@ class OnMatchingTest extends TestCase
     use IOMockery;
     use AppMockery;
 
-    /**
-     * Tests OnByRegex::isTrue
-     */
     public function testConditionTrue(): void
     {
         $io           = $this->createIOMock();
@@ -36,9 +33,6 @@ class OnMatchingTest extends TestCase
         $this->assertTrue($condition->isTrue($io, $repository));
     }
 
-    /**
-     * Tests OnByRegex::isTrue
-     */
     public function testConditionFalse(): void
     {
         $io           = $this->createIOMock();

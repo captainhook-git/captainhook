@@ -16,15 +16,11 @@ use CaptainHook\App\Hook\Condition;
 use CaptainHook\App\Mockery as AppMockery;
 use PHPUnit\Framework\TestCase;
 
-class LogicalAndTest extends TestCase
+class LogicAndTest extends TestCase
 {
     use IOMockery;
     use AppMockery;
 
-    /**
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicAnd::isTrue
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicAnd::fromConditionsArray
-     */
     public function testLogicAndReturnsFalseWithOneFailure(): void
     {
         $io         = $this->createIOMock();
@@ -40,10 +36,6 @@ class LogicalAndTest extends TestCase
         $this->assertFalse($condition->isTrue($io, $repository));
     }
 
-    /**
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicAnd::isTrue
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicAnd::fromConditionsArray
-     */
     public function testLogicAndReturnsTrueWithAllSuccess(): void
     {
         $io         = $this->createIOMock();
@@ -57,9 +49,6 @@ class LogicalAndTest extends TestCase
         $this->assertTrue($condition->isTrue($io, $repository));
     }
 
-    /**
-     * @covers \CaptainHook\App\Hook\Condition\Logic\LogicAnd::fromConditionsArray
-     */
     public function testNamedConstructorIgnoresNonCondition(): void
     {
         $io         = $this->createIOMock();

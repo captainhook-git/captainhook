@@ -20,11 +20,6 @@ use PHPUnit\Framework\TestCase;
 
 class PostCheckoutTest extends TestCase
 {
-    /**
-     * Tests PostCheckout::run
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $repo   = new DummyRepo();

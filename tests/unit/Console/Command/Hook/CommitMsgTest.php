@@ -20,11 +20,6 @@ use PHPUnit\Framework\TestCase;
 
 class CommitMsgTest extends TestCase
 {
-    /**
-     * Tests CommitMsg::run
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $repo   = new DummyRepo();

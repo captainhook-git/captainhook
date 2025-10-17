@@ -22,9 +22,6 @@ class DispatcherTest extends TestCase
     use CHMockery;
     use IOMockery;
 
-    /**
-     * Tests Dispatcher::subscribeHandlers
-     */
     public function testSubscribeHandlers(): void
     {
         $io      = $this->createIOMock();

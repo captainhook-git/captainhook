@@ -16,21 +16,11 @@ use PHPUnit\Framework\TestCase;
 
 class GuidedTest extends TestCase
 {
-    /**
-     * Tests Guided::isPHPActionOptionValid
-     *
-     * @throws \Exception
-     */
     public function testPHPActionOptionValidationValid(): void
     {
         $this->assertEquals('foo:bar', Guided::isPHPActionOptionValid('foo:bar'));
     }
 
-    /**
-     * Tests Guided::isPHPActionOptionValid
-     *
-     * @throws \Exception
-     */
     public function testPHPActionOptionValidationInvalid(): void
     {
         $this->expectException(Exception::class);

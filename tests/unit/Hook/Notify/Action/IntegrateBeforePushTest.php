@@ -35,9 +35,6 @@ class IntegrateBeforePushTest extends TestCase
     use ConfigMockery;
     use IOMockery;
 
-    /**
-     * Tests IntegrateBeforePush::getRestriction
-     */
     public function testRestrictions(): void
     {
         $restriction = IntegrateBeforePush::getRestriction();
@@ -46,9 +43,6 @@ class IntegrateBeforePushTest extends TestCase
         $this->assertFalse($restriction->isApplicableFor(Hooks::PRE_COMMIT));
     }
 
-    /**
-     * Tests: IntegrateBeforePush::execute
-     */
     public function testBlockPush(): void
     {
         $io           = $this->createIOMock();
@@ -81,9 +75,6 @@ class IntegrateBeforePushTest extends TestCase
         $action->execute($config, $io, $repository, $actionConfig);
     }
 
-    /**
-     * Tests: IntegrateBeforePush::execute
-     */
     public function testNoTrigger(): void
     {
         $io           = $this->createIOMock();

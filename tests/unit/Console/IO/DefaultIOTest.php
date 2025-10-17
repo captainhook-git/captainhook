@@ -73,9 +73,6 @@ class DefaultIOTest extends TestCase
                     ->getMock();
     }
 
-    /**
-     * Tests DefaultIO::getArguments
-     */
     public function testGetArguments(): void
     {
         $input  = $this->getInputMock();
@@ -88,9 +85,6 @@ class DefaultIOTest extends TestCase
         $this->assertEquals(['foo' => 'bar'], $io->getArguments());
     }
 
-    /**
-     * Tests DefaultIO::getArgument
-     */
     public function testGetArgument(): void
     {
         $input  = $this->getInputMock();
@@ -104,10 +98,6 @@ class DefaultIOTest extends TestCase
         $this->assertEquals('bar', $io->getArgument('fiz', 'bar'));
     }
 
-
-    /**
-     * Tests DefaultIO::getStandardInput
-     */
     public function testGetStandardInput(): void
     {
         $input  = $this->getInputMock();
@@ -123,9 +113,6 @@ class DefaultIOTest extends TestCase
         $this->assertCount(3, $io->getStandardInput());
     }
 
-    /**
-     * Tests DefaultIO::isInteractive
-     */
     public function testIsInteractive(): void
     {
         $input  = $this->getInputMock();
@@ -138,9 +125,6 @@ class DefaultIOTest extends TestCase
         $this->assertFalse($io->isInteractive());
     }
 
-    /**
-     * Tests DefaultIO::isVerbose
-     */
     public function testIsVerbose(): void
     {
         $input  = $this->getInputMock();
@@ -153,9 +137,6 @@ class DefaultIOTest extends TestCase
         $this->assertFalse($io->isVerbose());
     }
 
-    /**
-     * Tests DefaultIO::isVeryVerbose
-     */
     public function testIsVeryVerbose(): void
     {
         $input  = $this->getInputMock();
@@ -168,9 +149,6 @@ class DefaultIOTest extends TestCase
         $this->assertFalse($io->isVeryVerbose());
     }
 
-    /**
-     * Tests DefaultIO::isDebug
-     */
     public function testIsDebug(): void
     {
         $input  = $this->getInputMock();
@@ -183,9 +161,6 @@ class DefaultIOTest extends TestCase
         $this->assertFalse($io->isDebug());
     }
 
-    /**
-     * Tests DefaultIO::writeError
-     */
     public function testWriteError(): void
     {
         $input  = $this->getInputMock();
@@ -198,9 +173,6 @@ class DefaultIOTest extends TestCase
         $io->writeError('foo');
     }
 
-    /**
-     * Tests DefaultIO::ask
-     */
     public function testAsk(): void
     {
         $input          = $this->getInputMock();
@@ -236,7 +208,6 @@ class DefaultIOTest extends TestCase
         $io->askConfirmation('foo');
     }
 
-
     public function testAskAndValidateNoHelper(): void
     {
         $this->expectException(Exception::class);
@@ -252,9 +223,6 @@ class DefaultIOTest extends TestCase
         );
     }
 
-    /**
-     * Tests DefaultIO::askConfirmation
-     */
     public function testAskConfirmation(): void
     {
         $input          = $this->getInputMock();
@@ -270,11 +238,6 @@ class DefaultIOTest extends TestCase
         $this->assertTrue($answer);
     }
 
-    /**
-     * Tests DefaultIO::askAbdValidate
-     *
-     * @throws \Exception
-     */
     public function testAskAndValidate(): void
     {
         $input          = $this->getInputMock();
@@ -295,14 +258,11 @@ class DefaultIOTest extends TestCase
         $this->assertEquals('y', $answer);
     }
 
-    /**
-     * Tests DefaultIO::write
-     */
     public function testWrite(): void
     {
-        $input          = $this->getInputMock();
-        $output         = $this->getConsoleOutputMock();
-        $helper         = $this->getHelperSetMock();
+        $input  = $this->getInputMock();
+        $output = $this->getConsoleOutputMock();
+        $helper = $this->getHelperSetMock();
 
         $output->expects($this->once())->method('getVerbosity')->willReturn(OutputInterface::VERBOSITY_DEBUG);
         $output->expects($this->once())->method('getErrorOutput')->willReturn($this->getOutputMock());
@@ -311,15 +271,11 @@ class DefaultIOTest extends TestCase
         $io->writeError('foo');
     }
 
-
-    /**
-     * Tests DefaultIO::write
-     */
     public function testWriteSkipped(): void
     {
-        $input          = $this->getInputMock();
-        $output         = $this->getConsoleOutputMock();
-        $helper         = $this->getHelperSetMock();
+        $input  = $this->getInputMock();
+        $output = $this->getConsoleOutputMock();
+        $helper = $this->getHelperSetMock();
 
         $output->expects($this->once())->method('getVerbosity')->willReturn(OutputInterface::VERBOSITY_NORMAL);
         $output->expects($this->exactly(0))->method('getErrorOutput');

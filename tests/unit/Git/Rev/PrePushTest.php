@@ -23,9 +23,6 @@ use PHPUnit\Framework\TestCase;
  */
 class PrePushTest extends TestCase
 {
-    /**
-     * Tests all ref getters
-     */
     public function testGetter(): void
     {
         $ref = new PrePush('refs/heads/main', '12345', 'main');

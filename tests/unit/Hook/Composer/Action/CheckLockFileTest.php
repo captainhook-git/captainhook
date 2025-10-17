@@ -21,11 +21,6 @@ class CheckLockFileTest extends TestCase
 {
     use Mockery;
 
-    /**
-     * Tests CheckLockFile::execute
-     *
-     * @throws \Exception
-     */
     public function testExecute(): void
     {
         $io     = new NullIO();
@@ -41,11 +36,6 @@ class CheckLockFileTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests CheckLockFile::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteFail(): void
     {
         $this->expectException(Exception::class);
@@ -62,12 +52,6 @@ class CheckLockFileTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-
-    /**
-     * Tests CheckLockFile::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteNoHash(): void
     {
         $this->expectException(Exception::class);
@@ -84,11 +68,6 @@ class CheckLockFileTest extends TestCase
         $standard->execute($config, $io, $repo, $action);
     }
 
-    /**
-     * Tests CheckLockFile::execute
-     *
-     * @throws \Exception
-     */
     public function testExecuteInvalidPath(): void
     {
         $this->expectException(Exception::class);

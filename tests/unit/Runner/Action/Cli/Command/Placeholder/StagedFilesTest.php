@@ -22,9 +22,6 @@ class StagedFilesTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests StagedFiles::replacement
-     */
     public function testCustomSeparator(): void
     {
         $io     = $this->createIOMock();
@@ -39,9 +36,6 @@ class StagedFilesTest extends TestCase
         $this->assertEquals('file1.php, file2.php, README.md', $command);
     }
 
-    /**
-     * Tests StagedFiles::replacement
-     */
     public function testCustomDiffFilter(): void
     {
         $io     = $this->createIOMock();
@@ -56,9 +50,6 @@ class StagedFilesTest extends TestCase
         $this->assertEquals('file1.php file2.php README.md', $command);
     }
 
-    /**
-     * Tests StagedFiles::replacement
-     */
     public function testOfType(): void
     {
         $io     = $this->createIOMock();
@@ -74,9 +65,6 @@ class StagedFilesTest extends TestCase
         $this->assertEquals('file1.php file2.php', $command);
     }
 
-    /**
-     * Tests StagedFiles::replacement
-     */
     public function testFilterByDirectory(): void
     {
         $io     = $this->createIOMock();
@@ -91,9 +79,6 @@ class StagedFilesTest extends TestCase
         $this->assertEquals('foo/file1.php foo/file2.php', $command);
     }
 
-    /**
-     * Tests StagedFiles::replacement
-     */
     public function testReplaceWith(): void
     {
         $io     = $this->createIOMock();

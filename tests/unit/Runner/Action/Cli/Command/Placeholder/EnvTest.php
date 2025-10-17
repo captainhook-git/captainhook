@@ -22,9 +22,6 @@ class EnvTest extends TestCase
     use AppMockery;
     use ConfigMockery;
 
-    /**
-     * Tests Env::replacement
-     */
     public function testEnvValue(): void
     {
         $_ENV['foo'] = 'bar';
@@ -41,9 +38,6 @@ class EnvTest extends TestCase
         unset($_ENV['foo']);
     }
 
-    /**
-     * Tests Env::replacement
-     */
     public function testNoValueOf(): void
     {
         $io     = $this->createIOMock();
@@ -56,9 +50,6 @@ class EnvTest extends TestCase
         $this->assertEquals('', $result);
     }
 
-    /**
-     * Tests Env::replacement
-     */
     public function testDefault(): void
     {
         $io     = $this->createIOMock();

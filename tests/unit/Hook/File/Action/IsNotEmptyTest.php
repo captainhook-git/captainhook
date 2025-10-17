@@ -23,29 +23,18 @@ class IsNotEmptyTest extends TestCase
     use GitMockery;
     use IOMockery;
 
-    /**
-     * Tests IsNotEmpty::getRestriction
-     */
     public function testRestrictionValid(): void
     {
         $restriction = IsNotEmpty::getRestriction();
         $this->assertTrue($restriction->isApplicableFor('pre-commit'));
     }
 
-    /**
-     * Tests IsNotEmpty::getRestriction
-     */
     public function testRestrictionInvalid(): void
     {
         $restriction = IsNotEmpty::getRestriction();
         $this->assertFalse($restriction->isApplicableFor('pre-push'));
     }
 
-    /**
-     * Tests IsNotEmpty::execute
-     *
-     * @throws \Exception
-     */
     public function testCommitNotEmptyFile(): void
     {
 
@@ -71,11 +60,6 @@ class IsNotEmptyTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests IsNotEmpty::execute
-     *
-     * @throws \Exception
-     */
     public function testConfigWithGlobs(): void
     {
         $io     = $this->createIOMock();
@@ -105,11 +89,6 @@ class IsNotEmptyTest extends TestCase
         $this->assertTrue(true);
     }
 
-    /**
-     * Tests IsNotEmpty::execute
-     *
-     * @throws \Exception
-     */
     public function testFailCommitEmptyFile(): void
     {
         $this->expectException(Exception::class);

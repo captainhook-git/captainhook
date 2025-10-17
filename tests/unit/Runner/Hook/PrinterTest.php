@@ -24,7 +24,6 @@ class PrinterTest extends TestCase
     use AppMockery;
     use IOMockery;
 
-    # @Test
     public function testHookEndDebug(): void
     {
         $io = $this->createIOMock();
@@ -44,7 +43,6 @@ class PrinterTest extends TestCase
         $printer->hookEnded(HookRunner::HOOK_SUCCEEDED, $log, 0.25);
     }
 
-    # @Test
     public function testHookEndVeryVerbose(): void
     {
         $io = $this->createIOMock();
@@ -65,7 +63,6 @@ class PrinterTest extends TestCase
         $printer->hookEnded(HookRunner::HOOK_SUCCEEDED, $log, 0.25);
     }
 
-    # @Test
     public function testHookEndVerbose(): void
     {
         $io = $this->createIOMock();
