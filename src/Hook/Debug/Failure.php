@@ -18,7 +18,17 @@ use CaptainHook\App\Hook\Debug;
 use SebastianFeldmann\Git\Repository;
 
 /**
- * Debug hook to test hook triggering that fails the hook execution
+ * Debug Failure
+ *
+ * Debug hook to test hook triggering, arguments, stdIn ect.
+ * Fails the hook execution and stops current the git operation.
+ *
+ * Example configuration:
+ * <code>
+ * {
+ *   "action": "CaptainHook.Debug.Fail"
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

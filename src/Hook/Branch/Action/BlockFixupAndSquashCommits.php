@@ -27,17 +27,17 @@ use SebastianFeldmann\Git\Repository;
  * This action blocks pushes that contain fixup! or squash! commits.
  * Just as a security layer, so you are not pushing stuff you wanted to autosquash.
  *
- * Configure like this:
- *
+ * Example configuration:
+ * <code>
  * {
- *    "action": "\\CaptainHook\\App\\Hook\\Branch\\Action\\BlockFixupAndSquashCommits",
- *    "options": {
- *      "blockSquashCommits": true,
- *      "blockFixupCommits": true,
- *      "protectedBranches": ["main", "master", "integration"]
- *    },
- *    "conditions": []
- *  }
+ *   "action": "CaptainHook.Branch.PreventPushOfFixupAndSquashCommits",
+ *   "options": {
+ *     "blockSquashCommits": true,
+ *     "blockFixupCommits": true,
+ *     "protectedBranches": ["main", "master", "integration"]
+ *   }
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

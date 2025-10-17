@@ -17,7 +17,17 @@ use CaptainHook\App\Hook\Debug;
 use SebastianFeldmann\Git\Repository;
 
 /**
- * Debug hook to test hook triggering that allows the hook to pass
+ * Debug Success
+ *
+ * Debug hook action to test hook triggering, arguments, stdIn etc.
+ * Does not crash the hook execution. The git operation will succeed.
+ *
+ * Example configuration:
+ * <code>
+ * {
+ *   "action": "CaptainHook.Debug.Ok"
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
