@@ -12,7 +12,6 @@
 namespace CaptainHook\App\Runner;
 
 use CaptainHook\App\Hook;
-use PHPUnit\Framework\MockObject\MockObject;
 use RuntimeException;
 
 /**
@@ -62,7 +61,7 @@ class Shorthand
             ],
         ],
         'condition' => [
-            'inconfig'    => [
+            'config'    => [
                 'customvalueistruthy' => Hook\Condition\Config\CustomValueIsTruthy::class,
                 'customvalueisfalsy'  => Hook\Condition\Config\CustomValueIsFalsy::class,
             ],
@@ -71,9 +70,11 @@ class Shorthand
                 'all' => Hook\Condition\FileChanged\All::class,
             ],
             'filestaged'  => [
-                'all'    => Hook\Condition\FileStaged\All::class,
-                'any'    => Hook\Condition\FileStaged\Any::class,
-                'thatis' => Hook\Condition\FileStaged\ThatIs::class,
+                'all'         => Hook\Condition\FileStaged\All::class,
+                'any'         => Hook\Condition\FileStaged\Any::class,
+                'indirectory' => Hook\Condition\FileStaged\InDirectory::class,
+                'oftype'      => Hook\Condition\FileStaged\OfType::class,
+                'thatis'      => Hook\Condition\FileStaged\ThatIs::class,
             ],
             'status'      => [
                 'onbranch'            => Hook\Condition\Branch\On::class,
