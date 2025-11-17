@@ -93,7 +93,7 @@ class Shorthand
      */
     public static function isShorthand(string $shorthand): bool
     {
-        return preg_match('#^captainhook\.[a-z]+\.[a-z]+$#i', $shorthand);
+        return (bool) preg_match('#^captainhook\.[a-z]+\.[a-z]+$#i', $shorthand);
     }
 
     /**
