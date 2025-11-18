@@ -21,13 +21,17 @@ use SebastianFeldmann\Git\Repository;
  *
  * Example configuration:
  *
- * "action": "some-action"
- * "conditions": [
- *   {"exec": "\\CaptainHook\\App\\Hook\\Condition\\Config\\CustomValueIsTruthy",
- *    "args": [
- *      "NAME_OF_CUSTOM_VALUE"
- *    ]}
- * ]
+ * <code>
+ * {
+ *   "action": "some-action"
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.Config.CustomValueIsTruthy",
+ *       "args": ["NAME_OF_CUSTOM_VALUE"]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

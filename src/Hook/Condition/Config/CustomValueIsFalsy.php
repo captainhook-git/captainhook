@@ -17,22 +17,31 @@ use CaptainHook\App\Hooks;
 use SebastianFeldmann\Git\Repository;
 
 /**
- * Class CustomValueIsFalsy
+ * Condition CustomValueIsFalsy
+ *
+ * With this condition, you can check if a given custom value is falsy.
+ * The Action only is executed if the custom value is falsy.
+ * Values considered falsy are, 0, null, empty string, empty array and false.
  *
  * Example configuration:
  *
- * "action": "some-action"
- * "conditions": [
- *   {"exec": "\\CaptainHook\\App\\Hook\\Condition\\Config\\CustomValueIsFalsy",
- *    "args": [
- *      "NAME_OF_CUSTOM_VALUE"
- *    ]}
- * ]
+ * <code>
+ * {
+ *   "action": "some-action"
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.Config.CustomValueIsFalsy",
+ *       "args": ["NAME_OF_CUSTOM_VALUE"]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
  * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 5.17.2
+ * @short   CaptainHook.Config.CustomValueIsFalsy
  */
 class CustomValueIsFalsy extends Condition\Config
 {

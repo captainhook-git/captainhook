@@ -27,18 +27,24 @@ use SebastianFeldmann\Git\Repository;
  *
  * Example configuration:
  *
- * "action": "some-action"
- * "conditions": [
- *   {"exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
- *    "args": [
- *      "php",
- *      ["A", "C"]
- *    ]}
- * ]
+ * <code>
+ * {
+ *   "action": "some-action"
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.FileStaged.OfType",
+ *       "args": [
+ *         "php",
+ *         ["A", "C"]
+ *       ]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * Multiple types can be configured using a comma separated string or an array
- * "php,html,xml"
- * ["php", "html", "xml"]
+ *  - "php,html,xml"
+ *  - ["php", "html", "xml"]
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

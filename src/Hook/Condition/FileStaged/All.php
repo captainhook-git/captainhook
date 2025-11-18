@@ -23,13 +23,19 @@ use SebastianFeldmann\Git\Repository;
  *
  * Example configuration:
  *
- *  "action": "some-action"
- *  "conditions": [
- *    {"exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\All",
- *     "args": [
- *       ["file1", "file2", "file3"]
- *    ]}
- *  ]
+ * <code>
+ * {
+ *   "action": "some-action"
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.FileStaged.All",
+ *       "args": [
+ *         ["list", "of", "files"]
+ *       ]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * The file list can also be defined as comma seperated string "file1,file2,file3"
  *

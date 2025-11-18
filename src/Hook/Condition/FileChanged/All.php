@@ -21,6 +21,22 @@ use SebastianFeldmann\Git\Repository;
  * The FileChange condition is applicable for `post-merge` and `post-checkout` hooks.
  * It checks if all configured files are updated within the last change set.
  *
+ * Example configuration:
+ *
+ *  <code>
+ *  {
+ *    "action": "some-action"
+ *    "conditions": [
+ *      {
+ *        "exec": "CaptainHook.FileChanged.All",
+ *        "args": [
+ *          ["list", "of", "files"]
+ *        ]
+ *      }
+ *    ]
+ *  }
+ *  </code>
+ *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
  * @link    https://github.com/captainhook-git/captainhook

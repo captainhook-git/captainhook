@@ -26,13 +26,19 @@ use SebastianFeldmann\Git\Repository;
  *
  * Example configuration:
  *
- * "action": "some-action"
- * "conditions": [
- *   {"exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\ThatIs",
- *    "args": [
- *      {"ofType": "php", "inDirectory": "foo/", "diff-filter": ["A", "C"]}
- *    ]}
- * ]
+ * <code>
+ * {
+ *   "action": "some-action"
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.FileStaged.ThatIs",
+ *       "args": [
+ *         {"ofType": "php", "inDirectory": "foo/", "diff-filter": ["A", "C"]}
+ *       ]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

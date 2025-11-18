@@ -25,13 +25,17 @@ use SebastianFeldmann\Git\Repository;
  *
  * Example configuration:
  *
- * "action": "some-action"
- * "conditions": [
- *   {"exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\OfType",
- *    "args": [
- *      "php"
- *    ]}
- * ]
+ * <code>
+ * {
+ *   "action": "some-action"
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.FileChanged.OfType",
+ *       "args": ["php"]
+ *     }
+ *   ]
+ * }
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

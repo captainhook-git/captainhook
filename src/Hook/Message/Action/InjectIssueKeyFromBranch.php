@@ -28,16 +28,20 @@ use SebastianFeldmann\Git\Repository;
  * Class PrepareFromFile
  *
  * Example configuration:
+ *
+ * <code>
  * {
- *   "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\InjectIssueKeyFromBranch",
+ *   "action": "CaptainHook.Message.InjectIssueKeyFromBranch",
  *   "options": {
  *     "regex": "#([A-Z]+\\-[0-9]+)#i",
- *     "into": "body",
- *     "mode": "append",
- *     "prefix": "\nissue: ",
+ *     "into": "body|subject",
+ *     "mode": "append|prepend",
+ *     "prefix": "",
+ *     "suffix": "",
  *     "force": true
  *   }
  * }
+ * </code>
  *
  * The regex option needs group $1 (...) to be the issue key
  *

@@ -19,6 +19,7 @@ use CaptainHook\App\Hook\Action;
 use CaptainHook\App\Hook\Constrained;
 use CaptainHook\App\Hook\EventSubscriber;
 use CaptainHook\App\Runner\Action as ActionRunner;
+use CaptainHook\App\Runner\Shorthand;
 use Error;
 use Exception;
 use RuntimeException;
@@ -40,13 +41,13 @@ class PHP implements ActionRunner
      *
      * @var string
      */
-    private $hook;
+    private string $hook;
 
     /**
      *
      * @var \CaptainHook\App\Event\Dispatcher
      */
-    private $dispatcher;
+    private Dispatcher $dispatcher;
 
     /**
      * PHP constructor.
@@ -71,7 +72,7 @@ class PHP implements ActionRunner
      */
     public function execute(Config $config, IO $io, Repository $repository, Config\Action $action): void
     {
-        $class = $action->getAction();
+        $class = $this->getActionClass($action->getAction());
 
         try {
             // if the configured action is a static php method display the captured output and exit
@@ -80,7 +81,7 @@ class PHP implements ActionRunner
                 return;
             }
 
-            // if not static it has to be an 'Action' so let's instantiate
+            // if not static, it has to be an 'Action' so let's instantiate
             $exe = $this->createAction($class);
             // check for any given restrictions
             if (!$this->isApplicable($exe)) {
@@ -169,5 +170,16 @@ class PHP implements ActionRunner
             return $action->getRestriction()->isApplicableFor($this->hook);
         }
         return true;
+    }
+
+    /**
+     * Make sure action shorthands are translated before instantiating
+     *
+     * @param  string $action
+     * @return string
+     */
+    private function getActionClass(string $action): string
+    {
+        return Shorthand::isShorthand($action) ? Shorthand::getActionClass($action) : $action;
     }
 }

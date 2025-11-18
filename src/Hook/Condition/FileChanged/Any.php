@@ -19,21 +19,24 @@ use SebastianFeldmann\Git\Repository;
  * Class Any
  *
  * The FileChange condition is applicable for `post-merge` and `post-checkout` hooks.
- * For example it can be used to trigger an automatic composer install if the composer.json
- * or composer.lock file is changed during a checkout or merge.
+ * For example, it can be used to trigger an automatic composer install if the composer.json
+ * or `composer.lock` file is changed during a checkout or merge.
  *
  * Example configuration:
  *
- * "action": "composer install"
- * "conditions": [
- *   {"exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChange\\Any",
- *    "args": [
- *      [
- *        "composer.json",
- *        "composer.lock"
- *      ]
- *    ]}
- * ]
+ * <code>
+ * {
+ *   "action": "some-action"
+ *   "conditions": [
+ *     {
+ *       "exec": "CaptainHook.FileChanged.Any",
+ *       "args": [
+ *         ["list", "of", "files"]
+ *       ]
+ *     }
+ *   ]
+ * }
+ *  </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
