@@ -15,6 +15,7 @@ use CaptainHook\App\Config;
 use CaptainHook\App\Console\IO;
 use CaptainHook\App\Event\Dispatcher;
 use CaptainHook\App\Exception\ActionFailed;
+use CaptainHook\App\Exception\ActionNotApplicable;
 use CaptainHook\App\Hook\Action;
 use CaptainHook\App\Hook\Constrained;
 use CaptainHook\App\Hook\EventSubscriber;
@@ -69,6 +70,7 @@ class PHP implements ActionRunner
      * @param  \CaptainHook\App\Config\Action    $action
      * @return void
      * @throws \CaptainHook\App\Exception\ActionFailed
+     * @throws \CaptainHook\App\Exception\ActionNotApplicable
      */
     public function execute(Config $config, IO $io, Repository $repository, Config\Action $action): void
     {
@@ -85,8 +87,7 @@ class PHP implements ActionRunner
             $exe = $this->createAction($class);
             // check for any given restrictions
             if (!$this->isApplicable($exe)) {
-                $io->write('Action skipped due to hook constraint', true, IO::VERBOSE);
-                return;
+                throw new ActionNotApplicable('Action can\'t be used for this hook');
             }
 
             // make sure to collect all event handlers before executing the action
@@ -96,7 +97,7 @@ class PHP implements ActionRunner
 
             // no restrictions run it!
             $exe->execute($config, $io, $repository, $action);
-        } catch (ActionFailed $e) {
+        } catch (ActionNotApplicable | ActionFailed $e) {
             throw $e;
         } catch (Exception $e) {
             throw new ActionFailed(

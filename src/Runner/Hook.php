@@ -15,6 +15,7 @@ use CaptainHook\App\Config;
 use CaptainHook\App\Console\IO;
 use CaptainHook\App\Event\Dispatcher;
 use CaptainHook\App\Exception\ActionFailed;
+use CaptainHook\App\Exception\ActionNotApplicable;
 use CaptainHook\App\Hook\Constrained;
 use CaptainHook\App\Hook\Template\Inspector;
 use CaptainHook\App\Plugin;
@@ -336,7 +337,10 @@ abstract class Hook extends RepositoryAware
             $runner = $this->createActionRunner(Util::getExecType($action->getAction()));
             $runner->execute($this->config, $io, $this->repository, $action);
             $this->printer->actionSucceeded($action);
-        } catch (Exception  $e) {
+        } catch (ActionNotApplicable $e) {
+            $this->printer->actionSkipped($action);
+            return;
+        } catch (Exception $e) {
             $status = ActionLog::ACTION_FAILED;
             $this->printer->actionFailed($action);
             if (!$action->isFailureAllowed($this->config->isFailureAllowed())) {

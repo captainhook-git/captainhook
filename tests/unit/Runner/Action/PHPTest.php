@@ -14,6 +14,7 @@ namespace CaptainHook\App\Runner\Action;
 use CaptainHook\App\Config\Mockery as ConfigMockery;
 use CaptainHook\App\Console\IO\Mockery as IOMockery;
 use CaptainHook\App\Event\Dispatcher;
+use CaptainHook\App\Exception\ActionNotApplicable;
 use CaptainHook\App\Mockery as CHMockery;
 use Exception;
 use PHPUnit\Framework\TestCase;
@@ -71,6 +72,8 @@ class PHPTest extends TestCase
 
     public function testExecuteConstraintNotApplicable(): void
     {
+        $this->expectException(ActionNotApplicable::class);
+
         $config = $this->createConfigMock();
         $io     = $this->createIOMock();
         $repo   = $this->createRepositoryMock();

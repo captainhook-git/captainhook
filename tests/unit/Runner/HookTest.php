@@ -14,6 +14,7 @@ namespace CaptainHook\App\Runner;
 use CaptainHook\App\Config;
 use CaptainHook\App\Config\Mockery as ConfigMockery;
 use CaptainHook\App\Console\IO\Mockery as IOMockery;
+use CaptainHook\App\Console\IO\TestIO;
 use CaptainHook\App\Git\DummyRepo;
 use CaptainHook\App\Hook\Restriction;
 use CaptainHook\App\Hooks;
@@ -115,6 +116,31 @@ class HookTest extends TestCase
 
         $this->assertFalse($runner->shouldSkipActions(false));
         $this->assertFalse($runner->shouldSkipActions());
+    }
+
+    public function testActionNotApplicable(): void
+    {
+        $config = $this->createConfigMock();
+        $config->method('failOnFirstError')->willReturn(true);
+        $dummy = new DummyRepo(['hooks' => ['pre-commit' => '# hook script']]);
+        $repo  = $this->createRepositoryMock($dummy->getRoot());
+        $repo->method('getHooksDir')->willReturn($dummy->getHookDir());
+
+        $io           = new TestIO();
+        $hookConfig   = $this->createHookConfigMock();
+        $actionConfig = $this->createActionConfigMock();
+        $actionConfig->method('getAction')->willReturn("\\CaptainHook\\App\\Hook\\Message\\Action\\Beams");
+        $hookConfig->method('isEnabled')->willReturn(true);
+        $hookConfig->expects($this->once())->method('getActions')->willReturn([$actionConfig]);
+        $config->expects($this->once())->method('getHookConfigToExecute')->willReturn($hookConfig);
+        $config->expects($this->atLeastOnce())->method('isHookEnabled')->willReturn(true);
+
+        $runner = new class ($io, $config, $repo) extends Hook {
+            protected string $hook = Hooks::PRE_PUSH;
+        };
+        $runner->run();
+
+        $this->assertStringContainsString('skipped', implode($io->getLog()));
     }
 
     public function testRunHookWithPlugins(): void
