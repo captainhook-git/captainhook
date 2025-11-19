@@ -38,6 +38,7 @@ use SebastianFeldmann\Git\Repository;
  *     "mode": "append|prepend",
  *     "prefix": "",
  *     "suffix": "",
+ *     "modify": "lowercase|uppercase",
  *     "force": true
  *   }
  * }
@@ -139,6 +140,8 @@ class InjectIssueKeyFromBranch implements Action, Constrained
         $target = $options->get('into', self::TARGET_BODY);
         $mode   = $options->get('mode', self::MODE_APPEND);
 
+        $issueID = $this->modify($issueID, (string) $options->get('modify', ''));
+
         // overwrite either subject or body
         $pattern          = $this->handlePrefixAndSuffix($mode, $options);
         $msgData          = [self::TARGET_SUBJECT => $msg->getSubject(), self::TARGET_BODY => $msg->getBody()];
@@ -146,9 +149,9 @@ class InjectIssueKeyFromBranch implements Action, Constrained
 
         // combine all the parts to create a new commit message
         $msgText = $msgData[self::TARGET_SUBJECT] . PHP_EOL
-                 . PHP_EOL
-                 . $msgData[self::TARGET_BODY] . PHP_EOL
-                 . $msg->getComments();
+                   . PHP_EOL
+                   . $msgData[self::TARGET_BODY] . PHP_EOL
+                   . $msg->getComments();
 
         return new CommitMessage($msgText, $msg->getCommentCharacter());
     }
@@ -194,5 +197,29 @@ class InjectIssueKeyFromBranch implements Action, Constrained
         $prefix = $options->get('prefix', $mode == 'append' ? $space : '');
         $suffix = $options->get('suffix', $mode == 'prepend' ? $space : '');
         return $prefix . $pattern . $suffix;
+    }
+
+    /**
+     * Run modifier
+     *
+     * @param  string $issueID
+     * @param  string $modify
+     * @return string
+     */
+    private function modify(string $issueID, string $modify): string
+    {
+        if (empty($modify)) {
+            return $issueID;
+        }
+
+        $availableModifiers = [
+            'lowercase' => fn (string $str): string => strtolower($str),
+            'uppercase' => fn (string $str): string => strtoupper($str),
+        ];
+
+        if (array_key_exists($modify, $availableModifiers)) {
+            $issueID = $availableModifiers[$modify]($issueID);
+        }
+        return $issueID;
     }
 }
