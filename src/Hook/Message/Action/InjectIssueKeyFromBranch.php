@@ -71,7 +71,7 @@ class InjectIssueKeyFromBranch implements Action, Constrained
      */
     public static function getRestriction(): Restriction
     {
-        return Restriction::fromArray([Hooks::PREPARE_COMMIT_MSG]);
+        return Restriction::fromArray([Hooks::PREPARE_COMMIT_MSG, Hooks::COMMIT_MSG]);
     }
 
     /**
