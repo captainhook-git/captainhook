@@ -24,6 +24,14 @@ class FactoryTest extends TestCase
         $this->assertCount(1, $config->getHookConfig('pre-commit')->getActions());
     }
 
+    public function testCustomValuesCanBeDefined(): void
+    {
+        $config = Factory::create(CH_PATH_FILES . '/config/valid-with-all-settings.json');
+        $custom = $config->getCustomSettings();
+
+        $this->assertEquals('bar', $custom['foo']);
+    }
+
     public function testOverwriteConfigSettingsBySettingsConfigFile(): void
     {
         $config = Factory::create(realpath(CH_PATH_FILES . '/config/config-file/captainhook.json'));

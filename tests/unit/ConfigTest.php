@@ -175,7 +175,7 @@ class ConfigTest extends TestCase
         $config = new Config(
             './no-config.json',
             false,
-            ['run-path' => '/usr/local/bin/captainhook', 'verbosity' => 'debug']
+            ['run-path' => '/usr/local/bin/captainhook', 'verbosity' => 'debug', 'custom' => ['foo' => 'bar']]
         );
         $json   = $config->getJsonData();
 
