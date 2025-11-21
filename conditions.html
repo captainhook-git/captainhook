@@ -62,19 +62,19 @@
           <td>Check if we are not on a particular branch</td>
         </tr>
         <tr>
-          <td><a href="#on-matching-branch">\CaptainHook\App\Hook\Condition\Branch\OnMatching</a></td>
+          <td><a href="#on-matching-branch">CaptainHook.Status.OnMatchingBranch</a></td>
           <td>Check if we are on a particular branch that matches a given regex</td>
         </tr>
         <tr>
-          <td><a href="#not-on-matching-branch">\CaptainHook\App\Hook\Condition\Branch\NotOnMatching</a></td>
+          <td><a href="#not-on-matching-branch">CaptainHook.Status.NotOnMatchingBranch</a></td>
           <td>Check if we are not on a particular branch that matches a given regex</td>
         </tr>
         <tr>
-          <td><a href="#custom-truthy">\CaptainHook\App\Hook\Condition\Config\CustomValueIsTruthy</a></td>
+          <td><a href="#custom-truthy">CaptainHook.Config.CustomValueIsTruthy</a></td>
           <td>Check if a custom config is true, 1, yes or on</td>
         </tr>
         <tr>
-          <td><a href="#custom-falsy">\CaptainHook\App\Hook\Condition\Config\CustomValueIsFalsy</a></td>
+          <td><a href="#custom-falsy">CaptainHook.Config.CustomValueIsFalsy</a></td>
           <td>Check if a custom config is false, 0, no or off</td>
         </tr>
         <tr>
@@ -85,45 +85,45 @@
           <th colspan="2">pre-commit</th>
         </tr>
         <tr>
-          <td><a href="#file-staged-all">\CaptainHook\App\Hook\Condition\FileStaged\All</a></td>
+          <td><a href="#file-staged-all">CaptainHook.FileStaged.All</a></td>
           <td>Check if <strong>all</strong> of the configured files are staged for commit</td>
         </tr>
         <tr>
-          <td><a href="#file-staged-any">\CaptainHook\App\Hook\Condition\FileStaged\Any</a></td>
+          <td><a href="#file-staged-any">CaptainHook.FileStaged.Any</a></td>
           <td>Check if <strong>any</strong> of the configured files is staged for commit</td>
         </tr>
         <tr>
-          <td><a href="#file-staged-of-type">\CaptainHook\App\Hook\Condition\FileStaged\OfType</a></td>
+          <td><a href="#file-staged-of-type">CaptainHook.FileStaged.OfType</a></td>
           <td>Check if a file of a given type is staged for commit</td>
         </tr>
         <tr>
-          <td><a href="#file-staged-in-directory">\CaptainHook\App\Hook\Condition\FileStaged\InDirectory</a></td>
+          <td><a href="#file-staged-in-directory">CaptainHook.FileStaged.InDirectory</a></td>
           <td>Check if a file in a directory is changed</td>
         </tr>
         <tr>
           <th colspan="2">post-checkout / post-merge / post-rewrite / pre-push</th>
         </tr>
         <tr>
-          <td><a href="#file-changed-all">\CaptainHook\App\Hook\Condition\FileChanged\All</a></td>
-          <td>Check if <strong>all</strong> of the configured files are changed</td>
+          <td><a href="#file-changed-all">CaptainHook.FileChanged.All</a></td>
+          <td>Check if <strong>all</strong> the configured files are changed</td>
         </tr>
         <tr>
-          <td><a href="#file-changed-any">\CaptainHook\App\Hook\Condition\FileChanged\Any</a></td>
+          <td><a href="#file-changed-any">CaptainHook.FileChanged.Any</a></td>
           <td>Check if <strong>any</strong> of the configured files is changed</td>
         </tr>
         <tr>
-          <td><a href="#file-changed-oftype">\CaptainHook\App\Hook\Condition\FileChanged\OfType</a></td>
-          <td>Check if changes to a typy of file will be pushed</td>
+          <td><a href="#file-changed-oftype">CaptainHook.FileChanged.OfType</a></td>
+          <td>Check if changes to a type of file will be pushed</td>
         </tr>
         <tr>
           <th colspan="2">logic conditions</th>
         </tr>
         <tr>
-          <td><a href="#logic-and">\CaptainHook\App\Hook\Condition\Logic\LogicAnd</a></td>
+          <td><a href="#logic-and">CaptainHook.Logic.And</a></td>
           <td>Combine multiple conditions. Only if all conditions apply the action will be executed</td>
         </tr>
         <tr>
-          <td><a href="#logic-or">\CaptainHook\App\Hook\Condition\Logic\LogicOr</a></td>
+          <td><a href="#logic-or">CaptainHook.Logic.Or</a></td>
           <td>Combine multiple conditions. If one condition applies the action will be executed</td>
         </tr>
       </table>
@@ -137,13 +137,13 @@
         <a href="extend.html#conditions">"how to extend CaptainHook"</a> section.
       </p>
 
-      <h3 id="on-branch">On</h3>
+      <h3 id="on-branch">OnBranch</h3>
       <p><em class="hl">all hooks</em></p>
       <p>This <em>Condition</em> expects just one argument, the name of the branch.</p>
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\Branch\\On",
+      "exec": "CaptainHook.Status.OnBranch",
       "args": [
         "main"
       ]
@@ -151,13 +151,13 @@
   ]
 }</code></pre>
 
-      <h3 id="not-on-branch">NotOn</h3>
+      <h3 id="not-on-branch">NotOnBranch</h3>
       <p><em class="hl">all hooks</em></p>
       <p>This <em>Condition</em> expects just one argument, the name of the branch.</p>
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\Branch\\NotOn",
+      "exec": "CaptainHook.Status.NotOnBranch",
       "args": [
         "main"
       ]
@@ -165,13 +165,13 @@
   ]
 }</code></pre>
 
-      <h3 id="on-matching-branch">OnMatching</h3>
+      <h3 id="on-matching-branch">OnMatchingBranch</h3>
       <p><em class="hl">all hooks</em></p>
       <p>This <em>Condition</em> expects just one argument, the regex to match the branch.</p>
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\Branch\\OnMatching",
+      "exec": "CaptainHook.Status.OnMatchingBranch",
       "args": [
         "#feature/[a-z0-9\-_]+#i"
       ]
@@ -179,13 +179,13 @@
   ]
 }</code></pre>
 
-      <h3 id="not-on-matching-branch">NotOnMatching</h3>
+      <h3 id="not-on-matching-branch">NotOnMatchingBranch</h3>
       <p><em class="hl">all hooks</em></p>
       <p>This <em>Condition</em> expects just one argument, the regex to match the branch.</p>
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\Branch\\NotOnMatching",
+      "exec": "CaptainHook.Status.NotOnMatchingBranch",
       "args": [
         "#feature/[a-z0-9\-_]+#i"
       ]
@@ -199,7 +199,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\Config\\CustomConfigValueIsTruthy",
+      "exec": "CaptainHook.Config.CustomValueIsTruthy",
       "args": [
         "MY_CONFIG_VALUE"
       ]
@@ -213,7 +213,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\Config\\CustomConfigValueIsFalsy",
+      "exec": "CaptainHook.Config.CustomValueIsFalsy",
       "args": [
         "MY_CONFIG_VALUE"
       ]
@@ -229,7 +229,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\Branch\\Files",
+      "exec": "CaptainHook\\App\\Hook\\Condition\\Branch\\Files",
       "args": [
         {"compared-to": "main", "of-type": "php", "in-dir": "foo/"}
       ]
@@ -243,7 +243,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\All",
+      "exec": "CaptainHook.FileStaged.All",
       "args": [
         ["foo.html", "bar.html", "*.php"]
       ]
@@ -257,7 +257,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\Any",
+      "exec": "CaptainHook.FileStaged.Any",
       "args": [
         ["foo.html", "bar.html", "*.php"]
       ]
@@ -271,7 +271,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+      "exec": "CaptainHook.FileStaged.OfType",
       "args": [
         "php"
       ]
@@ -285,7 +285,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+      "exec": "CaptainHook.FileStaged.InDirectory",
       "args": [
         "src/Foo/"
       ]
@@ -299,7 +299,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\All",
+      "exec": "CaptainHook.FileChanged.All",
       "args": [
         ["foo.html", "bar.html", "*.php"]
       ]
@@ -313,7 +313,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any‚",
+      "exec": "CaptainHook.FileChanged.Any‚",
       "args": [
         ["foo.html", "bar.html", "*.php"]
       ]
@@ -327,7 +327,7 @@
       <pre><code class="javascript">{
   "conditions": [
     {
-      "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\OfType",
+      "exec": "CaptainHook.FileChanged.OfType",
       "args": [
         "php"
       ]
@@ -342,12 +342,12 @@
     {
       "exec": "and",
       "args": [{
-        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+        "exec": "CaptainHookFileStaged.InDirectory",
         "args": [
           ["src/new"]
         ]
       },{
-        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+        "exec": "CaptainHook.FileStaged.OfType",
         "args": [
           ["php"]
         ]
@@ -363,12 +363,12 @@
     {
       "exec": "or",
       "args": [{
-        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\InDirectory",
+        "exec": "CaptainHook.FileStaged.InDirectory",
         "args": [
           ["src/new"]
         ]
       },{
-        "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+        "exec": "CaptainHook.FileStaged.OfType",
         "args": [
           ["php"]
         ]

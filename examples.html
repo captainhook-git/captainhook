@@ -60,7 +60,7 @@
         "action": "phpcs --standard=psr12 {$STAGED_FILES|of-type:php}",
         "conditions": [
           {
-            "exec:"\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "exec:"CaptainHook.FileStaged.OfType",
             "args": [
               "php"
             ]
@@ -85,7 +85,7 @@
         "action": "composer install",
         "conditions": [
           {
-            "exec:"\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",
+            "exec:"CaptainHook.FileChanged.Any",
             "args": [
               ["composer.json", "composer.lock"]
             ]
@@ -101,7 +101,7 @@
         "action": "composer install",
         "conditions": [
           {
-            "exec:"\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",
+            "exec:"CaptainHook.FileChanged.Any",
             "args": [
               ["composer.json", "composer.lock"]
             ]

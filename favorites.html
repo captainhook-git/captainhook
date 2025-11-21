@@ -48,7 +48,7 @@
 
   <h1>The Captain's favorite hooks</h1>
   <p>
-    Here ye can find a treasure full with the Captain's favorite hooks ready
+    Here ye can find a treasure full of the Captain's favorite hooks ready
     for ye to get copy and pasted into yer own <em>captainhook.json</em> files.
   </p>
 
@@ -57,7 +57,7 @@
     "enabled": true,
     "actions": [
       {
-        "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
+        "action": "CaptainHook.Message.MustFollowBeamsRules",
         "options": {
           "subjectLength": 50,
           "bodyLineLength": 72
@@ -82,7 +82,7 @@
         "options": [],
         "conditions": [
           {
-            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileStaged\\OfType",
+            "exec": "CaptainHook.FileStaged.OfType",
             "args": ["php"]
           }
         ]
@@ -118,7 +118,7 @@
         "options": [],
         "conditions": [
           {
-            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",
+            "exec": "CaptainHook.FileChanged.Any",
             "args": [
               [
                 "phive.xml"
@@ -132,7 +132,7 @@
         "options": [],
         "conditions": [
           {
-            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",
+            "exec": "CaptainHook.FileChanged.Any",
             "args": [
               [
                 "composer.json",

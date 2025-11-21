@@ -88,7 +88,7 @@
     <li>Use imperative mood</li>
   </ul>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Message\Action\Beams",
+  "action": "CaptainHook.Message.MustFollowBeamsRules",
   "options": []
 }</code></pre>
 
@@ -97,7 +97,7 @@
     Use a regex to validate your commit messages.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Message\Action\Regex",
+  "action": "CaptainHook.Message.MustMatchRegex",
   "options": {
     "regex": "#.*#i",
     "error": "No match for: %s",
@@ -111,7 +111,7 @@
     Use <em>CaptainHooks</em> built in rules or write <a href="extend.html">your own</a> ones.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Message\Action\Rules",
+  "action": "CaptainHook.Message.Rules",
   "options": [
     "\CaptainHook\App\Hook\Message\Rule\MsgNotEmpty"
   ]
@@ -123,7 +123,7 @@
     you don't have to type the whole message again. Instead, you can just fix the errors and proceed.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Message\Action\CacheOnFail",
+  "action": "CaptainHook.Message.CacheOnFail",
   "options": {
     "file": ".git/CH_MSG.temp"
   }
@@ -154,7 +154,7 @@
     if you want to add a delimiter or another character.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Message\Action\InjectIssueKeyFromBranch",
+  "action": "CaptainHook.Message.InjectIssueKeyFromBranch",
   "options": {
     "regex": "#([A-Z]+\\-[0-9]+)#i",
     "into": "body",
@@ -171,7 +171,7 @@
     previous commit attempt.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Message\Action\LoadFromFile",
+  "action": "CaptainHook.Message.LoadFromFile",
   "options": {
     "file": ".git/CH_MSG.temp"
   }
@@ -184,7 +184,7 @@
     Make sure your <em>composer.lock</em> file is up to date.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Composer\Action\CheckLockFile",
+  "action": "CaptainHook.Tools.CheckComposerLockFile",
   "options": []
 }</code></pre>
 
@@ -193,7 +193,7 @@
     Make sure your PHP code doesn't contain any syntax errors.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\PHP\Action\Linting",
+  "action": "CaptainHook.Tools.PHPLint",
   "options": []
 }</code></pre>
 
@@ -202,7 +202,7 @@
     Make sure you code coverage doesn't decrease beyond a given percent value.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\PHP\Action\TestCoverage",
+  "action": "CaptainHook.Tools.CloverTestCoverage",
   "options": {
     "minCoverage": 90,
     "cloverXml": "build/logs/clover.xml"
@@ -215,7 +215,7 @@
     Use 'B', 'K' or 'M' as size indication.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\File\Action\MaxSize",
+  "action": "CaptainHook.File.MaxSize",
   "options": {
     "maxSize": "5M"
   }
@@ -227,7 +227,7 @@
     The following configuration makes sure you will not commit log files with contents to the repository.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\File\Action\IsEmpty",
+  "action": "CaptainHook.File.MustBeEmpty",
   "options": {
     "files": [
       ".env",
@@ -243,7 +243,7 @@
     With this configuration you can make sure that README files are not committed without any contents.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\File\Action\IsNotEmpty",
+  "action": "CaptainHook.File.MustNotBeEmpty",
   "options": {
     "files": [
       "README.md",
@@ -257,7 +257,7 @@
     Make sure you do not commit specific contents to a list of file types.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\File\Action\DoesNotContainRegex",
+  "action": "CaptainHook.File.ContentMustNotMatchRegex",
   "options": {
     "regex": "#print_r|var_dump#i"
     "regexName": "debug output"
@@ -278,7 +278,7 @@
     <em>blockDefault</em> to <em>false</em>.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Diff\Action\BlockSecrets",
+  "action": "CaptainHook.File.BlockSecrets",
   "options": {
     "entropyThreshold": 3.7,
     "suppliers": [
@@ -298,7 +298,7 @@
     Make sure you are only allowed to push if configured files exist in the repository.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\File\Action\Exists",
+  "action": "CaptainHook.File.MustExists",
   "options": {
     "files": [
       "tests/**/*Tests.php",
@@ -312,7 +312,7 @@
     Make sure branch names match a configured regex.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Branch\Action\EnsureNaming",
+  "action": "CaptainHook.Branch.NameMustMatchRegex",
   "options": {
     "regex": "#master|integration|feature/[a-z]+-[0-9]+#"
   }
@@ -325,7 +325,7 @@
     prohibited.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Branch\Action\BlockFixupAndSquashCommits",
+  "action": "CaptainHook.Branch.PreventPushOfFixupAndSquashCommits",
   "options": {
     "protectedBranches": ["main", "master"]
   }
@@ -336,7 +336,7 @@
     Checks if a branch contains any trigger commits, if so it forces you to update your local branch before you can push.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Notify\Action\IntegrateBeforePush",
+  "action": "CaptainHook.Branch.IntegrateBeforePush",
   "options": {
     "trigger": "[merge]",
     "branch": "main"
@@ -348,7 +348,7 @@
     Ask the user to confirm to continue the current git operation.
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\UserInput\AskConfirmation",
+  "action": "CaptainHook.Notify.AskConfirmation",
   "options": {
     "message": "Do you really want to continue? [Yes|no]",
     "default": true
@@ -369,7 +369,7 @@ git-notify: WARNING
 Please update your dev tooling</pre>
   </p>
   <pre><code class="javascript">{
-  "action": "\CaptainHook\App\Hook\Notify\Action\Notify",
+  "action": "CaptainHook.Notify.GitNotify",
   "options": {
     "prefix": "git-notify:"
   }

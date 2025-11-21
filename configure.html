@@ -303,6 +303,26 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
 }</code></pre>
 
       <p>
+        This approach is mostly for your own classes. For all <em>CaptainHook</em> included Actions you should use
+        a shorthand that can be found in the documentation. This way, if classes get moved around in future versions
+        of the Cap'n, your config will not break.
+      </p>
+
+      <pre><code class="javascript">{
+  "commit-msg": {
+    "enabled": true,
+    "actions": [
+      {
+        "action": "CaptainHook.Message.MustMatchRegex",
+        "options": {
+          "regex": "#.*#"
+        }
+      }
+    ]
+  }
+}</code></pre>
+
+      <p>
         Here's a <a href="actions.html">list of all available actions</a>.
       </p>
       <p>
@@ -328,7 +348,7 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
         "options": {},
         "conditions": [
           {
-            "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",
+            "exec": "CaptainHook.FileChanged.Any",
             "args": [
               ["composer.json", "composer.lock"]
             ]
@@ -361,7 +381,7 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
     "enabled": true,
     "actions": [
       {
-        "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Regex",
+        "action": "CaptainHook.Message.MustMatchRegex",
         "options": {
           "regex": "#.*#"
         }
@@ -377,8 +397,8 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
 ├── msg-validation.json
 └── crazy-workflow.json</code></pre>
       <p>
-        Inside your composer.json you require all libs and extensions you need to execute the configured actions plus <em>captainhook/captainhook</em>
-        or <em>captainhook/plugin-composer</em>. The only thing you have to do in your projects is to require your <em class="hl">my-git-hooks</em>
+        Inside your composer.json you require all libs and extensions you need to execute the configured actions plus <em>captainhook/captainhook-phar</em>
+        or <em>captainhook/hook-installer</em>. The only thing you have to do in your projects is to require your <em class="hl">my-git-hooks</em>
         package and add something like this to your local project <em>captainhook.json</em> file.
       </p>
       <pre><code class="javascript">{
@@ -395,7 +415,7 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
 
       <h4>Include Level</h4>
       <p>
-        By default you can't include configurations in included configurations. But if you really want to shoot yourself in the foot, who am I to judge you.
+        By default, you can't include configurations in included configurations. But if you really want to shoot yourself in the foot, who am I to judge you.
         You can increase the maximum levels of inclusion in your project configuration. Be aware, that setting this in any included configuration will have no effect.
       </p>
       <pre><code class="javascript">{
@@ -412,8 +432,8 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
       <h2>Settings</h2>
       <p>
        You can configure some basic CaptainHook behaviour by overwriting the defaults in your configuration file.
-        For example if your .git directory is not located on the same level as your captainhook.json or
-        you like a more verbose output.
+        For example if your .git directory is not located on the same level as your captainhook.json, or
+        you like a more verbose output. Here is a list of all available settings. All of them are optional.
       </p>
       <pre><code class="javascript">{
   "config": {
@@ -527,9 +547,9 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
       <a id="settings-overwrite"></a>
       <h3>Overwrite settings</h3>
       <p>
-        If you have different preferences as your team does and you want to tweak some settings to your needs but you
-        don't want to change the <em>captainhook.json</em> that is under version control, there is a way.
-        All you have to do is to create a <em>captainhook.config.json</em> file right beside your <em>captainhook.json</em> file.
+        If you have different preferences as your team does, and you want to tweak some settings to your needs, but you
+        don't want to change the <em>captainhook.json</em> that is under version control, you can
+        create a <em>captainhook.config.json</em> file right beside your <em>captainhook.json</em> file.
       </p>
       <p>
         <strong>ATTENTION:</strong> The file must be named <em>captainhook.config.json</em> and it must be located in the same directory
@@ -559,7 +579,7 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
       <a id="settings-action"></a>
       <h3>Action settings</h3>
       <p>
-        You can also configure settings for a specific action.
+        You can also configure settings for actions.
       </p>
       <pre><code class="javascript">{
   "pre-commit": {
