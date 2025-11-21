@@ -50,11 +50,7 @@ class PrepareCommitMsgTest extends TestCase
         file_put_contents($commitMessageFile, 'Commit Message');
 
         $io->expects($this->atLeast(1))->method('write');
-        $io->expects($this->exactly(3))->method('getArgument')->willReturnOnConsecutiveCalls(
-            $commitMessageFile,
-            '',
-            ''
-        );
+        $io->expects($this->exactly(3))->method('getArgument')->willReturn($commitMessageFile);
 
         $runner = new PrepareCommitMsg($io, $config, $repo);
         $runner->run();
