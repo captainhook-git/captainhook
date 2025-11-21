@@ -35,29 +35,38 @@ class Shorthand
     private static array $map = [
         'action'    => [
             'branch'  => [
-                'ensurenaming'                       => Hook\Branch\Action\EnsureNaming::class,
+                'namemustmatchregex'                 => Hook\Branch\Action\EnsureNaming::class,
                 'preventpushoffixupandsquashcommits' => Hook\Branch\Action\BlockFixupAndSquashCommits::class,
+            ],
+            'tools' => [
+                'checkcomposerlockfile' => Hook\Composer\Action\CheckLockFile::class,
+                'phplint'               => Hook\PHP\Action\Linting::class,
+                'clovertestcoverage'    => Hook\PHP\Action\TestCoverage::class,
             ],
             'debug'   => [
                 'fail' => Hook\Debug\Failure::class,
                 'ok'   => Hook\Debug\Success::class,
             ],
             'file'    => [
-                'blocksecrets'        => Hook\Diff\Action\BlockSecrets::class,
-                'doesnotcontainregex' => Hook\File\Action\DoesNotContainRegex::class,
-                'isnotempty'          => Hook\File\Action\IsNotEmpty::class,
-                'maxsize'             => Hook\File\Action\MaxSize::class,
+                'blocksecrets'             => Hook\Diff\Action\BlockSecrets::class,
+                'contentmustnotmatchregex' => Hook\File\Action\DoesNotContainRegex::class,
+                'maxsize'                  => Hook\File\Action\MaxSize::class,
+                'mustbeempty'              => Hook\File\Action\IsEmpty::class,
+                'mustnotbeempty'           => Hook\File\Action\IsNotEmpty::class,
+                'mustexist'                => Hook\File\Action\Exists::class,
             ],
             'message' => [
                 'injectissuekeyfrombranch' => Hook\Message\Action\InjectIssueKeyFromBranch::class,
                 'cacheonfail    '          => Hook\Message\Action\CacheOnFail::class,
+                'mustfollowrules'          => Hook\Message\Action\Rules::class,
                 'mustfollowbeamsrules'     => Hook\Message\Action\Beams::class,
                 'mustmatchregex'           => Hook\Message\Action\Regex::class,
                 'preparefromfile'          => Hook\Message\Action\PrepareFromFile::class,
                 'prepare'                  => Hook\Message\Action\Prepare::class,
             ],
             'notify'  => [
-                'gitnotify' => Hook\Notify\Action\Notify::class,
+                'gitnotify'       => Hook\Notify\Action\Notify::class,
+                'askconfirmation' => Hook\UserInput\AskConfirmation::class,
             ],
         ],
         'condition' => [

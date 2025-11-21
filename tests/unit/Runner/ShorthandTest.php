@@ -74,7 +74,7 @@ class ShorthandTest extends TestCase
      */
     public function testFindsActionClassByShorthand(): void
     {
-        $class = Shorthand::getActionClass('Captainhook.Branch.EnsureNaming');
+        $class = Shorthand::getActionClass('Captainhook.Branch.NameMustMatchRegex');
         $this->assertTrue(str_contains($class, 'CaptainHook\App\Hook\Branch\Action\EnsureNaming'));
     }
 
