@@ -79,7 +79,7 @@ Here's an example *captainhook.json* configuration file.
   "commit-msg": {
     "actions": [
       {
-        "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams"
+        "action": "CaptainHook.Message.MustFollowBeamsRules"
       }
     ]
   },
