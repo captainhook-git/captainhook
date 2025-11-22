@@ -92,7 +92,7 @@ class PHP implements ActionRunner
 
             // make sure to collect all event handlers before executing the action
             if ($exe instanceof EventSubscriber) {
-                $this->dispatcher->subscribeHandlers($class::getEventHandlers($action));
+                $this->dispatcher->subscribeHandlers($exe::getEventHandlers($action));
             }
 
             // no restrictions run it!
