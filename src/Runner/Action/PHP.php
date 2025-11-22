@@ -87,6 +87,7 @@ class PHP implements ActionRunner
             $exe = $this->createAction($class);
             // check for any given restrictions
             if (!$this->isApplicable($exe)) {
+                $io->write('Action not applicable because of hook restrictions', true, IO::VERBOSE);
                 throw new ActionNotApplicable('Action can\'t be used for this hook');
             }
 
