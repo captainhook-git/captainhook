@@ -1,4 +1,4 @@
-FROM php:8.0-alpine
+FROM php:8.5-alpine
 
 COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/bin/
 RUN install-php-extensions zip
