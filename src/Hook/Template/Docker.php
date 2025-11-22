@@ -107,11 +107,11 @@ class Docker implements Template
      */
     private function getOptimizeDockerCommand(string $hook): string
     {
-        $command  = $this->config->getRunConfig()->getDockerCommand();
-        $position = strpos($command, 'docker exec');
-        // add interactive and tty flags if docker exec is used
-        if ($position !== false) {
-            $endExec    = $position + 11;
+        $command = $this->config->getRunConfig()->getDockerCommand();
+        $endExec = $this->endOfExecPositionInCommand($command);
+
+        // if the docker command can be identified, add env vars and tty flags
+        if ($endExec !== -1) {
             $executable = substr($command, 0, $endExec);
             $options    = substr($command, $endExec);
 
@@ -227,5 +227,31 @@ class Docker implements Template
         // which will most likely not work from within the docker container
         // you have to use the 'run' 'path' config then
         return $this->pathInfo->getExecutablePath();
+    }
+
+    /**
+     * Look for the docker exec position in the command
+     *
+     * The position is necessary to optimize the interactive and env variable settings.
+     * Returns -1 if nothing can be detected.
+     *
+     * This detection works with:
+     *  - docker
+     *  - docker-compose
+     *  - podman
+     *  - sail
+     *
+     * @param string $command
+     * @return int
+     */
+    private function endOfExecPositionInCommand(string $command): int
+    {
+        // find the exec command to extract the options later on and improve them
+        $regex   = '~(?:^|[\s;|&])(?:[\w./-]*/)?(docker|docker-compose|podman|sail)\s+exec\b~i';
+        $matches = [];
+        if (preg_match($regex, $command, $matches)) {
+            return strlen($matches[0]);
+        }
+        return -1;
     }
 }

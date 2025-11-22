@@ -105,6 +105,28 @@ class DockerTest extends TestCase
         $this->assertStringContainsString('/usr/local/bin/captainhook', $code);
     }
 
+    public function testDoesNotOptimizeUnrecognizedCommands(): void
+    {
+        $pathInfo = $this->createMock(PathInfo::class);
+        $pathInfo->method('getExecutablePath')->willReturn('./vendor/bin/captainhook');
+        $pathInfo->method('getConfigPath')->willReturn('captainhook.json');
+
+        $configMock = $this->createConfigMock(false, 'captainhook.json');
+        $runConfig  = new Run([
+            'mode' => 'docker',
+            'exec' => 'custom-exec my-container',
+            'path' => '/usr/local/bin/captainhook'
+        ]);
+        $configMock->method('getBootstrap')->willReturn('');
+        $configMock->method('getRunConfig')->willReturn($runConfig);
+
+        $template = new Docker($pathInfo, $configMock);
+        $code     = $template->getCode('prepare-commit-msg');
+
+        $this->assertStringContainsString('/usr/local/bin/captainhook', $code);
+        $this->assertStringNotContainsString('GIT_INDEX_FILE', $code);
+    }
+
     public static function replacementPossibilitiesWithoutGitMapping(): array
     {
         return [
