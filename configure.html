@@ -447,12 +447,12 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
     "includes": [],
     "includes-level": 2,
     "plugins": [],
-    "php-path": "/usr/bin/php7.4",
+    "php-path": "/usr/bin/php8.4",
     "run": {
       "mode": "docker",
       "exec": "docker exec -i CONTAINER_NAME",
       "path": "vendor/bin/captainhook",
-      "git": "/docker/.git"
+      "git": "/var/www/html/.git"
     },
     "verbosity": "verbose"
   }
@@ -566,7 +566,7 @@ echo {$STDIN} | bin/my-script-needs-stdin</pre>
     "mode": "docker",
     "exec": "docker exec -i MY_CONTAINER_NAME",
     "path": "vendor/bin/captainhook",
-    "git": "/docker/.git"
+    "git": "/var/www/html/.git"
   },
   "custom": {
     "some-key": "some value"

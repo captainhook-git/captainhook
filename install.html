@@ -103,7 +103,7 @@
         If you don't have PHP installed locally, or you have installed a different version, you can use Docker to
         execute CaptainHook. To do so you must install the hooks a bit differently.
       </p>
-      <pre><code class="bash">$ vendor/bin/captainhook install --run-mode=docker --run-exec="docker exec -i CONTAINER_NAME"</code></pre>
+      <pre><code class="bash">$ vendor/bin/captainhook install --run-mode=docker --run-exec="docker exec -i CONTAINER_NAME" --run-git="/var/www/html/.git"</code></pre>
       <p>
         You can choose your preferred docker command e.g.:
       </p>
@@ -115,12 +115,15 @@
       <p>
         If you are using the composer plugin or just don't want to provide the settings via cli option you can
         configure the settings in the "config" section of your <em>captainhook.json</em>.
+        The <em>git</em> setting is important to perform a path mapping from host to container to make commands
+        like <em>git commit -a</em> work as expected.
       </p>
       <pre><code class="javascript">{
   "config": {
     "run": {
       "mode": "docker",
-      "exec": "docker exec -i CONTAINER_NAME"
+      "exec": "docker exec -i CONTAINER_NAME",
+      "git": "/var/www/html/.git"
     }
   }
   "pre-commit": {
