@@ -99,7 +99,13 @@ class Install extends RepositoryAware
                  'p',
                  InputOption::VALUE_OPTIONAL,
                  'The path to the CaptainHook executable \'/usr/bin/captainhook\''
-             );
+             )
+            ->addOption(
+                'run-git',
+                'd',
+                InputOption::VALUE_OPTIONAL,
+                'The absolute path to the .git directory inside the container \'/var/www/html/.git\''
+            );
     }
 
     /**
@@ -113,7 +119,7 @@ class Install extends RepositoryAware
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $args     = ['git-directory', 'run-mode', 'run-exec', 'run-path', 'bootstrap'];
+            $args     = ['git-directory', 'run-mode', 'run-exec', 'run-path', 'run-git', 'bootstrap'];
             $io       = $this->getIO($input, $output);
             $config   = $this->createConfig($input, true, $args);
             $repo     = $this->createRepository(dirname($config->getGitDirectory()));
