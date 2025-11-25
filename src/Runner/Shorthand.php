@@ -33,12 +33,12 @@ class Shorthand
      * @var array<string, array<string, array<string, string>>>
      */
     private static array $map = [
-        'action'    => [
+        'action' => [
             'branch'  => [
                 'namemustmatchregex'                 => Hook\Branch\Action\EnsureNaming::class,
                 'preventpushoffixupandsquashcommits' => Hook\Branch\Action\BlockFixupAndSquashCommits::class,
             ],
-            'tools' => [
+            'tools'   => [
                 'checkcomposerlockfile' => Hook\Composer\Action\CheckLockFile::class,
                 'phplint'               => Hook\PHP\Action\Linting::class,
                 'clovertestcoverage'    => Hook\PHP\Action\TestCoverage::class,
@@ -70,13 +70,16 @@ class Shorthand
             ],
         ],
         'condition' => [
-            'config'    => [
+            'config'      => [
                 'customvalueistruthy' => Hook\Condition\Config\CustomValueIsTruthy::class,
                 'customvalueisfalsy'  => Hook\Condition\Config\CustomValueIsFalsy::class,
             ],
             'filechanged' => [
-                'any' => Hook\Condition\FileChanged\Any::class,
-                'all' => Hook\Condition\FileChanged\All::class,
+                'any'         => Hook\Condition\FileChanged\Any::class,
+                'all'         => Hook\Condition\FileChanged\All::class,
+                'indirectory' => Hook\Condition\FileChanged\InDirectory::class,
+                'oftype'      => Hook\Condition\FileChanged\OfType::class,
+                'thatis'      => Hook\Condition\FileChanged\ThatIs::class,
             ],
             'filestaged'  => [
                 'all'         => Hook\Condition\FileStaged\All::class,
