@@ -11,9 +11,7 @@
 
 namespace CaptainHook\App\Hook\Condition\FileChanged;
 
-use CaptainHook\App\Console\IO;
-use CaptainHook\App\Hook\Condition\FileChanged;
-use SebastianFeldmann\Git\Repository;
+use CaptainHook\App\Hook\Condition\File;
 
 /**
  * Class Any
@@ -43,19 +41,7 @@ use SebastianFeldmann\Git\Repository;
  * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 4.2.0
  */
-class Any extends FileChanged
+class Any extends File\Any
 {
-    /**
-     * Check if any of the configured files was changed within the applied change set
-     *
-     * IMPORTANT: If no files are configured this condition is always false.
-     *
-     * @param  \CaptainHook\App\Console\IO       $io
-     * @param  \SebastianFeldmann\Git\Repository $repository
-     * @return bool
-     */
-    public function isTrue(IO $io, Repository $repository): bool
-    {
-        return $this->anyFileInHaystack($this->filesToWatch, $this->getChangedFiles($io, $repository));
-    }
+    use File\Changed;
 }

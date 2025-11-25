@@ -14,7 +14,9 @@ namespace CaptainHook\App\Hook\Condition\FileChanged;
 use CaptainHook\App\Hook\Condition\File;
 
 /**
- * Class OfType
+ * Class ThatIs
+ *
+ * All FileStaged conditions are only applicable for `pre-commit` hooks.
  *
  * Example configuration:
  *
@@ -23,8 +25,10 @@ use CaptainHook\App\Hook\Condition\File;
  *   "action": "some-action"
  *   "conditions": [
  *     {
- *       "exec": "CaptainHook.FileChanged.OfType",
- *       "args": ["php"]
+ *       "exec": "CaptainHook.FileChanged.ThatIs",
+ *       "args": [
+ *         {"ofType": "php", "inDirectory": "foo/", "diff-filter": ["A", "C"]}
+ *       ]
  *     }
  *   ]
  * }
@@ -33,9 +37,9 @@ use CaptainHook\App\Hook\Condition\File;
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
  * @link    https://github.com/captainhook-git/captainhook
- * @since   Class available since Release 5.0.0
+ * @since   Class available since Release 5.16.0
  */
-class OfType extends File\OfType
+class ThatIs extends File\ThatIs
 {
     use File\Changed;
 }

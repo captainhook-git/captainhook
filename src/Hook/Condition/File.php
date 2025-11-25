@@ -98,4 +98,58 @@ abstract class File implements Condition, Constrained
         }
         return false;
     }
+
+    /**
+     * Remove all files not in a given directory
+     *
+     * @param  array<string> $files
+     * @param  array<string> $directories
+     * @return array<string>
+     */
+    protected function filterFilesByDirectory(array $files, array $directories): array
+    {
+        if (empty($directories)) {
+            return $files;
+        }
+        return array_filter($files, function ($file) use ($directories) {
+            foreach ($directories as $directory) {
+                if (str_starts_with($file, $directory)) {
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
+
+    /**
+     * Remove all files not of a configured type
+     *
+     * @param  array<string> $files
+     * @param  array<string> $suffixes
+     * @return array<string>
+     */
+    protected function filterFilesByType(array $files, array $suffixes): array
+    {
+        if (empty($suffixes)) {
+            return $files;
+        }
+        return array_filter($files, fn($file) => in_array(
+            strtolower(pathinfo($file, PATHINFO_EXTENSION)),
+            $suffixes,
+            true
+        ));
+    }
+
+    /**
+     * This method is responsible for finding the files that should be checked
+     *
+     * During pre-commit it's all staged files.
+     * During post-checkout it's the files that changed from old-commit to new-commit
+     *
+     * @param  \CaptainHook\App\Console\IO       $io
+     * @param  \SebastianFeldmann\Git\Repository $repository
+     * @param  array<string>                     $diffFilter
+     * @return array<string>
+     */
+    abstract protected function getFiles(IO $io, Repository $repository, array $diffFilter): array;
 }

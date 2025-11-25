@@ -30,8 +30,8 @@ class OfTypeTest extends TestCase
     {
         $io    = $this->createIOMock();
         $repo  = $this->createRepositoryMock();
-        $index = $this->createGitIndexOperator();
-        $index->expects($this->once())->method('getStagedFilesOfTypes')->willReturn(['foo.php', 'bar.php']);
+        $index = $this->createGitIndexOperator(['foo.php', 'bar.php', 'baz.txt']);
+        $index->expects($this->once())->method('getStagedFiles');
         $repo->expects($this->once())->method('getIndexOperator')->willReturn($index);
 
         $ofType = new OfType('php');
@@ -42,8 +42,8 @@ class OfTypeTest extends TestCase
     {
         $io    = $this->createIOMock();
         $repo  = $this->createRepositoryMock();
-        $index = $this->createGitIndexOperator();
-        $index->expects($this->once())->method('getStagedFilesOfTypes')->willReturn(['foo.php', 'bar.html', 'baz.js']);
+        $index = $this->createGitIndexOperator(['foo.php', 'bar.html', 'baz.js']);
+        $index->expects($this->once())->method('getStagedFiles');
         $repo->expects($this->once())->method('getIndexOperator')->willReturn($index);
 
         $ofType = new OfType(['xml', 'js']);
@@ -54,8 +54,8 @@ class OfTypeTest extends TestCase
     {
         $io    = $this->createIOMock();
         $repo  = $this->createRepositoryMock();
-        $index = $this->createGitIndexOperator();
-        $index->expects($this->once())->method('getStagedFilesOfTypes')->willReturn([]);
+        $index = $this->createGitIndexOperator([]);
+        $index->expects($this->once())->method('getStagedFiles');
         $repo->expects($this->once())->method('getIndexOperator')->willReturn($index);
 
         $ofType = new OfType('js', ['A', 'C']);

@@ -11,9 +11,7 @@
 
 namespace CaptainHook\App\Hook\Condition\FileStaged;
 
-use CaptainHook\App\Console\IO;
-use CaptainHook\App\Hook\Condition\FileStaged;
-use SebastianFeldmann\Git\Repository;
+use CaptainHook\App\Hook\Condition\File;
 
 /**
  * Class Any
@@ -43,17 +41,7 @@ use SebastianFeldmann\Git\Repository;
  * @link    https://github.com/captainhook-git/captainhook
  * @since   Class available since Release 5.2.0
  */
-class Any extends FileStaged
+class Any extends File\Any
 {
-    /**
-     * Check if any of the configured files is staged for commit
-     *
-     * @param  \CaptainHook\App\Console\IO       $io
-     * @param  \SebastianFeldmann\Git\Repository $repository
-     * @return bool
-     */
-    public function isTrue(IO $io, Repository $repository): bool
-    {
-        return $this->anyFileInHaystack($this->filesToWatch, $this->getStagedFiles($repository));
-    }
+    use File\Staged;
 }
