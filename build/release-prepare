@@ -1,0 +1,40 @@
+#!/usr/bin/env php
+<?php
+
+$version   = $argv[1] ?? '';
+$installer = $argv[2] ?? '';
+
+if (empty($version) || !preg_match('/^\d+\.\d+\.\d+$/', $version)) {
+  printHelp();
+  echo "\nversion number is missing\n";
+  exit(1);
+}
+
+$root = realpath(__DIR__ . '/..') . '/';
+$file = $root . 'src/CH.php';
+$ch   = file_get_contents($file);
+$date = date('Y-m-d');
+
+// update version number
+$ch = preg_replace("~VERSION = '[0-9]+\.[0-9]+.[0-9]';~", "VERSION = '$version';", $ch);
+// update release date
+$ch = preg_replace("~RELEASE_DATE = '[0-9]+-[0-9]+-[0-9]+';~", "RELEASE_DATE = '$date';", $ch);
+// update the installer version
+if (!empty($installer)) {
+  $ch = preg_replace("~MIN_REQ_INSTALLER = '[0-9]+\.[0-9]+.[0-9]';~", "MIN_REQ_INSTALLER = '$installer';", $ch);
+}
+
+file_put_contents($file, $ch);
+
+`git add $file`;
+`git commit -m'Prepare version $version'`;
+`git tag -asm'Version $version' $version`;
+
+function printHelp(): void {
+  echo 'release-prepare' . PHP_EOL
+       . 'Usage:' . PHP_EOL
+       . '  command [<version> <installer>]' . PHP_EOL . PHP_EOL
+       . 'Arguments:' . PHP_EOL
+       . '  version    New version number (semver)' . PHP_EOL
+       . '  installer  New required installer version' . PHP_EOL;
+}
