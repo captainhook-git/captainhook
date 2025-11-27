@@ -11,6 +11,15 @@
 
 namespace CaptainHook\App\Config;
 
+/**
+ * Config setting fake enum ;)
+ *
+ * @package CaptainHook
+ * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link    https://github.com/captainhook-git/captainhook
+ * @since   Class available since Release 5.27.3
+ * @internal
+ */
 class Settings
 {
     public const ALLOW_FAILURE       = 'allow-failure';
