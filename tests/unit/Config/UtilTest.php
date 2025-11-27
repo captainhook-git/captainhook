@@ -219,22 +219,22 @@ class UtilTest extends TestCase
     public function testMergeSettings()
     {
         $s1 = [
-            Config::SETTING_INCLUDES => [
+            Config\Settings::INCLUDES => [
                 'foo',
                 'bar'
             ],
-            CONFIG::SETTING_COLORS => true,
+            Config\Settings::COLORS => true,
         ];
         $s2 = [
-            Config::SETTING_INCLUDES => [
+            Config\Settings::INCLUDES => [
                 'baz'
             ],
-            CONFIG::SETTING_GIT_DIR => '/var/.git'
+            Config\Settings::GIT_DIR => '/var/.git'
         ];
 
         $merged = Util::mergeSettings($s2, $s1);
 
-        $this->assertEquals(3, count($merged[Config::SETTING_INCLUDES]));
-        $this->assertContains('baz', $merged[Config::SETTING_INCLUDES]);
+        $this->assertEquals(3, count($merged[Config\Settings::INCLUDES]));
+        $this->assertContains('baz', $merged[Config\Settings::INCLUDES]);
     }
 }

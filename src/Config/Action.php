@@ -57,8 +57,8 @@ class Action
      * @var string[]
      */
     private static array $availableSettings = [
-        Config::SETTING_ALLOW_FAILURE,
-        Config::SETTING_LABEL
+        Config\Settings::ALLOW_FAILURE,
+        Config\Settings::LABEL
     ];
 
     /**
@@ -149,7 +149,7 @@ class Action
      */
     public function isFailureAllowed(bool $default = false): bool
     {
-        return (bool) ($this->settings[Config::SETTING_ALLOW_FAILURE] ?? $default);
+        return (bool) ($this->settings[Config\Settings::ALLOW_FAILURE] ?? $default);
     }
 
     /**
@@ -159,7 +159,7 @@ class Action
      */
     public function getLabel(): string
     {
-        return (string) ($this->settings[Config::SETTING_LABEL] ?? $this->getAction());
+        return (string) ($this->settings[Config\Settings::LABEL] ?? $this->getAction());
     }
 
     /**

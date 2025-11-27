@@ -26,22 +26,6 @@ use SebastianFeldmann\Camino\Check;
  */
 class Config
 {
-    public const SETTING_ALLOW_FAILURE       = 'allow-failure';
-    public const SETTING_BOOTSTRAP           = 'bootstrap';
-    public const SETTING_COLORS              = 'ansi-colors';
-    public const SETTING_CUSTOM              = 'custom';
-    public const SETTING_GIT_DIR             = 'git-directory';
-    public const SETTING_INCLUDES            = 'includes';
-    public const SETTING_INCLUDES_LEVEL      = 'includes-level';
-    public const SETTING_LABEL               = 'label';
-    public const SETTING_RUN_EXEC            = 'run-exec';
-    public const SETTING_RUN_MODE            = 'run-mode';
-    public const SETTING_RUN_PATH            = 'run-path';
-    public const SETTING_RUN_GIT             = 'run-git';
-    public const SETTING_PHP_PATH            = 'php-path';
-    public const SETTING_VERBOSITY           = 'verbosity';
-    public const SETTING_FAIL_ON_FIRST_ERROR = 'fail-on-first-error';
-
     /**
      * Path to the config file
      *
@@ -161,10 +145,10 @@ class Config
     {
         // extract the legacy settings
         $settingsToMove = [
-            self::SETTING_RUN_MODE,
-            self::SETTING_RUN_EXEC,
-            self::SETTING_RUN_PATH,
-            self::SETTING_RUN_GIT
+            Config\Settings::RUN_MODE,
+            Config\Settings::RUN_EXEC,
+            Config\Settings::RUN_PATH,
+            Config\Settings::RUN_GIT
         ];
         $config = [];
         foreach ($settingsToMove as $setting) {
@@ -199,7 +183,7 @@ class Config
      */
     public function isFailureAllowed(): bool
     {
-        return (bool) ($this->settings[self::SETTING_ALLOW_FAILURE] ?? false);
+        return (bool) ($this->settings[Config\Settings::ALLOW_FAILURE] ?? false);
     }
 
     /**
@@ -243,14 +227,14 @@ class Config
      */
     public function getGitDirectory(): string
     {
-        if (empty($this->settings[self::SETTING_GIT_DIR])) {
+        if (empty($this->settings[Config\Settings::GIT_DIR])) {
             return getcwd() . '/.git';
         }
 
         // if repo path is absolute use it otherwise create an absolute path relative to the configuration file
-        return Check::isAbsolutePath($this->settings[self::SETTING_GIT_DIR])
-            ? $this->settings[self::SETTING_GIT_DIR]
-            : dirname($this->path) . '/' . $this->settings[self::SETTING_GIT_DIR];
+        return Check::isAbsolutePath($this->settings[Config\Settings::GIT_DIR])
+            ? $this->settings[Config\Settings::GIT_DIR]
+            : dirname($this->path) . '/' . $this->settings[Config\Settings::GIT_DIR];
     }
 
     /**
@@ -261,8 +245,8 @@ class Config
      */
     public function getBootstrap(string $default = 'vendor/autoload.php'): string
     {
-        return !empty($this->settings[self::SETTING_BOOTSTRAP])
-            ? $this->settings[self::SETTING_BOOTSTRAP]
+        return !empty($this->settings[Config\Settings::BOOTSTRAP])
+            ? $this->settings[Config\Settings::BOOTSTRAP]
             : $default;
     }
 
@@ -273,8 +257,8 @@ class Config
      */
     public function getVerbosity(): string
     {
-        return !empty($this->settings[self::SETTING_VERBOSITY])
-            ? $this->settings[self::SETTING_VERBOSITY]
+        return !empty($this->settings[Config\Settings::VERBOSITY])
+            ? $this->settings[Config\Settings::VERBOSITY]
             : 'normal';
     }
 
@@ -285,7 +269,7 @@ class Config
      */
     public function useAnsiColors(): bool
     {
-        return (bool) ($this->settings[self::SETTING_COLORS] ?? true);
+        return (bool) ($this->settings[Config\Settings::COLORS] ?? true);
     }
 
     /**
@@ -295,7 +279,7 @@ class Config
      */
     public function getPhpPath(): string
     {
-        return (string) ($this->settings[self::SETTING_PHP_PATH] ?? '');
+        return (string) ($this->settings[Config\Settings::PHP_PATH] ?? '');
     }
 
     /**
@@ -327,7 +311,7 @@ class Config
      */
     public function failOnFirstError(): bool
     {
-        return (bool) ($this->settings[self::SETTING_FAIL_ON_FIRST_ERROR] ?? true);
+        return (bool) ($this->settings[Config\Settings::FAIL_ON_FIRST_ERROR] ?? true);
     }
 
     /**

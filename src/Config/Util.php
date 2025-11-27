@@ -161,14 +161,14 @@ abstract class Util
      */
     public static function mergeSettings(array ...$settings): array
     {
-        $includes       = array_column($settings, Config::SETTING_INCLUDES);
-        $custom         = array_column($settings, Config::SETTING_CUSTOM);
+        $includes       = array_column($settings, Config\Settings::INCLUDES);
+        $custom         = array_column($settings, Config\Settings::CUSTOM);
         $mergedSettings = array_merge(...$settings);
         if (!empty($includes)) {
-            $mergedSettings[Config::SETTING_INCLUDES] = array_merge(...$includes);
+            $mergedSettings[Config\Settings::INCLUDES] = array_merge(...$includes);
         }
         if (!empty($custom)) {
-            $mergedSettings[Config::SETTING_CUSTOM] = array_merge(...$custom);
+            $mergedSettings[Config\Settings::CUSTOM] = array_merge(...$custom);
         }
 
         return $mergedSettings;
