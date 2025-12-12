@@ -57,7 +57,7 @@ class Shorthand
             ],
             'message' => [
                 'injectissuekeyfrombranch' => Hook\Message\Action\InjectIssueKeyFromBranch::class,
-                'cacheonfail    '          => Hook\Message\Action\CacheOnFail::class,
+                'cacheonfail'          => Hook\Message\Action\CacheOnFail::class,
                 'mustfollowrules'          => Hook\Message\Action\Rules::class,
                 'mustfollowbeamsrules'     => Hook\Message\Action\Beams::class,
                 'mustmatchregex'           => Hook\Message\Action\Regex::class,
