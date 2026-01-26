@@ -13,6 +13,7 @@ namespace CaptainHook\App\Git\ChangedFiles\Detector;
 
 use CaptainHook\App\Git\ChangedFiles\Detector;
 use CaptainHook\App\Git\Range\Detector\PostRewrite as RangeDetector;
+use CaptainHook\App\Git\Rev\Util;
 
 /**
  * Class PostRewrite
@@ -36,6 +37,10 @@ class PostRewrite extends Detector
         $ranges   = $detector->getRanges($this->io);
         $old      = $ranges[0]->from()->id();
         $new      = $ranges[0]->to()->id();
+
+        if (Util::isZeroHash($old) || Util::isZeroHash($new)) {
+            return [];
+        }
 
         return $this->repository->getDiffOperator()->getChangedFiles($old, $new, $filter);
     }

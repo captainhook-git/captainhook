@@ -12,6 +12,7 @@
 namespace CaptainHook\App\Git\ChangedFiles\Detector;
 
 use CaptainHook\App\Git\ChangedFiles\Detector;
+use CaptainHook\App\Git\Rev\Util;
 use CaptainHook\App\Hooks;
 
 /**
@@ -35,8 +36,13 @@ class Fallback extends Detector
      */
     public function getChangedFiles(array $filter = []): array
     {
+        $previousHead = $this->io->getArgument(Hooks::ARG_PREVIOUS_HEAD, 'HEAD@{1}');
+        if (Util::isZeroHash($previousHead)) {
+            return [];
+        }
+
         return $this->repository->getDiffOperator()->getChangedFiles(
-            $this->io->getArgument(Hooks::ARG_PREVIOUS_HEAD, 'HEAD@{1}'),
+            $previousHead,
             'HEAD',
             $filter
         );

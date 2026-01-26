@@ -15,6 +15,7 @@ use CaptainHook\App\Console\IO;
 use CaptainHook\App\Git\ChangedFiles\Detector;
 use CaptainHook\App\Git\Range\Detector\PrePush as RangeDetector;
 use CaptainHook\App\Git\Range\PrePush as Range;
+use CaptainHook\App\Git\Rev\Util;
 use SebastianFeldmann\Git\Repository;
 
 /**
@@ -97,10 +98,13 @@ class PrePush extends Detector
                 if (!$this->reflogFallback) {
                     continue;
                 }
-                // remote branch does not exist
+                // the remote branch does not exist
                 // try to find the branch starting point with the reflog
                 $oldHash = $this->repository->getLogOperator()->getBranchRevFromRefLog($range->to()->branch());
                 $newHash = 'HEAD';
+            }
+            if (Util::isZeroHash($oldHash) || Util::isZeroHash($newHash)) {
+                continue;
             }
             if (!empty($oldHash)) {
                 $files[] = $this->repository->getDiffOperator()->getChangedFiles($oldHash, $newHash, $filter);
