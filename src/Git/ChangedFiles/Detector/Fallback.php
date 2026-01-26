@@ -36,13 +36,8 @@ class Fallback extends Detector
      */
     public function getChangedFiles(array $filter = []): array
     {
-        $previousHead = $this->io->getArgument(Hooks::ARG_PREVIOUS_HEAD, 'HEAD@{1}');
-        if (Util::isZeroHash($previousHead)) {
-            return [];
-        }
-
         return $this->repository->getDiffOperator()->getChangedFiles(
-            $previousHead,
+            $this->io->getArgument(Hooks::ARG_PREVIOUS_HEAD, 'HEAD@{1}'),
             'HEAD',
             $filter
         );

@@ -103,9 +103,6 @@ class PrePush extends Detector
                 $oldHash = $this->repository->getLogOperator()->getBranchRevFromRefLog($range->to()->branch());
                 $newHash = 'HEAD';
             }
-            if (Util::isZeroHash($oldHash) || Util::isZeroHash($newHash)) {
-                continue;
-            }
             if (!empty($oldHash)) {
                 $files[] = $this->repository->getDiffOperator()->getChangedFiles($oldHash, $newHash, $filter);
             }

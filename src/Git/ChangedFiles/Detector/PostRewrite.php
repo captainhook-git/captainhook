@@ -38,10 +38,6 @@ class PostRewrite extends Detector
         $old      = $ranges[0]->from()->id();
         $new      = $ranges[0]->to()->id();
 
-        if (Util::isZeroHash($old) || Util::isZeroHash($new)) {
-            return [];
-        }
-
         return $this->repository->getDiffOperator()->getChangedFiles($old, $new, $filter);
     }
 }
