@@ -91,7 +91,7 @@ class ComposerIO extends Base
      */
     public function ask($question, $default = null)
     {
-        return $this->io->ask($question, $default);
+        return (string) $this->io->ask($question, $default);
     }
 
     /**
