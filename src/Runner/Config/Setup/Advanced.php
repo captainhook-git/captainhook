@@ -126,8 +126,7 @@ class Advanced extends Guided implements Setup
         $answer = $this->io->askAndValidate(
             '  <info>Specify options key and value</info> <comment>[key:value]</comment> ',
             ['\\CaptainHook\\App\\Runner\\Config\\Setup\\Guided', 'isPHPActionOptionValid'],
-            3,
-            null
+            3
         );
         if (null !== $answer) {
             list($key, $value) = explode(':', $answer);

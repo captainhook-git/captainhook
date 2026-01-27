@@ -39,6 +39,6 @@ class NoPeriodOnSubjectEnd extends Base
      */
     public function pass(CommitMessage $msg): bool
     {
-        return substr(trim($msg->getSubject()), -1) !== '.';
+        return !str_ends_with(trim($msg->getSubject()), '.');
     }
 }

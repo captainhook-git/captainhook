@@ -55,7 +55,7 @@ class Blacklist extends Base
         $this->isCaseSensitive = $caseSensitive;
         $this->hint            = 'Commit message should not contain blacklisted words';
         $this->stringDetection = function (string $content, string $term): bool {
-            return strpos($content, $term) !== false;
+            return str_contains($content, $term);
         };
     }
 

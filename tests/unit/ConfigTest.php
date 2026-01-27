@@ -167,7 +167,7 @@ class ConfigTest extends TestCase
         $this->assertIsArray($json);
         $this->assertIsArray($json['pre-commit']);
         $this->assertIsArray($json['pre-push']);
-        $this->assertFalse(array_key_exists('commit-msg', $json));
+        $this->assertArrayNotHasKey('commit-msg', $json);
     }
 
     public function testCanBeExportedToJsonDataWithSettings(): void

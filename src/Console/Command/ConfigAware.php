@@ -82,8 +82,8 @@ abstract class ConfigAware extends Command
         // if path not absolute
         if (!Check::isAbsolutePath($path)) {
             // try to guess the config location and
-            // transform relative path to absolute path
-            if (substr($path, 0, 2) === './') {
+            // transform a relative path to an absolute path
+            if (str_starts_with($path, './')) {
                 return getcwd() . substr($path, 1);
             }
             return getcwd() . '/' . $path;

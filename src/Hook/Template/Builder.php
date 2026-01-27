@@ -20,7 +20,6 @@ use CaptainHook\App\Hook\Template\Local\PHP;
 use CaptainHook\App\Hook\Template\Local\Shell;
 use CaptainHook\App\Hook\Template\Local\WSL;
 use CaptainHook\App\Runner\Bootstrap\Util;
-use RuntimeException;
 use SebastianFeldmann\Git\Repository;
 
 /**

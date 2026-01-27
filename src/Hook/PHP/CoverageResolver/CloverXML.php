@@ -37,7 +37,7 @@ class CloverXML implements CoverageResolver
      *
      * @param string $pathToCloverXml
      */
-    public function __construct($pathToCloverXml)
+    public function __construct(string $pathToCloverXml)
     {
         $cloverFile = new Xml($pathToCloverXml);
         if (!$cloverFile->exists()) {

@@ -11,12 +11,9 @@
 
 namespace CaptainHook\App\Git\ChangedFiles\Detector;
 
-use CaptainHook\App\Console\IO;
 use CaptainHook\App\Git\ChangedFiles\Detector;
 use CaptainHook\App\Git\Range\Detector\PrePush as RangeDetector;
 use CaptainHook\App\Git\Range\PrePush as Range;
-use CaptainHook\App\Git\Rev\Util;
-use SebastianFeldmann\Git\Repository;
 
 /**
  * Class PrePush

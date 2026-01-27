@@ -54,7 +54,7 @@ class OfTypeTest extends TestCase
     {
         $io    = $this->createIOMock();
         $repo  = $this->createRepositoryMock();
-        $index = $this->createGitIndexOperator([]);
+        $index = $this->createGitIndexOperator();
         $index->expects($this->once())->method('getStagedFiles');
         $repo->expects($this->once())->method('getIndexOperator')->willReturn($index);
 

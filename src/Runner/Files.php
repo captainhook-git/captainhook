@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace CaptainHook\App\Runner;
 
-use CaptainHook\App\Exception;
 use CaptainHook\App\Hook\Util as HookUtil;
 use CaptainHook\App\Hooks;
 use CaptainHook\App\Runner\Hook\Arg;

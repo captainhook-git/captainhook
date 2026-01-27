@@ -74,7 +74,7 @@ class FactoryTest extends TestCase
     public function testCreateWithRunConfig(): void
     {
         $path   = realpath(CH_PATH_FILES . '/config/valid-run-config-nested.json');
-        $config = Factory::create($path, []);
+        $config = Factory::create($path);
 
         $this->assertEquals('./vendor/bin/captainhook', $config->getRunConfig()->getCaptainsPath());
         $this->assertEquals('docker', $config->getRunConfig()->getMode());
@@ -84,7 +84,7 @@ class FactoryTest extends TestCase
     public function testCreateWithRunConfigLegacy(): void
     {
         $path   = realpath(CH_PATH_FILES . '/config/valid-run-config-legacy.json');
-        $config = Factory::create($path, []);
+        $config = Factory::create($path);
 
         $this->assertEquals('./vendor/bin/captainhook', $config->getRunConfig()->getCaptainsPath());
         $this->assertEquals('docker', $config->getRunConfig()->getMode());
@@ -123,10 +123,10 @@ class FactoryTest extends TestCase
         $this->assertCount(1, $config->getHookConfig('pre-commit')->getActions());
         $this->assertEquals('verbose', $config->getVerbosity());
         $this->assertEquals($gitDir, $config->getGitDirectory());
-        $this->assertEquals(false, $config->useAnsiColors());
+        $this->assertFalse($config->useAnsiColors());
         $this->assertEquals('docker', $config->getRunConfig()->getMode());
         $this->assertEquals('docker exec CONTAINER_NAME', $config->getRunConfig()->getDockerCommand());
-        $this->assertEquals(false, $config->failOnFirstError());
+        $this->assertFalse($config->failOnFirstError());
     }
 
     public function testCreateWithIncludes(): void

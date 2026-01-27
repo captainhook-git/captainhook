@@ -31,7 +31,7 @@ class InDirectoryTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator   = $this->createGitDiffOperator(['foo/foo.php', 'bar/bar.php', 'bar/baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $fileChange = new InDirectory(['foo']);
@@ -44,7 +44,7 @@ class InDirectoryTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator   = $this->createGitDiffOperator(['foo/foo.php', 'bar/bar.php', 'bar/baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $condition = new InDirectory('tests/', ['A', 'C']);

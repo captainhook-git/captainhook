@@ -30,7 +30,7 @@ class AllTest extends TestCase
     {
         $io         = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new All(['foo.php', 'bar.php']);
@@ -42,7 +42,7 @@ class AllTest extends TestCase
     {
         $io         = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new All(['foo.*', 'bar.php']);
@@ -54,7 +54,7 @@ class AllTest extends TestCase
     {
         $io         = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['foo.php', 'bar.php', 'baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new All(['foo.php', 'bar.php'], ['A', 'C']);
@@ -66,7 +66,7 @@ class AllTest extends TestCase
     {
         $io = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['foo.php', 'bar.php', 'baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new All(['foo.*', 'ba?.php']);

@@ -11,7 +11,6 @@
 
 namespace CaptainHook\App\Console\Command;
 
-use CaptainHook\App\Console\Runtime\Resolver;
 use SebastianFeldmann\Git\Repository;
 use Symfony\Component\Console\Input\InputOption;
 

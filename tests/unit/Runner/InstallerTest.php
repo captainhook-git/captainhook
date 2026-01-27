@@ -384,7 +384,7 @@ class InstallerTest extends TestCase
 
     public function testMoveExistingHookWhenMoveExistingIsAnAbsolutePath(): void
     {
-        $virtualFs = vfsStream::setup('root');
+        $virtualFs = vfsStream::setup();
 
         $fakeRepo = new DummyRepo(
         // git repo

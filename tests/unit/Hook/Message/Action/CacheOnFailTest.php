@@ -36,7 +36,7 @@ class CacheOnFailTest extends TestCase
         $exe->execute($config, $io, $repo, $action);
 
         $handlers = CacheOnFail::getEventHandlers($action);
-        $this->assertFalse(empty($handlers));
+        $this->assertNotEmpty($handlers);
         $this->assertInstanceOf(WriteCacheFile::class, $handlers['onHookFailure'][0]);
     }
 

@@ -40,7 +40,7 @@ class BuilderTest extends TestCase
             ]
         );
 
-        $resolver   = $this->createResolverMock($repo->getRoot() . '/vendor/bin/captainhook', false);
+        $resolver   = $this->createResolverMock($repo->getRoot() . '/vendor/bin/captainhook');
         $repository = $this->createRepositoryMock($repo->getRoot());
         $config     = $this->createConfigMock(true, $repo->getRoot() . '/captainhook.json');
         $runConfig  = new Run(['mode' => 'docker', 'exec' => 'docker exec captain-container', 'path' => '']);
@@ -101,7 +101,7 @@ class BuilderTest extends TestCase
         );
 
         $executable = realpath(__DIR__ . '/../../../../bin/captainhook');
-        $resolver   = $this->createResolverMock($executable, false);
+        $resolver   = $this->createResolverMock($executable);
         $repository = $this->createRepositoryMock($repo->getRoot());
         $config     = $this->createConfigMock(true, $repo->getRoot() . '/captainhook.json');
         $runConfig  = new Run(['mode' => 'docker', 'exec' => 'docker exec captain-container', 'path' => '']);
@@ -136,7 +136,7 @@ class BuilderTest extends TestCase
 
     public function testBuildLocalTemplate(): void
     {
-        $resolver   = $this->createResolverMock(CH_PATH_FILES . '/bin/captainhook', false);
+        $resolver   = $this->createResolverMock(CH_PATH_FILES . '/bin/captainhook');
         $repository = $this->createRepositoryMock(CH_PATH_FILES);
         $config     = $this->createConfigMock(true, CH_PATH_FILES . '/template/captainhook.json');
         $runConfig  = new Run(['mode' => 'php', 'exec' => '', 'path' => '']);
@@ -153,7 +153,7 @@ class BuilderTest extends TestCase
 
     public function testBuildWSLTemplate(): void
     {
-        $resolver   = $this->createResolverMock(CH_PATH_FILES . '/bin/captainhook', false);
+        $resolver   = $this->createResolverMock(CH_PATH_FILES . '/bin/captainhook');
         $repository = $this->createRepositoryMock(CH_PATH_FILES);
         $config     = $this->createConfigMock(true, CH_PATH_FILES . '/template/captainhook.json');
         $runConfig  = new Run(['mode' => 'wsl', 'exec' => '', 'path' => '']);

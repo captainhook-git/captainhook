@@ -29,7 +29,7 @@ trait Mockery
     }
 
     /**
-     * @param  $type
+     * @param  string $type
      * @return \PHPUnit\Framework\MockObject\MockBuilder
      */
     abstract public function getMockBuilder(string $type): MockBuilder;

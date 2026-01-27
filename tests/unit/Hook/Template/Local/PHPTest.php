@@ -28,7 +28,7 @@ class PHPTest extends TestCase
         $config = $this->createConfigMock(false, 'captainhook.json');
         $config->method('getBootstrap')->willReturn('vendor/autoload.php');
 
-        $template = new PHP($pathInfo, $config, false);
+        $template = new PHP($pathInfo, $config);
         $code     = $template->getCode('commit-msg');
 
         $this->assertStringContainsString('#!/usr/bin/env php', $code);
@@ -45,7 +45,7 @@ class PHPTest extends TestCase
         $config = $this->createConfigMock(false, 'captainhook.json');
         $config->method('getBootstrap')->willReturn('vendor/autoload.php');
 
-        $template = new PHP($pathInfo, $config, false);
+        $template = new PHP($pathInfo, $config);
         $code     = $template->getCode('pre-push');
 
         $this->assertStringContainsString('#!/usr/bin/env php', $code);
@@ -63,7 +63,7 @@ class PHPTest extends TestCase
         $config = $this->createConfigMock(false, 'captainhook.json');
         $config->method('getBootstrap')->willReturn('vendor/autoload.php');
 
-        $template   = new PHP($pathInfo, $config, false);
+        $template   = new PHP($pathInfo, $config);
         $code       = $template->getCode('commit-msg');
 
         $this->assertStringContainsString('#!/usr/bin/env php', $code);

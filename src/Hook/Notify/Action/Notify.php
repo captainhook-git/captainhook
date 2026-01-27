@@ -13,7 +13,6 @@ namespace CaptainHook\App\Hook\Notify\Action;
 
 use CaptainHook\App\Config;
 use CaptainHook\App\Console\IO;
-use CaptainHook\App\Exception\ActionFailed;
 use CaptainHook\App\Hook\Action;
 use CaptainHook\App\Hook\Constrained;
 use CaptainHook\App\Hook\Notify\Extractor;
@@ -21,7 +20,6 @@ use CaptainHook\App\Hook\Notify\Notification;
 use CaptainHook\App\Hook\Restriction;
 use CaptainHook\App\Hook\Util;
 use CaptainHook\App\Hooks;
-use SebastianFeldmann\Cli\Processor\ProcOpen as Processor;
 use SebastianFeldmann\Git\Repository;
 
 /**
@@ -89,7 +87,7 @@ class Notify implements Action, Constrained
      */
     private function containsNotification(string $message): bool
     {
-        return strpos($message, $this->prefix) !== false;
+        return str_contains($message, $this->prefix);
     }
 
     /**

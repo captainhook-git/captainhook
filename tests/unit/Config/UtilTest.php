@@ -234,7 +234,7 @@ class UtilTest extends TestCase
 
         $merged = Util::mergeSettings($s2, $s1);
 
-        $this->assertEquals(3, count($merged[Config\Settings::INCLUDES]));
+        $this->assertCount(3, $merged[Config\Settings::INCLUDES]);
         $this->assertContains('baz', $merged[Config\Settings::INCLUDES]);
     }
 }

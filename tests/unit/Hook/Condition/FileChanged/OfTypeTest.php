@@ -47,7 +47,7 @@ class OfTypeTest extends TestCase
                ]
            );
         $operator   = $this->createGitDiffOperator(['fiz.php', 'foo.txt']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $fileChange = new OfType('php');
@@ -68,7 +68,7 @@ class OfTypeTest extends TestCase
                 ]
             );
         $operator   = $this->createGitDiffOperator(['fiz.txt', 'foo.txt']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $fileChange = new OfType('php');
@@ -88,7 +88,7 @@ class OfTypeTest extends TestCase
                 ]
             );
 
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
 
         $fileChange = new OfType('php');
         $this->assertFalse($fileChange->isTrue($io, $repository));
@@ -107,7 +107,7 @@ class OfTypeTest extends TestCase
                 ]
             );
         $operator   = $this->createGitDiffOperator();
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $operator->method('getChangedFilesOfType')->willReturn([]);
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 

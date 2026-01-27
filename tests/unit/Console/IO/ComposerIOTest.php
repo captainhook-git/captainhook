@@ -82,13 +82,12 @@ class ComposerIOTest extends TestCase
 
     public function testAskConfirmation(): void
     {
-        $this->assertEquals(true, $this->io->askConfirmation('foo', true));
+        $this->assertTrue($this->io->askConfirmation('foo'));
     }
 
     public function testAskAndValidate(): void
     {
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $this->io->askAndValidate(
                 'foo',
                 function () {

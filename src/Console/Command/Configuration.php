@@ -12,7 +12,6 @@
 namespace CaptainHook\App\Console\Command;
 
 use CaptainHook\App\Console\IOUtil;
-use CaptainHook\App\Console\Runtime\Resolver;
 use CaptainHook\App\Runner\Config\Creator;
 use Exception;
 use Symfony\Component\Console\Input\InputInterface;

@@ -13,7 +13,6 @@ namespace CaptainHook\App\Hook;
 
 use CaptainHook\App\Config;
 use CaptainHook\App\Console\IO;
-use CaptainHook\App\Exception\ActionFailed;
 use Exception;
 use SebastianFeldmann\Git\Repository;
 
@@ -54,7 +53,8 @@ abstract class Debug implements Action
         try {
             $currentGitTag = $repository->getInfoOperator()->getCurrentTag();
         } catch (Exception $e) {
-            // ignore it, it just means there are no tags yet
+            // just ignore the exception
+            // it just means there are no tags yet
         }
         $io->write($this->getArgumentOutput($originalHookArguments), false);
         $io->write('  <comment>Current git-tag:</comment> ' . $currentGitTag);

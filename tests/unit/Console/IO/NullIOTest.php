@@ -74,14 +74,13 @@ class NullIOTest extends TestCase
     public function testAskConfirmation(): void
     {
         $io = new NullIO();
-        $this->assertEquals(true, $io->askConfirmation('foo', true));
+        $this->assertTrue($io->askConfirmation('foo'));
     }
 
     public function testAskAndValidate(): void
     {
         $io = new NullIO();
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $io->askAndValidate(
                 'foo',
                 function () {

@@ -40,7 +40,7 @@ class HooksTest extends TestCase
     {
         $hooks = Hooks::getNativeHooksForVirtualHook(Hooks::PRE_COMMIT);
 
-        $this->assertTrue(empty($hooks));
+        $this->assertEmpty($hooks);
     }
 
     public function testGetVirtualHookFail(): void

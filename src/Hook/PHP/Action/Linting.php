@@ -57,7 +57,7 @@ class Linting implements Action
             $prefix = IOUtil::PREFIX_OK;
             if ($this->hasSyntaxErrors($file)) {
                 $failedFilesCount++;
-                $io->write('  ' . IOUtil::PREFIX_FAIL . ' ' . $file, true, IO::NORMAL);
+                $io->write('  ' . IOUtil::PREFIX_FAIL . ' ' . $file);
             }
             $io->write('  ' . $prefix . ' ' . $file, true, IO::VERBOSE);
         }

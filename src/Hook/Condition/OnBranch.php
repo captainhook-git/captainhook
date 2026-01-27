@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace CaptainHook\App\Hook\Condition;
 
-use CaptainHook\App\Console\IO;
 use CaptainHook\App\Hook\Condition;
-use SebastianFeldmann\Git\Repository;
 
 /**
  * OnBranch condition

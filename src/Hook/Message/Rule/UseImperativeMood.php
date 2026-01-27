@@ -50,7 +50,7 @@ class UseImperativeMood extends Blacklist
         if ($checkOnlyBeginning) {
             // overwrite the detection logic to only check the beginning og the string
             $this->stringDetection = function (string $content, string $term): bool {
-                return strpos($content, $term) === 0;
+                return str_starts_with($content, $term);
             };
         }
     }

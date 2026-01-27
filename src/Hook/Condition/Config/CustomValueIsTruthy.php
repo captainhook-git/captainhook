@@ -13,7 +13,6 @@ namespace CaptainHook\App\Hook\Condition\Config;
 
 use CaptainHook\App\Console\IO;
 use CaptainHook\App\Hook\Condition;
-use CaptainHook\App\Hooks;
 use SebastianFeldmann\Git\Repository;
 
 /**

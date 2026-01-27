@@ -27,7 +27,7 @@ class CustomValueIsTruthyTest extends TestCase
     public function testCustomValueIsTruthyIsTrue(): void
     {
         $io         = $this->createIOMock();
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $config     = $this->createConfigMock();
         $config->method('getCustomSettings')->willReturn(['FOOO' => 'yes', 'BARR' => 0]);
 
@@ -49,7 +49,7 @@ class CustomValueIsTruthyTest extends TestCase
         $this->expectException(Exception::class);
 
         $io         = $this->createIOMock();
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
 
         $condition = new CustomValueIsTruthy('FOOO');
         $this->assertTrue($condition->isTrue($io, $repository));

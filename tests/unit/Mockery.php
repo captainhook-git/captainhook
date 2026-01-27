@@ -43,9 +43,10 @@ trait Mockery
     }
 
     /**
-     * Create repository mock
+     * Create a repository mock
      *
      * @param  string $root
+     * @param  string $hooksDir
      * @return \SebastianFeldmann\Git\Repository&\PHPUnit\Framework\MockObject\MockObject
      */
     public function createRepositoryMock(string $root = '', string $hooksDir = ''): Repository
@@ -116,11 +117,9 @@ trait Mockery
      */
     public function createGitLogOperator(): Log
     {
-        $operator = $this->getMockBuilder(Log::class)
+        return $this->getMockBuilder(Log::class)
             ->disableOriginalConstructor()
             ->getMock();
-
-        return $operator;
     }
 
     /**
@@ -151,7 +150,7 @@ trait Mockery
     }
 
     /**
-     * @param  $type
+     * @param  string $type
      * @return \PHPUnit\Framework\MockObject\MockBuilder
      */
     abstract public function getMockBuilder(string $type): MockBuilder;

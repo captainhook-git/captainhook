@@ -11,7 +11,6 @@
 
 namespace CaptainHook\App\Runner\Action\Cli\Command\Placeholder;
 
-use CaptainHook\App\Git;
 use CaptainHook\App\Hook\FileList;
 
 /**

@@ -24,7 +24,7 @@ class AnyTest extends TestCase
     {
         $io = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new Any(['foo.php', 'bar.php']);
@@ -36,7 +36,7 @@ class AnyTest extends TestCase
     {
         $io = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new Any(['foo.php', 'bar.php'], 'ARC');
@@ -48,7 +48,7 @@ class AnyTest extends TestCase
     {
         $io = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new Any(['foo.*', 'bar.php']);
@@ -60,7 +60,7 @@ class AnyTest extends TestCase
     {
         $io = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['fiz.php', 'baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new Any(['foo.php', 'bar.php']);
@@ -72,7 +72,7 @@ class AnyTest extends TestCase
     {
         $io = $this->createIOMock();
         $operator   = $this->createGitIndexOperator(['fiz.php', 'baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getIndexOperator')->willReturn($operator);
 
         $fileStaged = new Any(['fo?.php', 'bar.*']);

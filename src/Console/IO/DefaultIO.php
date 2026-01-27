@@ -14,7 +14,6 @@ namespace CaptainHook\App\Console\IO;
 use CaptainHook\App\Console\IO;
 use CaptainHook\App\Console\IOUtil;
 use RuntimeException;
-use SebastianFeldmann\Cli\Reader\StandardInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;

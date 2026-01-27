@@ -31,7 +31,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo.php', 'bar.php']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['ofType' => 'php']);
@@ -43,7 +43,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo.php', 'bar.php']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['ofType' => ['php', 'js']]);
@@ -55,7 +55,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo.php', 'bar.php']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['ofType' => ['ts', 'js']]);
@@ -67,7 +67,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo/foo.php', 'bar/bar.js', 'fiz/baz.txt']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['inDirectory' => 'bar/']);
@@ -79,7 +79,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo/foo.php', 'foo/bar/bar.js', 'fiz/baz.txt']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['inDirectory' => 'bar/']);
@@ -91,7 +91,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo/foo.php', 'foo/bar/bar.js', 'fiz/baz.txt']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['inDirectory' => ['foo/bar/', 'baz/']]);
@@ -103,7 +103,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo/foo.php', 'foo/bar/bar.js', 'fiz/baz.txt']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['inDirectory' => ['foobar/', 'baz/'], 'diffFilter' => ['A', 'C']]);
@@ -115,7 +115,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo/foo.php', 'bar/bar.js']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['inDirectory' => 'bar/', 'ofType' => 'php']);
@@ -127,7 +127,7 @@ class ThatIsTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator = $this->createGitDiffOperator(['foo.php']);
-        $repo     = $this->createRepositoryMock('');
+        $repo     = $this->createRepositoryMock();
         $repo->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $thatIs = new ThatIs(['ofType' => 'js']);

@@ -62,7 +62,7 @@ trait Mockery
     /**
      * Create Action configuration mock
      *
-     * @return \CaptainHook\App\Config\Action&\PHPUnit\Framework\MockObject\MockObject
+     * @return \CaptainHook\App\Config\Plugin&\PHPUnit\Framework\MockObject\MockObject
      */
     public function createPluginConfigMock(): Plugin
     {
@@ -72,7 +72,7 @@ trait Mockery
     }
 
     /**
-     * @param  $type
+     * @param  string $type
      * @return \PHPUnit\Framework\MockObject\MockBuilder
      */
     abstract public function getMockBuilder(string $type): MockBuilder;

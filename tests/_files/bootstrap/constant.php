@@ -1,3 +1,3 @@
 <?php
 
-define('CH_BOOTSTRAP_WORKED', true);
+const CH_BOOTSTRAP_WORKED = true;

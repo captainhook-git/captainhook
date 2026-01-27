@@ -344,7 +344,7 @@ final class Factory
      */
     public static function create(string $path = '', array $settings = []): Config
     {
-        $factory = new static();
+        $factory = new self();
         return $factory->createConfig($path, $settings);
     }
 }

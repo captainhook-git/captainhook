@@ -16,8 +16,6 @@ namespace CaptainHook\App\Hook\Template\Local;
 use CaptainHook\App\CH;
 use CaptainHook\App\Hook\Template;
 use CaptainHook\App\Hooks;
-use SebastianFeldmann\Camino\Path;
-use SebastianFeldmann\Camino\Path\Directory;
 
 /**
  * Local class
@@ -107,7 +105,7 @@ class PHP extends Template\Local
         $executablePath = $this->pathInfo->getExecutablePath();
         $stdIn          = $this->getStdInHandling($hook);
 
-        $executableInclude = substr($executablePath, 0, 1) == '/'
+        $executableInclude = str_starts_with($executablePath, '/')
                            ? '\'' . $executablePath . '\''
                            : '__DIR__ . \'/../../' . $executablePath  . '\'';
 

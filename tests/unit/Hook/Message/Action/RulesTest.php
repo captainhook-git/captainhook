@@ -126,7 +126,7 @@ class RulesTest extends TestCase
             // no exception should be thrown
             $this->assertTrue(true);
         } catch (Exception $e) {
-            $this->assertTrue(false);
+            $this->fail();
         }
     }
 

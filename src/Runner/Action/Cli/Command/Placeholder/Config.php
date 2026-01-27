@@ -53,7 +53,7 @@ class Config extends Foundation
      */
     private function getConfigValueFor(string $value): string
     {
-        if (strpos($value, 'custom>>') === 0) {
+        if (str_starts_with($value, 'custom>>')) {
             $key    = substr($value, 8);
             $custom = $this->config->getCustomSettings();
             return $custom[$key] ?? '';

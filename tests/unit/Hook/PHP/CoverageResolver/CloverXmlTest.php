@@ -14,7 +14,7 @@ namespace CaptainHook\App\Hook\PHP\CoverageResolver;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
-class CloverXMLTest extends TestCase
+class CloverXmlTest extends TestCase
 {
     public function testValid(): void
     {

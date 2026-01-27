@@ -12,7 +12,6 @@
 namespace CaptainHook\App\Git\ChangedFiles\Detector;
 
 use CaptainHook\App\Git\ChangedFiles\Detector;
-use CaptainHook\App\Git\Rev\Util;
 use CaptainHook\App\Hooks;
 
 /**

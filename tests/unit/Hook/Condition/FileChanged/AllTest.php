@@ -25,7 +25,7 @@ class AllTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator   = $this->createGitDiffOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $fileChange = new All(['foo.php', 'bar.php'], '');
@@ -38,7 +38,7 @@ class AllTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator   = $this->createGitDiffOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $fileChange = new All(['foo.*', 'bar.php']);
@@ -51,7 +51,7 @@ class AllTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator   = $this->createGitDiffOperator(['foo.php', 'bar.php', 'baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $fileChange = new All(['foo.php', 'bar.php']);
@@ -64,7 +64,7 @@ class AllTest extends TestCase
         $io = $this->createIOMock();
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
         $operator   = $this->createGitDiffOperator(['foo.php', 'bar.php', 'baz.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $fileChange = new All(['foo.*', 'ba?.php']);

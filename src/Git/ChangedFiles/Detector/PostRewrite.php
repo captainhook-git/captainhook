@@ -13,7 +13,6 @@ namespace CaptainHook\App\Git\ChangedFiles\Detector;
 
 use CaptainHook\App\Git\ChangedFiles\Detector;
 use CaptainHook\App\Git\Range\Detector\PostRewrite as RangeDetector;
-use CaptainHook\App\Git\Rev\Util;
 
 /**
  * Class PostRewrite

@@ -35,7 +35,7 @@ class ConditionTest extends TestCase
         $io->expects($this->exactly(2))->method('getArgument')->willReturn('');
 
         $operator   = $this->createGitDiffOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->once())->method('getDiffOperator')->willReturn($operator);
 
         $conditionConfig = new Config\Condition(
@@ -54,7 +54,7 @@ class ConditionTest extends TestCase
         $config = $this->createConfigMock();
 
         $io         = $this->createIOMock();
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->never())->method('getDiffOperator');
 
         $conditionConfig = new Config\Condition(
@@ -106,7 +106,7 @@ class ConditionTest extends TestCase
         }
 
         $io         = $this->createIOMock();
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
 
         $conditionConfig = new Config\Condition(CH_PATH_FILES . '/bin/phpunit');
 
@@ -120,7 +120,7 @@ class ConditionTest extends TestCase
         $io->expects($this->exactly(4))->method('getArgument')->willReturn('');
 
         $operator   = $this->createGitDiffOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->exactly(2))->method('getDiffOperator')->willReturn($operator);
 
         $conditionConfig = new Config\Condition(
@@ -148,7 +148,7 @@ class ConditionTest extends TestCase
         $io->expects($this->exactly(4))->method('getArgument')->willReturn('');
 
         $operator   = $this->createGitDiffOperator(['fiz.php', 'baz.php', 'foo.php']);
-        $repository = $this->createRepositoryMock('');
+        $repository = $this->createRepositoryMock();
         $repository->expects($this->exactly(2))->method('getDiffOperator')->willReturn($operator);
 
         $conditionConfig = new Config\Condition(

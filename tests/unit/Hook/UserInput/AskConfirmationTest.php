@@ -37,7 +37,7 @@ class AskConfirmationTest extends TestCase
         $exe->execute($config, $io, $repo, $action);
 
         $handlers = AskConfirmation::getEventHandlers($action);
-        $this->assertFalse(empty($handlers));
+        $this->assertNotEmpty($handlers);
         $this->assertInstanceOf(EventHandler\AskConfirmation::class, $handlers['onHookSuccess'][0]);
     }
 }

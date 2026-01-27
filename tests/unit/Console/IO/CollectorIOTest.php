@@ -86,7 +86,7 @@ class CollectorIOTest extends TestCase
     {
         $io  = new NullIO();
         $cio = new CollectorIO($io);
-        $this->assertEquals(true, $cio->askConfirmation('foo', true));
+        $this->assertTrue($cio->askConfirmation('foo'));
     }
 
     public function testAskAndValidate(): void
