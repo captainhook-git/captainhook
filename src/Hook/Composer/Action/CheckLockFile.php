@@ -69,7 +69,7 @@ class CheckLockFile implements Action
     }
 
     /**
-     * Read the composer.lock file and extract the composer.json hash
+     * Read the `composer.lock` file and extract the composer.json hash
      *
      * @param  string $composerLock
      * @return string

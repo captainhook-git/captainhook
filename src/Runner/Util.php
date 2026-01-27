@@ -23,11 +23,11 @@ final class Util
      *
      * @var array<bool>
      */
-    private static $validTypes = ['php' => true, 'cli' => true];
+    private static array $validTypes = ['php' => true, 'cli' => true];
 
 
     /**
-     * Check the validity of a exec type
+     * Check the validity of an exec type
      *
      * @param  string $type
      * @return bool

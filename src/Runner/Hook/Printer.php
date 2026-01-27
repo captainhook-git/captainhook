@@ -118,7 +118,7 @@ class Printer
     {
         $actionLength = 65;
         if (mb_strlen($action) < $actionLength) {
-            return str_pad($action, $actionLength, ' ');
+            return str_pad($action, $actionLength);
         }
 
         return mb_substr($action, 0, $actionLength - 3) . '...';

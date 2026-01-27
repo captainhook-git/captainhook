@@ -48,7 +48,7 @@ class CloverXML implements CoverageResolver
     }
 
     /**
-     * Make sure you have a valid xml structure
+     * Make sure you have a valid XML structure
      *
      * @return void
      * @throws \RuntimeException

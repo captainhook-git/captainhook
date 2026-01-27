@@ -81,17 +81,17 @@ class Cli implements ActionRunner
      * Replace argument placeholder with their original values
      *
      * This replaces the hook argument and other placeholders
-     *  - prepare-commit-msg => FILE, MODE, HASH
-     *  - commit-msg         => FILE
-     *  - pre-push           => TARGET, URL
-     *  - pre-commit         => -
-     *  - post-checkout      => PREVIOUSHEAD, NEWHEAD, MODE
-     *  - post-merge         => SQUASH
+     *  - `prepare-commit-msg` => FILE, MODE, HASH
+     *  - `commit-msg` => FILE
+     *  - `pre-push` => TARGET, URL
+     *  - `pre-commit` => -
+     *  - `post-checkout` => PREVIOUSHEAD, NEWHEAD, MODE
+     *  - `post-merge` => SQUASH
      *
-     * @param \CaptainHook\App\Console\IO       $io
-     * @param \CaptainHook\App\Config           $config
-     * @param \SebastianFeldmann\Git\Repository $repository
-     * @param string                            $command
+     * @param  \CaptainHook\App\Console\IO       $io
+     * @param  \CaptainHook\App\Config           $config
+     * @param  \SebastianFeldmann\Git\Repository $repository
+     * @param  string                            $command
      * @return string
      */
     protected function formatCommand(IO $io, Config $config, Repository $repository, string $command): string

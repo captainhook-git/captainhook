@@ -55,7 +55,7 @@ class DoesNotContainRegex extends Check
     private array $fileMatches = [];
 
     /**
-     * Total amount of found matches
+     * Total number of found matches
      *
      * @var int
      */

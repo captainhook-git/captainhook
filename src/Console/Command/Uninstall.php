@@ -73,6 +73,7 @@ class Uninstall extends RepositoryAware
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return int
      * @throws \Exception
+     * @throws \Throwable
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

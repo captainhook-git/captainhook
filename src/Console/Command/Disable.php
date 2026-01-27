@@ -51,6 +51,7 @@ class Disable extends ConfigAware
      * @return int
      * @throws \CaptainHook\App\Exception\InvalidHookName
      * @throws \Exception
+     * @throws \Throwable
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

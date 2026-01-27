@@ -148,7 +148,7 @@ class PHP extends Template\Local
      */
     private function getStdInHandling(string $hook): array
     {
-        // if the hook supplies input via std in we have to read that data
+        // if the hook supplies input via stdIn, we have to read that data,
         // then we can't support reading user input from the TTY anymore
         $useStdIn = [
             '    $stdIn = new StandardInput(STDIN);',
@@ -160,8 +160,8 @@ class PHP extends Template\Local
             '',
         ];
 
-        // if the hook does not receive data via stdIn ignore it and just use the tty
-        // sp the user can be asked for some input
+        // if the hook does not receive data via stdIn, ignore it and just use the tty
+        // so the user can be asked for some input
         $useTTY = [
             '    $input     = \'\';'
         ];

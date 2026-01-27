@@ -91,8 +91,8 @@ class Condition
     /**
      * Return the configured condition
      *
-     * In case of a cli condition it returns an special condition class that deals with
-     * the binary execution with implementing the same interface.
+     * In the case of a cli condition, it returns a special condition class that deals with
+     * the command execution while implementing the same interface.
      *
      * @param  \CaptainHook\App\Config\Condition $config
      * @return \CaptainHook\App\Hook\Condition

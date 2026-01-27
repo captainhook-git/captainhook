@@ -44,9 +44,9 @@ abstract class File implements Condition, Constrained
     abstract public function isTrue(IO $io, Repository $repository): bool;
 
     /**
-     * Check if all of the given files can be found in a haystack of files
+     * Check if all the given files can be found in a haystack of files
      *
-     * IMPORTANT: If no files are provided this is always true.
+     * IMPORTANT: If no files are provided, this is always true.
      *
      * @param  array<string> $files
      * @param  array<string> $haystack
@@ -65,7 +65,7 @@ abstract class File implements Condition, Constrained
     /**
      * Check if any of the given files can be found in a haystack of files
      *
-     * IMPORTANT: If no files are provided this is always false.
+     * IMPORTANT: If no files are provided, this is always false.
      *
      * @param  array<string> $files
      * @param  array<string> $haystack

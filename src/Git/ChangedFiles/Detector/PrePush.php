@@ -44,10 +44,11 @@ class PrePush extends Detector
     }
 
     /**
-     * Return list of changed files
+     * Returns a list of changed files
      *
      * @param  array<string> $filter
      * @return array<string>
+     * @throws \Exception
      */
     public function getChangedFiles(array $filter = []): array
     {
@@ -81,8 +82,9 @@ class PrePush extends Detector
      * Collect all changed files from all ranges
      *
      * @param  array<\CaptainHook\App\Git\Range\PrePush> $ranges
-     * @param  array<string> $filter
+     * @param  array<string>                             $filter
      * @return array<string>
+     * @throws \Exception
      */
     private function collectChangedFiles(array $ranges, array $filter): array
     {
@@ -108,7 +110,7 @@ class PrePush extends Detector
     }
 
     /**
-     * If the remote branch is known the diff can  be easily determined
+     * If the remote branch is known, the diff can be easily determined
      *
      * @param  \CaptainHook\App\Git\Range\PrePush $range
      * @return bool

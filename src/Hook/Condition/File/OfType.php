@@ -39,7 +39,7 @@ use SebastianFeldmann\Git\Repository;
  * }
  * </code>
  *
- * Multiple types can be configured using a comma separated string or an array
+ * Multiple types can be configured using a comma-separated string or an array
  *  - "php,html,xml"
  *  - ["php", "html", "xml"]
  *

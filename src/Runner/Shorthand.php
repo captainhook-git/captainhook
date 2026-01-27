@@ -98,7 +98,7 @@ class Shorthand
     ];
 
     /**
-     * Check if a configured action or condition value is actually a shorthand for an internal action
+     * Check if a configured action or condition value is actually shorthand for an internal action
      *
      * @param  string $shorthand
      * @return bool
@@ -109,7 +109,7 @@ class Shorthand
     }
 
     /**
-     * Return the matching action class for given action shorthand
+     * Return the matching action class for the given action shorthand
      *
      * @param  string $shorthand
      * @return string
@@ -120,7 +120,7 @@ class Shorthand
     }
 
     /**
-     * Return the matching condition class for given condition shorthand
+     * Return the matching condition class for the given condition shorthand
      *
      * @param  string $shorthand
      * @return string

@@ -16,8 +16,8 @@ use CaptainHook\App\Hook\FileList;
 /**
  * Changed Files Placeholder
  *
- * This placeholder only works for pre-push, post-rewrite, post-checkout and post-merge actions.
- * If it is used in a pre-push hook and multiple refs are pushed the placeholder will contain
+ * This placeholder only works for pre-push, post-rewrite, post-checkout, and post-merge actions.
+ * If it is used in a pre-push hook and multiple refs are pushed, the placeholder will contain
  * all changed files for all refs.
  *
  * Usage examples:
@@ -35,6 +35,7 @@ class BranchFiles extends Foundation
     /**
      * @param  array<string, string> $options
      * @return string
+     * @throws \Exception
      */
     public function replacement(array $options): string
     {

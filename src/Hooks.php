@@ -50,7 +50,7 @@ final class Hooks
     public const ARG_URL           = 'url';
 
     /**
-     * This defines which native hook trigger which virtual hook
+     * This defines which native hook triggers which virtual hook
      *
      * @var string[]
      */
@@ -61,7 +61,7 @@ final class Hooks
     ];
 
     /**
-     * Is it necessary to give the Captain access to user input
+     * Determines if it is necessary to give the Captain access to the user input
      *
      * @var array<string, bool>
      */
@@ -151,7 +151,7 @@ final class Hooks
     }
 
     /**
-     * Does a given hook allow for user input to be used
+     * Defines if a given hook allows for user input to be used
      *
      * @param  string $hook
      * @return bool

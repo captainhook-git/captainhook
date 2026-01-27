@@ -301,7 +301,7 @@ final class Factory
     }
 
     /**
-     * Return list of included configurations to add them to the main configuration afterwards
+     * Return list of included configurations to add them to the main configuration afterward
      *
      * @param  array<string, mixed> $json
      * @param  string               $path

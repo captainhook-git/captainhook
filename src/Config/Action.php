@@ -122,7 +122,7 @@ class Action
     }
 
     /**
-     * Marks a action config as included
+     * Marks an action config as included
      *
      * @return void
      */

@@ -86,7 +86,7 @@ abstract class Check implements Action, Constrained
     }
 
     /**
-     * Setup the action, reading and validating all config settings
+     * Initialize the action, reading and validating all config settings
      *
      * @param \CaptainHook\App\Config\Options $options
      */

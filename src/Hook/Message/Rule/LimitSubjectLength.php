@@ -42,7 +42,7 @@ class LimitSubjectLength extends Base
     }
 
     /**
-     * Check if commit message doesn't exceeed the max length
+     * Check if a commit message doesn't exceed the max length
      *
      * @param  \SebastianFeldmann\Git\CommitMessage $msg
      * @return bool

@@ -17,14 +17,14 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * Trait RepositoryAware
  *
- * Trait for all commands that needs to be aware of the git repository.
+ * Trait for all commands that need to be aware of the git repository.
  *
  * @package CaptainHook\App\Console\Command
  */
 class RepositoryAware extends ConfigAware
 {
     /**
-     * Configure method to set up the git-directory command option
+     * Set up the git-directory command option
      *
      * @return void
      */

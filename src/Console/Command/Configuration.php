@@ -53,10 +53,11 @@ class Configuration extends ConfigAware
     /**
      * Execute the command
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface   $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @return int
      * @throws \Exception
+     * @throws \Throwable
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {

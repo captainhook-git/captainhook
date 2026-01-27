@@ -73,7 +73,7 @@ abstract class Files extends RepositoryAware
     }
 
     /**
-     * Limit uninstall to s specific hook
+     * Make sure only installable hooks are uninstalled
      *
      * @param  string $hook
      * @return static
@@ -93,12 +93,14 @@ abstract class Files extends RepositoryAware
     }
 
     /**
-     * Return list of hooks to handle
+     * Return a list of hooks to handle
      *
+     * <code>
      * [
      *   string    => bool
      *   HOOK_NAME => ASK_USER_TO_CONFIRM_INSTALL
      * ]
+     * </code>
      *
      * @return array<string, bool>
      */

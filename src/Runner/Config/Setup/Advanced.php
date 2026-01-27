@@ -71,7 +71,7 @@ class Advanced extends Guided implements Setup
     }
 
     /**
-     * Setup a action config with user input
+     * Create an action config with user input
      *
      * @return \CaptainHook\App\Config\Action
      * @throws \Exception

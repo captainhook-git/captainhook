@@ -3,7 +3,7 @@
   "type": "library",
   "description": "PHP git hook manager",
   "keywords": ["git", "hooks", "pre-commit", "pre-push", "commit-msg", "prepare-commit-msg", "post-merge"],
-  "homepage": "http://php.captainhook.info/",
+  "homepage": "https://php.captainhook.info/",
   "license": "MIT",
   "authors": [
     {

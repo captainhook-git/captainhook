@@ -44,7 +44,7 @@ class PHPUnit implements CoverageResolver
 
     /**
      * Run PHPUnit to calculate code coverage.
-     * Shamelessly ripped from bruli/php-git-hooks.
+     * Shamelessly ripped from `bruli/php-git-hooks`.
      *
      * @author Pablo Braulio
      * @return int

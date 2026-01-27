@@ -34,7 +34,7 @@ use CaptainHook\App\Hook\Condition\File;
  * }
  * </code>
  *
- *  The file list can also be defined as comma seperated string "file1,file2,file3"
+ *  The file list can also be defined as comma-separated string "file1,file2,file3"
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>

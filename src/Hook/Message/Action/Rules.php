@@ -79,7 +79,7 @@ class Rules extends Book
     }
 
     /**
-     * Create a rule from a argument containing configuration
+     * Create a rule from an argument containing configuration
      *
      * @param  array<int, mixed> $config
      * @return \CaptainHook\App\Hook\Message\Rule

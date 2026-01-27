@@ -23,6 +23,7 @@ use SebastianFeldmann\Git\Repository;
  *
  * Example configuration:
  *
+ * <code>
  *   "action": "some-action"
  *   "conditions": [
  *     {"exec": "\\CaptainHook\\App\\Hook\\Condition\\Branch\\Files",
@@ -30,6 +31,7 @@ use SebastianFeldmann\Git\Repository;
  *        {"compare-to": "main", "of-type": "php"}
  *     ]}
  *   ]
+ * </code>
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
@@ -40,9 +42,9 @@ class Files implements Condition
 {
     /**
      * Options
-     *  - compare-to:   source branch if known, otherwise the reflog is used to figure it out
-     *  - in-directory: only check for files in given directory
-     *  - of-type:      only check for files of given type
+     *  - `compare-to`: source branch if known, otherwise the reflog is used to figure it out
+     *  - `in-directory`: only check for files in a given directory
+     *  - `of-type`: only check for files of a given type
      *
      * @var array<string>
      */
@@ -64,6 +66,7 @@ class Files implements Condition
      * @param  \CaptainHook\App\Console\IO       $io
      * @param  \SebastianFeldmann\Git\Repository $repository
      * @return bool
+     * @throws \Exception
      */
     public function isTrue(IO $io, Repository $repository): bool
     {

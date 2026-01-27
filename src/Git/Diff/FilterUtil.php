@@ -22,7 +22,7 @@ abstract class FilterUtil
     public static function filterFromConfigValue($value): array
     {
         return self::sanitize(
-            is_array($value) ? $value : str_split((string) strtoupper($value === null ? '' : $value))
+            is_array($value) ? $value : str_split(strtoupper($value === null ? '' : $value))
         );
     }
 

@@ -37,7 +37,7 @@ use SebastianFeldmann\Git\Repository;
  * }
  * </code>
  *
- *  The file list can also be defined as comma seperated string "file1,file2,file3"
+ *  The file list can also be defined as comma-separated string "file1,file2,file3"
  *
  * @package CaptainHook
  * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
@@ -47,7 +47,7 @@ use SebastianFeldmann\Git\Repository;
 abstract class Any extends File
 {
     /**
-     * List of file to watch
+     * List of files to watch
      *
      * @var array<string>
      */

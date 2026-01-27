@@ -40,7 +40,7 @@ use SebastianFeldmann\Git\Repository;
 class On extends Name
 {
     /**
-     * Check is the current branch is equal to the configured one
+     * Check if the current branch is equal to the configured one
      *
      * @param  \CaptainHook\App\Console\IO       $io
      * @param  \SebastianFeldmann\Git\Repository $repository

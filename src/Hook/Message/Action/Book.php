@@ -65,7 +65,7 @@ abstract class Book implements Action, Constrained
      */
     protected function validate(RuleBook $ruleBook, Repository $repository, IO $io): void
     {
-        // if this is a merge commit skip enforcing message rules
+        // if this is a merge commit, skip enforcing message rules
         if ($repository->isMerging()) {
             return;
         }
@@ -99,7 +99,7 @@ abstract class Book implements Action, Constrained
     }
 
     /**
-     * Indent multi line problems so the lines after the first one are indented for better readability
+     * Indent multi-line problems so the lines after the first one are indented for better readability
      *
      * @param  string $problem
      * @return array<string>

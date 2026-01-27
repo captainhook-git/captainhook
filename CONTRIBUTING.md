@@ -21,8 +21,8 @@ So you'd like to contribute to the `CaptainHook` library? Excellent! Thank you v
 
 # Getting started
 
-Fork the project to your own github account. Clone the forked repository to your development machine.
-Then run the following two commands to setup the project.
+Fork the project to your own GitHub account. Clone the forked repository to your development machine.
+Then run the following two commands to set up the project.
 
     $ composer install
     $ tools/phive --home ./.phive install --trust-gpg-keys 4AA394086372C20A,31C7E470E2138192,8E730BA25823D8B5 --force-accept-unsigned
@@ -85,17 +85,17 @@ Test data should go in the `test/files` directory.
 Add lots of test cases; they're cheap. Don't just test the obvious happy-path cases; test the
 null case, where your feature does nothing (make sure it does!). Test edge cases, strange
 inputs, missing inputs, non-ASCII characters, zeroes, and nils. Knowing what you know
-about your implementation, what inputs and cases might possibly cause it to break? Test those.
+about your implementation, what inputs and cases might cause it to break? Test those.
 
 Remember people are using `CaptainHook` in their daily development process
-where their data, their privacy, and even their business could be at stake. Now, of course
+where their data, their privacy, and even their business could be at stake. Now, of course, 
 it's up to them to make sure that their programs are safe and correct; library maintainers
 bear no responsibility for that. But we can at least ensure that the code is as reliable
 and trustworthy as we can make it.
 
 ## Style and formatting
 
-This is easy, just use the PSR12 coding standard.
+This is straightforward, use the PSR12 coding standard.
 
 Your code should pass `phpstan` and `phpcs` without errors
 (and if you want to run other linters too, that would be excellent).
@@ -103,13 +103,13 @@ Your code should pass `phpstan` and `phpcs` without errors
 # Documentation
 
 It doesn't matter if you write the greatest piece of code in the history of the world,
-if no one knows it exists, or how to use it.
+if no one knows it exists or how to use it.
 
 ## Write doc comments
 
 Any functions or methods you write should have useful documentation comments in the standard `PHPDoc`
 format. Specifically, they should say what inputs the function takes, what it does (in detail),
-and what outputs it returns. If it returns an error value or throw an exception,
+and what outputs it returns. If it returns an error value or throws an exception,
 explain under what circumstances this happens.
 
 ## Update the docs
@@ -163,17 +163,17 @@ but responding to code reviews is also a skilled task.
 
 If you find yourself reacting emotionally, take a break. Go walk in the woods for a while, or play
 with a laughing child. When you come back to the code, approach it as though it were someone else's,
-not your own, and ask yourself seriously whether or not the reviewer _has a point_.
+not your own, and ask yourself seriously whether the reviewer _has a point_.
 
-If you genuinely think the reviewer has just misunderstood something, or made a mistake,
+If you genuinely think the reviewer has just misunderstood something or made a mistake,
 try to clarify the issue. Ask questions, don't make accusations. Remember that every project
 has a certain way of doing things, which may not be your way. It's polite to go along with these
 practices and conventions.
 
-You may feel as though you're doing the project maintainer a favour by contributing, as indeed you are,
+You may feel as though you're doing the project maintainer a favor by contributing, as indeed you are,
 but an open source project is like somebody's home. They're used to living there, they probably
 like it the way it is, and they don't always respond well to strangers marching in and rearranging the furniture.
-Be considerate, and be willing to listen and make changes.
+Be considerate and be willing to listen and make changes.
 
 ## This may take a while
 

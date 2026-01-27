@@ -87,7 +87,7 @@ class Express extends Guided implements Setup
     }
 
     /**
-     * Setup the phpunit hook
+     * Set up the phpunit hook
      *
      * @param  \CaptainHook\App\Config\Hook $config
      * @return void
@@ -110,7 +110,7 @@ class Express extends Guided implements Setup
     }
 
     /**
-     * Setup the code sniffer hook
+     * Set up the code sniffer hook
      *
      * @param  \CaptainHook\App\Config\Hook $config
      * @return void

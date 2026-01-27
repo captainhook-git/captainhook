@@ -52,15 +52,11 @@ abstract class Builder
         );
         Util::validateBootstrapPath($resolver->isPharRelease(), $config);
 
-        switch ($config->getRunConfig()->getMode()) {
-            case Template::DOCKER:
-                return new Docker($pathInfo, $config);
-            case Template::PHP:
-                return new PHP($pathInfo, $config);
-            case Template::WSL:
-                return new WSL($pathInfo, $config);
-            default:
-                return new Shell($pathInfo, $config);
-        }
+        return match ($config->getRunConfig()->getMode()) {
+            Template::DOCKER => new Docker($pathInfo, $config),
+            Template::PHP    => new PHP($pathInfo, $config),
+            Template::WSL    => new WSL($pathInfo, $config),
+            default          => new Shell($pathInfo, $config),
+        };
     }
 }

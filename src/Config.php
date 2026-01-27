@@ -303,8 +303,8 @@ class Config
     }
 
     /**
-     * Whether to abort the hook as soon as a any action has errored. Default is true.
-     * Otherwise, all actions get executed (even if some of them have failed) and
+     * Whether to abort the hook as soon as any action has errored. Default is true.
+     * Otherwise, all actions get executed (even if some of them have failed), and
      * finally, a non-zero exit code is returned if any action has errored.
      *
      * @return bool

@@ -40,7 +40,7 @@ use SebastianFeldmann\Git\Repository;
 class OnMatching extends Name
 {
     /**
-     * Check is the current branch is matched by the configured regex
+     * Check if the current branch is matched by the configured regex
      *
      * @param  \CaptainHook\App\Console\IO       $io
      * @param  \SebastianFeldmann\Git\Repository $repository

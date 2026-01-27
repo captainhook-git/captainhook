@@ -80,7 +80,7 @@ class Notify implements Action, Constrained
     }
 
     /**
-     * Checks if the commit message contains the notification prefix 'git-notify:'
+     * Checks if the commit message contains the notification prefix `git-notify:`
      *
      * @param  string $message
      * @return bool

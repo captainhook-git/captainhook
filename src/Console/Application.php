@@ -62,7 +62,7 @@ class Application extends SymfonyApplication
     public function doRun(InputInterface $input, OutputInterface $output): int
     {
         if ($this->isHelpWithoutCommand($input)) {
-            // Run the `list` command not `list --help`
+            // Run the `list` command, not `list --help`
             return $this->find('list')->run($input, $output);
         }
         return parent::doRun($input, $output);

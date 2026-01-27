@@ -44,7 +44,7 @@ abstract class Config implements ConfigDependant, Condition
     }
 
     /**
-     * Check if the customer value exists and return izs boolish value
+     * Check if the customer value exists and return its boolean value
      *
      * @param  string $value
      * @param  bool   $default

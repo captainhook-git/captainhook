@@ -30,7 +30,7 @@ class PreserveWorkingTree extends Base implements Plugin\Hook
 {
     /**
      * The name of the environment variable used to indicate the post-checkout
-     * hook should be skipped, to avoid recursion.
+     * hook should be skipped to avoid recursion.
      */
     public const SKIP_POST_CHECKOUT_VAR = '_CH_PLUGIN_PRESERVE_WORKING_TREE_SKIP_POST_CHECKOUT';
 
@@ -39,19 +39,19 @@ class PreserveWorkingTree extends Base implements Plugin\Hook
      *
      * @var Path[]
      */
-    private $intentToAddFiles = [];
+    private array $intentToAddFiles = [];
 
     /**
      * A file where unstaged changes are stored as a patch.
      *
      * @var string|null
      */
-    private $unstagedPatchFile = null;
+    private ?string $unstagedPatchFile = null;
 
     /**
      * @var Filesystem
      */
-    private $filesystem;
+    private Filesystem $filesystem;
 
     /**
      * PreserveWorkingTree constructor.
@@ -63,6 +63,13 @@ class PreserveWorkingTree extends Base implements Plugin\Hook
         $this->filesystem = $filesystem ?? new Filesystem();
     }
 
+    /**
+     * Before hook callback
+     *
+     * @param  \CaptainHook\App\Runner\Hook $hook
+     * @return void
+     * @throws \Exception
+     */
     public function beforeHook(Runner\Hook $hook): void
     {
         $this->clearIntentToAddFiles();
@@ -212,8 +219,8 @@ class PreserveWorkingTree extends Base implements Plugin\Hook
     /**
      * Apply a patch file to the working tree.
      *
-     * We'll try twice, the second time disabling Git's core.autocrlf
-     * setting, in case the local system has it turned on and it's causing
+     * We'll try twice, the second time disabling Git's `core.autocrlf`
+     * setting, in case the local system has it turned on, and it's causing
      * problems when trying to apply the patch.
      *
      * @param string $patchFile
@@ -241,8 +248,8 @@ class PreserveWorkingTree extends Base implements Plugin\Hook
      */
     private function restoreWorkingTree(): void
     {
-        // Set environment variable that tells this plugin to skip all
-        // actions when running the post-checkout hook, to avoid recursion.
+        // Set an environment variable that tells this plugin to skip all
+        // actions when running the post-checkout hook to avoid recursion.
         putenv(self::SKIP_POST_CHECKOUT_VAR . '=1');
 
         $this->repository->getStatusOperator()->restoreWorkingTree();

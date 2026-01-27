@@ -89,8 +89,8 @@ abstract class Emptiness extends Check
     /**
      * Extract files list from the action configuration
      *
-     * @param  array<string, array<string>> $filesToWatch  ['pattern1' => ['file1', 'file2'], 'pattern2' => ['file3']..]
-     * @param  array<string>               $stagedFiles
+     * @param  array<string, array<string>> $filesToWatch ['pattern1' => ['file1', 'file2'], 'pattern2' => ['file3']...]
+     * @param  array<string>                $stagedFiles
      * @return array<string>
      */
     private function extractFilesToCheck(array $filesToWatch, array $stagedFiles): array

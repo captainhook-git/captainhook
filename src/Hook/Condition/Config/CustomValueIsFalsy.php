@@ -20,7 +20,7 @@ use SebastianFeldmann\Git\Repository;
  *
  * With this condition, you can check if a given custom value is falsy.
  * The Action only is executed if the custom value is falsy.
- * Values considered falsy are, 0, null, empty string, empty array and false.
+ * Values considered falsy are, 0, null, empty string, empty array, and false.
  *
  * Example configuration:
  *
