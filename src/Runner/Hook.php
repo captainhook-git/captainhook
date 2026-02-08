@@ -249,7 +249,7 @@ abstract class Hook extends RepositoryAware
     private function executeActions(array $actions): void
     {
         $status = self::HOOK_SUCCEEDED;
-        $start  = microtime(true);
+        $timer  = Timer::createAndStart();
         try {
             if ($this->config->failOnFirstError()) {
                 $this->executeFailOnFirstError($actions);
@@ -262,8 +262,7 @@ abstract class Hook extends RepositoryAware
             $this->dispatcher->dispatch('onHookFailure');
             throw $e;
         } finally {
-            $duration = microtime(true) - $start;
-            $this->printer->hookEnded($status, $this->hookLog, $duration);
+            $this->printer->hookEnded($status, $this->hookLog, $timer->stop());
         }
     }
 
@@ -319,6 +318,7 @@ abstract class Hook extends RepositoryAware
 
         $io     = new IO\CollectorIO($this->io);
         $status = ActionLog::ACTION_SUCCEEDED;
+        $timer  = Timer::createAndStart();
 
         try {
             if (!$this->doConditionsApply($action->getConditions(), $io)) {
@@ -336,13 +336,13 @@ abstract class Hook extends RepositoryAware
 
             $runner = $this->createActionRunner(Util::getExecType($action->getAction()));
             $runner->execute($this->config, $io, $this->repository, $action);
-            $this->printer->actionSucceeded($action);
+            $this->printer->actionSucceeded($action, $timer->stop());
         } catch (ActionNotApplicable $e) {
             $this->printer->actionSkipped($action);
             return;
         } catch (Exception $e) {
             $status = ActionLog::ACTION_FAILED;
-            $this->printer->actionFailed($action);
+            $this->printer->actionFailed($action, $timer->stop());
             if (!$action->isFailureAllowed($this->config->isFailureAllowed())) {
                 throw $e;
             }

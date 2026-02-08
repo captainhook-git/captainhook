@@ -62,12 +62,14 @@ class Printer
     /**
      * Prints the action success line
      *
-     * @param \CaptainHook\App\Config\Action $action
+     * @param  \CaptainHook\App\Config\Action $action
+     * @param  float                          $duration
      * @return void
      */
-    public function actionSucceeded(Action $action): void
+    public function actionSucceeded(Action $action, float $duration): void
     {
-        $this->io->write($this->actionHeadline($action) . '<info>done</info>');
+        $time = $this->verbosity === IO::VERBOSE ? sprintf(' (%01.2fs)', $duration) : '';
+        $this->io->write($this->actionHeadline($action) . '<info>done</info>' . $time);
     }
 
     /**
@@ -84,12 +86,14 @@ class Printer
     /**
      * Prints the action failed line
      *
-     * @param \CaptainHook\App\Config\Action $action
+     * @param  \CaptainHook\App\Config\Action $action
+     * @param  float                          $duration
      * @return void
      */
-    public function actionFailed(Action $action): void
+    public function actionFailed(Action $action, float $duration): void
     {
-        $this->io->write($this->actionHeadline($action) . '<fg=red>failed</>');
+        $time = $this->verbosity === IO::VERBOSE ? sprintf(' (%01.2fs)', $duration) : '';
+        $this->io->write($this->actionHeadline($action) . '<fg=red>failed</>' . $time);
     }
 
     /**
