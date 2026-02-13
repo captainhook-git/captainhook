@@ -119,7 +119,7 @@ abstract class Hook extends RepositoryAware
     {
         // we only have to care about bootstrapping PHAR builds because for
         // Composer installations the bootstrapping is already done in the bin script
-        if ($this->resolver->isPharRelease()) {
+        if ($this->isBootstrapRequired($config)) {
             // check the custom and default autoloader
             $bootstrapFile = BootstrapUtil::validateBootstrapPath($this->resolver->isPharRelease(), $config);
             // since the phar has its own autoloader, we don't need to do anything
@@ -155,5 +155,19 @@ abstract class Hook extends RepositoryAware
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if a bootstrapping is necessary
+     *
+     * We have to take care of bootstrapping PHAR builds and Composer installations
+     * if we the bootstrap file is not the composer autoloader.
+     *
+     * @param  \CaptainHook\App\Config $config
+     * @return bool
+     */
+    private function isBootstrapRequired(Config $config): bool
+    {
+        return $this->resolver->isPharRelease() || $config->getBootstrap() !== 'vendor/autoload.php';
     }
 }
