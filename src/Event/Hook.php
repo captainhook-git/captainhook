@@ -31,22 +31,22 @@ abstract class Hook implements Event
     /**
      * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var \CaptainHook\App\Console\IO
      */
-    protected $io;
+    protected IO $io;
 
     /**
      * @var \CaptainHook\App\Config
      */
-    protected $config;
+    protected Config $config;
 
     /**
      * @var \SebastianFeldmann\Git\Repository
      */
-    protected $repository;
+    protected Repository $repository;
 
     /**
      * Event

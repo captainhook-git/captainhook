@@ -21,5 +21,5 @@ namespace CaptainHook\App\Event;
  */
 class HookSucceeded extends Hook
 {
-    protected $name = 'onHookSuccess';
+    protected string $name = 'onHookSuccess';
 }

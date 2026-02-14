@@ -32,14 +32,14 @@ class Dispatcher
      *
      * @var array<string, array<int, \CaptainHook\App\Event\Handler>>
      */
-    private $config = [];
+    private array $config = [];
 
     /**
      * Event factory to create all necessary events
      *
      * @var \CaptainHook\App\Event\Factory
      */
-    private $factory;
+    private Factory $factory;
 
     /**
      * Event Dispatcher

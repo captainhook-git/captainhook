@@ -21,5 +21,5 @@ namespace CaptainHook\App\Event;
  */
 class HookFailed extends Hook
 {
-    protected $name = 'onHookFailure';
+    protected string $name = 'onHookFailure';
 }

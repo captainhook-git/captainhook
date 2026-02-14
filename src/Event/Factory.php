@@ -30,24 +30,24 @@ class Factory
     /**
      * @var \CaptainHook\App\Config
      */
-    protected $config;
+    protected Config $config;
 
     /**
      * @var \CaptainHook\App\Console\IO
      */
-    private $io;
+    private IO $io;
 
     /**
      * @var \SebastianFeldmann\Git\Repository
      */
-    private $repository;
+    private Repository $repository;
 
     /**
      * List of available events
      *
      * @var string[]
      */
-    private $validEventIDs = [
+    private array $validEventIDs = [
         'onHookFailure' => HookFailed::class,
         'onHookSuccess' => HookSucceeded::class,
     ];

@@ -29,7 +29,7 @@ class WriteCacheFile implements Handler
      *
      * @var string
      */
-    private $file;
+    private string $file;
 
     /**
      * @param string $file
