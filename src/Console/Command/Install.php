@@ -86,7 +86,7 @@ class Install extends RepositoryAware
                  'run-mode',
                  'm',
                  InputOption::VALUE_OPTIONAL,
-                 'Git hook run mode [php|shell|docker]'
+                 'Git hook run mode [shell|docker]'
              )
              ->addOption(
                  'run-exec',

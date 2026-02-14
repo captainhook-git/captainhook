@@ -22,10 +22,11 @@ use CaptainHook\App\Hooks;
  *
  * Generates the sourcecode for the php hook scripts in .git/hooks/*.
  *
- * @package CaptainHook
- * @author  Sebastian Feldmann <sf@sebastian-feldmann.info>
- * @link    https://github.com/captainhook-git/captainhook
- * @since   Class available since Release 4.3.0
+ * @package    CaptainHook
+ * @author     Sebastian Feldmann <sf@sebastian-feldmann.info>
+ * @link       https://github.com/captainhook-git/captainhook
+ * @since      Class available since Release 4.3.0
+ * @deprecated Use 'shell' mode instead
  */
 class PHP extends Template\Local
 {
