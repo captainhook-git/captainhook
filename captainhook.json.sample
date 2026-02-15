@@ -16,13 +16,13 @@
         "enabled": true,
         "actions": [
             {
-                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
+                "action": "CaptainHook.Tools.PHPLint"
             },
             {
                 "action": "tools/phpcs --standard=psr12 src"
             },
             {
-                "action": "\\CaptainHook\\App\\Hook\\Composer\\Action\\CheckLockFile"
+                "action": "CaptainHook.Tools.CheckComposerLockFile"
             }
         ]
     },
@@ -34,7 +34,7 @@
         "enabled": true,
         "actions": [
             {
-                "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
+                "action": "CaptainHook.Message.MustFollowBeamsRules",
                 "options": {
                     "subjectLength": 50,
                     "bodyLineLength": 72
@@ -48,7 +48,7 @@
                 ]
             },
             {
-                "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Regex",
+                "action": "CaptainHook.Message.MustMatchRegex",
                 "options": {
                     "regex": "#.*#"
                 }
