@@ -99,10 +99,6 @@ jobs:
       if: ${{ matrix.buildphar }}
       run: tools/box info ${{ env.PHAR }}
 
-    - name: Re-dump composer autoloader
-      if: ${{ matrix.buildphar }}
-      run: composer dump-autoload
-
     - name: Run phar
       if: ${{ matrix.buildphar }}
       run: ${{ env.PHAR }} --help
