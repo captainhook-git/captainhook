@@ -11,6 +11,7 @@
 
 namespace CaptainHook\App;
 
+use CaptainHook\App\Config\Helper;
 use CaptainHook\App\Config\Run;
 use CaptainHook\App\Storage\File;
 use InvalidArgumentException;
@@ -92,93 +93,80 @@ class Config
      */
     public function __construct(string $path, bool $fileExists = false, array $settings = [])
     {
-        $settings = $this->setupPlugins($settings);
-        $settings = $this->setupCustom($settings);
-        $settings = $this->setupRunConfig($settings);
+        $this->initializeHookConfigs();
+        $this->setupSettings($settings);
+        $this->setupPlugins($settings);
+        $this->setupCustom($settings);
+        $this->setupRunConfig($settings);
 
+        // remember that the path given was absolute, important for 'install' handling
         if (Check::isAbsolutePath($path)) {
             $this->pathProvidedIsAbsolute = true;
         }
-
         $this->path       = File::makePathAbsolute($path);
         $this->fileExists = $fileExists;
-        $this->settings   = $settings;
+    }
 
-        foreach (Hooks::getValidHooks() as $hook => $value) {
-            $this->hooks[$hook] = new Config\Hook($hook);
-        }
+    /**
+     * Set up base config settings
+     *
+     * Basically everything that is not a run-config, plugin-config, or custom-config settings.
+     *
+     * @param  array<string, mixed> $settings
+     * @return void
+     */
+    private function setupSettings(array $settings): void
+    {
+        $this->settings = Helper::extractBaseSettings($settings);
     }
 
     /**
      * Extract custom settings from Captain Hook ones
      *
      * @param  array<string, mixed> $settings
-     * @return array<string, mixed>
+     * @return void
      */
-    private function setupCustom(array $settings): array
+    private function setupCustom(array $settings): void
     {
         /* @var array<string, mixed> $custom */
         $this->custom = $settings['custom'] ?? [];
-        unset($settings['custom']);
-
-        return $settings;
     }
 
     /**
      * Setup all configured plugins
      *
      * @param  array<string, mixed> $settings
-     * @return array<string, mixed>
+     * @return void
      */
-    private function setupPlugins(array $settings): array
+    private function setupPlugins(array $settings): void
     {
-        /* @var array<int, array<string, mixed>> $pluginSettings */
-        $pluginSettings = $settings['plugins'] ?? [];
-        unset($settings['plugins']);
-
-        foreach ($pluginSettings as $plugin) {
-            $name                 = (string) $plugin['plugin'];
-            $options              = isset($plugin['options']) && is_array($plugin['options'])
-                ? $plugin['options']
-                : [];
-            $this->plugins[$name] = new Config\Plugin($name, $options);
-        }
-        return $settings;
+        $this->plugins = Helper::createPluginConfigs($settings);
     }
 
     /**
-     * Extract all running related settings into a run configuration
+     * Extract all run-related settings into a run configuration
      *
      * @param  array<string, mixed> $settings
-     * @return array<string, mixed>
+     * @return void
      */
-    private function setupRunConfig(array $settings): array
+    private function setupRunConfig(array $settings): void
     {
-        // extract the legacy settings
-        $settingsToMove = [
-            Config\Settings::RUN_MODE,
-            Config\Settings::RUN_EXEC,
-            Config\Settings::RUN_PATH,
-            Config\Settings::RUN_GIT
-        ];
-        $config = [];
-        foreach ($settingsToMove as $setting) {
-            if (!empty($settings[$setting])) {
-                $config[substr($setting, 4)] = $settings[$setting];
-            }
-            unset($settings[$setting]);
-        }
-        // make sure the new run configuration supersedes the legacy settings
-        if (isset($settings['run']) && is_array($settings['run'])) {
-            $config = array_merge($config, $settings['run']);
-            unset($settings['run']);
-        }
-        $this->runConfig = new Run($config);
-        return $settings;
+        $settings        = Helper::cleanupRunConfig($settings);
+        $this->runConfig = new Run($settings['run'] ?? []);
     }
 
     /**
-     * Is configuration loaded from file
+     * Initialize all hook configs
+     */
+    private function initializeHookConfigs(): void
+    {
+        foreach (Hooks::getValidHooks() as $hook => $value) {
+            $this->hooks[$hook] = new Config\Hook($hook);
+        }
+    }
+
+    /**
+     * Is the configuration loaded from a file?
      *
      * @return bool
      */
