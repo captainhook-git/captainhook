@@ -26,12 +26,12 @@ final class CH
     /**
      * Current CaptainHook version
      */
-    public const VERSION = '5.28.1';
+    public const VERSION = '5.28.2';
 
     /**
      * Release date of the current version
      */
-    public const RELEASE_DATE = '2026-02-14';
+    public const RELEASE_DATE = '2026-02-15';
 
     /**
      * Default configuration file
