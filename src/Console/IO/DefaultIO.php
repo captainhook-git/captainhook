@@ -109,7 +109,7 @@ class DefaultIO extends Base
     public function getStandardInput(): array
     {
         if (empty($this->stdIn)) {
-            $this->stdIn = explode(PHP_EOL, trim($this->input->getOption('input'), '"'));
+            $this->stdIn = explode(PHP_EOL, trim((string)$this->input->getOption('input'), '"'));
         }
         return $this->stdIn;
     }
