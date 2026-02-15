@@ -77,6 +77,9 @@ jobs:
     - name: Execute dummy pre commit
       run: bin/captainhook --configuration=build/captainhook.json hook:pre-commit
 
+    - name: Verify sample configuration
+      run: bin/captainhook --configuration=captainhook.json.sample hook:pre-commit
+
     - name: Check coding style
       run: tools/phpcs --standard=psr12 src tests
 
