@@ -8,8 +8,7 @@
         "run-mode": "local",
         "plugins": [
             {
-                "plugin": "\\CaptainHook\\App\\Plugin\\Hook\\PreserveWorkingTree",
-                "options": []
+                "plugin": "\\CaptainHook\\App\\Plugin\\Hook\\PreserveWorkingTree"
             }
         ]
     },
@@ -17,23 +16,13 @@
         "enabled": true,
         "actions": [
             {
-                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
-                "options": []
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
             },
             {
-                "action": "phpcs --standard=psr2 src",
-                "options": []
+                "action": "tools/phpcs --standard=psr12 src"
             },
             {
-                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\TestCoverage",
-                "options": [],
-                "config": {
-                    "allow-failure": true
-                }
-            },
-            {
-                "action": "\\CaptainHook\\App\\Hook\\Composer\\Action\\CheckLockFile",
-                "options": []
+                "action": "\\CaptainHook\\App\\Hook\\Composer\\Action\\CheckLockFile"
             }
         ]
     },
