@@ -66,7 +66,9 @@ class Docker implements Template
      */
     public function getCode(string $hook): string
     {
-        $path2Config = $this->pathInfo->getConfigPath();
+        $path2Config = $this->config->isProvidedPathAbsolute()
+                     ? $this->config->getPath()
+                     : $this->pathInfo->getConfigPath();
         $config      = $path2Config !== CH::CONFIG ? ' --configuration=' . escapeshellarg($path2Config) : '';
         $bootstrap   = Util::bootstrapCmdOption($this->pathInfo->isPhar(), $this->config);
 

@@ -16,6 +16,7 @@ use CaptainHook\App\Config;
 use CaptainHook\App\Hook\Util as HookUtil;
 use CaptainHook\App\Storage\File\Json;
 use RuntimeException;
+use SebastianFeldmann\Camino\Check;
 
 /**
  * Class Factory
@@ -52,11 +53,10 @@ final class Factory
      */
     public function createConfig(string $path = '', array $settings = []): Config
     {
-        $path     = $path ?: getcwd() . DIRECTORY_SEPARATOR . CH::CONFIG;
-        $file     = new Json($path);
-        $settings = $this->combineArgumentsAndSettingFile($file, $settings);
+        $path     = $path ?: '.' . DIRECTORY_SEPARATOR . CH::CONFIG;
+        $settings = $this->combineArgumentsAndSettingFile($path, $settings);
 
-        return $this->setupConfig($file, $settings);
+        return $this->setupConfig($path, $settings);
     }
 
     /**
@@ -72,13 +72,13 @@ final class Factory
      *
      * ARGUMENTS > SETTINGS_FILE > CONFIGURATION
      *
-     * @param  \CaptainHook\App\Storage\File\Json $file
-     * @param  array<string, mixed>               $settings
+     * @param  string               $configPath
+     * @param  array<string, mixed> $settings
      * @return array<string, mixed>
      */
-    private function combineArgumentsAndSettingFile(Json $file, array $settings): array
+    private function combineArgumentsAndSettingFile(string $configPath, array $settings): array
     {
-        $settingsFile = new Json(dirname($file->getPath()) . '/captainhook.config.json');
+        $settingsFile = new Json(dirname($configPath) . '/captainhook.config.json');
         if ($settingsFile->exists()) {
             $fileSettings = $settingsFile->readAssoc();
             $settings     = array_merge($fileSettings, $settings);
@@ -99,39 +99,42 @@ final class Factory
         if (!$file->exists()) {
             throw new RuntimeException('Config to include not found: ' . $path);
         }
-        return $this->setupConfig($file);
+        return $this->setupConfig($file->getPath());
     }
 
     /**
      * Return a configuration with data loaded from json file if it exists
      *
-     * @param  \CaptainHook\App\Storage\File\Json $file
-     * @param  array<string, mixed>               $settings
+     * @param string               $path
+     * @param array<string, mixed> $settings
      * @return \CaptainHook\App\Config
      * @throws \Exception
      */
-    private function setupConfig(Json $file, array $settings = []): Config
+    private function setupConfig(string $path, array $settings = []): Config
     {
+        $file = new Json($path);
+
         return $file->exists()
-            ? $this->loadConfigFromFile($file, $settings)
-            : new Config($file->getPath(), false, $settings);
+            ? $this->loadConfigFromFile($path, $settings)
+            : new Config($path, false, $settings);
     }
 
     /**
-     * Loads a given file into given the configuration
+     * Loads a given file to set up the configuration
      *
-     * @param  \CaptainHook\App\Storage\File\Json $file
-     * @param  array<string, mixed>               $settings
+     * @param  string               $path
+     * @param  array<string, mixed> $settings
      * @return \CaptainHook\App\Config
      * @throws \Exception
      */
-    private function loadConfigFromFile(Json $file, array $settings): Config
+    private function loadConfigFromFile(string $path, array $settings): Config
     {
+        $file = new Json($path);
         $json = $file->readAssoc();
         Util::validateJsonConfiguration($json);
 
         $settings = Util::mergeSettings($this->extractSettings($json), $settings);
-        $config   = new Config($file->getPath(), true, $settings);
+        $config   = new Config($path, true, $settings);
         if (!empty($settings)) {
             $json['config'] = $settings;
         }

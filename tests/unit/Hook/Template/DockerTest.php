@@ -31,6 +31,7 @@ class DockerTest extends TestCase
         $runConfig  = new Run(['mode' => 'docker', 'exec' => 'docker exec cap-container', 'path' => '']);
         $configMock->method('getBootstrap')->willReturn('vendor/autoload.php');
         $configMock->method('getRunConfig')->willReturn($runConfig);
+        $configMock->method('isProvidedPathAbsolute')->willReturn(false);
 
         $template   = new Docker($pathInfo, $configMock);
         $code       = $template->getCode('commit-msg');
@@ -50,6 +51,7 @@ class DockerTest extends TestCase
         $runConfig  = new Run(['mode' => 'docker', 'exec' => 'docker exec cap-container', 'path' => '']);
         $configMock->method('getBootstrap')->willReturn('');
         $configMock->method('getRunConfig')->willReturn($runConfig);
+        $configMock->method('isProvidedPathAbsolute')->willReturn(false);
 
         $template = new Docker($pathInfo, $configMock);
         $code     = $template->getCode('commit-msg');
@@ -63,15 +65,16 @@ class DockerTest extends TestCase
     {
         $repo       = realpath(CH_PATH_FILES . '/template-ch');
         $executable = $repo . '/does/not/matter';
-        $config     = $repo . '/captainhook.json';
+        $config     = '/var/www/captainhook.json';
         $pathInfo   = new PathInfo($repo, $config, $executable, false);
 
-        $configMock = $this->createConfigMock(false, $repo . '/captainhook.json');
+        $configMock = $this->createConfigMock(false, $config);
         $runConfig  = new Run(
             ['mode' => 'docker', 'exec' => 'docker exec cap-container', 'path' => './foo/captainhook']
         );
         $configMock->method('getBootstrap')->willReturn('vendor/autoload.php');
         $configMock->method('getRunConfig')->willReturn($runConfig);
+        $configMock->method('isProvidedPathAbsolute')->willReturn(true);
 
         $template = new Docker($pathInfo, $configMock);
         $code     = $template->getCode('commit-msg');
@@ -80,6 +83,7 @@ class DockerTest extends TestCase
         $this->assertStringContainsString('docker exec -i cap-container', $code);
         $this->assertStringContainsString('./foo/captainhook', $code);
         $this->assertStringContainsString('bootstrap=vendor/autoload.php', $code);
+        $this->assertStringContainsString('configuration=\'/var/www/captainhook.json\'', $code);
     }
 
     #[DataProvider('replacementPossibilitiesWithoutGitMapping')]
@@ -97,6 +101,7 @@ class DockerTest extends TestCase
         ]);
         $configMock->method('getBootstrap')->willReturn('');
         $configMock->method('getRunConfig')->willReturn($runConfig);
+        $configMock->method('isProvidedPathAbsolute')->willReturn(false);
 
         $template = new Docker($pathInfo, $configMock);
         $code     = $template->getCode('prepare-commit-msg');
@@ -119,6 +124,7 @@ class DockerTest extends TestCase
         ]);
         $configMock->method('getBootstrap')->willReturn('');
         $configMock->method('getRunConfig')->willReturn($runConfig);
+        $configMock->method('isProvidedPathAbsolute')->willReturn(false);
 
         $template = new Docker($pathInfo, $configMock);
         $code     = $template->getCode('prepare-commit-msg');
@@ -158,6 +164,7 @@ class DockerTest extends TestCase
         ]);
         $configMock->method('getBootstrap')->willReturn('');
         $configMock->method('getRunConfig')->willReturn($runConfig);
+        $configMock->method('isProvidedPathAbsolute')->willReturn(false);
 
         $template = new Docker($pathInfo, $configMock);
         $code     = $template->getCode('prepare-commit-msg');

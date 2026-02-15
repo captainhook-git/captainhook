@@ -12,6 +12,7 @@
 namespace CaptainHook\App\Storage;
 
 use RuntimeException;
+use SebastianFeldmann\Camino\Check;
 
 /**
  * Class File
@@ -141,5 +142,25 @@ class File
             throw new RuntimeException('Not a symbolic link: ' . $this->path);
         }
         return (string)readlink($this->path);
+    }
+
+    /**
+     * Convert the config path to an absolute path
+     *
+     * @param  string $path
+     * @return string
+     */
+    public static function makePathAbsolute(string $path): string
+    {
+        // if the path is not absolute
+        if (!Check::isAbsolutePath($path)) {
+            // try to guess the config location and
+            // transform a relative path to an absolute path
+            if (str_starts_with($path, './')) {
+                return getcwd() . substr($path, 1);
+            }
+            return getcwd() . '/' . $path;
+        }
+        return $path;
     }
 }

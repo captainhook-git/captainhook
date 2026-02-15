@@ -77,18 +77,7 @@ abstract class ConfigAware extends Command
      */
     private function getConfigPath(InputInterface $input): string
     {
-        $path = IOUtil::argToString($input->getOption('configuration'));
-
-        // if path not absolute
-        if (!Check::isAbsolutePath($path)) {
-            // try to guess the config location and
-            // transform a relative path to an absolute path
-            if (str_starts_with($path, './')) {
-                return getcwd() . substr($path, 1);
-            }
-            return getcwd() . '/' . $path;
-        }
-        return $path;
+        return IOUtil::argToString($input->getOption('configuration'));
     }
 
     /**

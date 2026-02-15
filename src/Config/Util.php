@@ -148,8 +148,7 @@ abstract class Util
      */
     public static function writeToDisk(Config $config): void
     {
-        $filePath = $config->getPath();
-        $file     = new Json($filePath);
+        $file     = new Json($config->getPath());
         $file->write($config->getJsonData());
     }
 

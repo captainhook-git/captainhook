@@ -12,6 +12,7 @@
 namespace CaptainHook\App;
 
 use CaptainHook\App\Config\Run;
+use CaptainHook\App\Storage\File;
 use InvalidArgumentException;
 use SebastianFeldmann\Camino\Check;
 
@@ -34,7 +35,14 @@ class Config
     private string $path;
 
     /**
-     * Does the config file exist
+     * Was the given path absolute or relative?
+     *
+     * @var bool
+     */
+    private bool $pathProvidedIsAbsolute = false;
+
+    /**
+     * Does the config file exist?
      *
      * @var bool
      */
@@ -88,8 +96,11 @@ class Config
         $settings = $this->setupCustom($settings);
         $settings = $this->setupRunConfig($settings);
 
+        if (Check::isAbsolutePath($path)) {
+            $this->pathProvidedIsAbsolute = true;
+        }
 
-        $this->path       = $path;
+        $this->path       = File::makePathAbsolute($path);
         $this->fileExists = $fileExists;
         $this->settings   = $settings;
 
@@ -221,6 +232,17 @@ class Config
     }
 
     /**
+     * Indicates if the path provided to the configuration file was absolute or relative
+     *
+     * Since we only work with absolute paths, we need to now if we should do some relative
+     * path shenanigans during installation or not.
+     */
+    public function isProvidedPathAbsolute(): bool
+    {
+        return $this->pathProvidedIsAbsolute;
+    }
+
+    /**
      * Return git directory path if configured, CWD/.git if not
      *
      * @return string
@@ -231,7 +253,7 @@ class Config
             return getcwd() . '/.git';
         }
 
-        // if repo path is absolute use it otherwise create an absolute path relative to the configuration file
+        // if the repo path is absolute, use it otherwise create an absolute path relative to the configuration file
         return Check::isAbsolutePath($this->settings[Config\Settings::GIT_DIR])
             ? $this->settings[Config\Settings::GIT_DIR]
             : dirname($this->path) . '/' . $this->settings[Config\Settings::GIT_DIR];

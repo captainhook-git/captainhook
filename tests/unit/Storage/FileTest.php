@@ -105,4 +105,12 @@ class FileTest extends TestCase
         $file = new File($path);
         $file->write('test');
     }
+
+    public function testLeavesAbsolutePathsUntouched(): void
+    {
+        $path = '/foo/bar.txt';
+        $abs  = File::makePathAbsolute($path);
+
+        $this->assertEquals($path, $abs);
+    }
 }

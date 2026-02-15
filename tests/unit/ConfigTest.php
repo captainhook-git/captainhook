@@ -25,6 +25,18 @@ class ConfigTest extends TestCase
         $this->assertFalse($config->isLoadedFromFile());
     }
 
+    public function testItCanWorkWithRelativePath(): void
+    {
+        $config = new Config('./someFile.json');
+        $this->assertFalse($config->isProvidedPathAbsolute());
+    }
+
+    public function testItCanWorkWithAbsolutePath(): void
+    {
+        $config = new Config('/tmp/some/file.json');
+        $this->assertTrue($config->isProvidedPathAbsolute());
+    }
+
     public function testItCanBeLoadedFromFile(): void
     {
         $config = new Config('valid.json', true);
