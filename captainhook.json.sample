@@ -8,7 +8,7 @@
         "run-mode": "local",
         "plugins": [
             {
-                "plugin": "\\CaptainHook\\App\\Plugin\\Runner\\PreserveWorkingTree",
+                "plugin": "\\CaptainHook\\App\\Plugin\\Hook\\PreserveWorkingTree",
                 "options": []
             }
         ]

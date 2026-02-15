@@ -16,7 +16,6 @@ tools/box
 tools/phpcs
 tools/phpunit
 tools/phpstan
-tools/phpdepend
 
 # Ignore composer libs
 /vendor/
