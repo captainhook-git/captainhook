@@ -12,7 +12,11 @@
     "actions": [
       {
         "action": "phpunit --configuration=build/phpunit-hook.xml",
-        "options": []
+        "config": {
+          "label": "PHPUnit",
+          "allow-failure": true
+        },
+        "options": {}
       }
     ]
   },
