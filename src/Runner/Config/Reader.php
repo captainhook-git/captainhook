@@ -33,6 +33,8 @@ class Reader extends Runner\RepositoryAware
     public const OPT_ACTIONS    = 'actions';
     public const OPT_CONDITIONS = 'conditions';
     public const OPT_OPTIONS    = 'options';
+    public const OPT_CONFIG     = 'config';
+    public const OPT_SETTINGS   = 'settings';
 
     /**
      * The hook to display
@@ -42,9 +44,17 @@ class Reader extends Runner\RepositoryAware
     private array $hooks = [];
 
     /**
+     * Default display options
+     *
      * @var array<string, bool>
      */
-    private array $options = [];
+    private array $options = [
+        self::OPT_ACTIONS    => true,
+        self::OPT_CONDITIONS => false,
+        self::OPT_OPTIONS    => false,
+        self::OPT_CONFIG     => false,
+        self::OPT_SETTINGS   => false,
+    ];
 
     /**
      * Show more detailed information
@@ -109,20 +119,42 @@ class Reader extends Runner\RepositoryAware
         if (!$this->config->isLoadedFromFile()) {
             throw new RuntimeException('No configuration to read');
         }
+        $this->displaySettings();
+        $this->io->write('<fg=magenta>Hooks:</>');
         foreach ($this->config->getHookConfigs() as $hookConfig) {
             $this->displayHook($hookConfig);
         }
     }
 
     /**
+     * Display the application settings
+     *
+     * @return void
+     */
+    private function displaySettings(): void
+    {
+        if (!$this->show(self::OPT_SETTINGS)) {
+            return;
+        }
+        $this->io->write('<fg=magenta>Config:</>');
+        $this->io->write('  - <fg=cyan>Verbosity:</fg=cyan> ' . $this->config->getVerbosity());
+        $this->io->write('  - <fg=cyan>Use colors:</fg=cyan> ' . $this->yesOrNo($this->config->useAnsiColors()));
+        $this->io->write('  - <fg=cyan>Allow failures:</fg=cyan> ' . $this->yesOrNo($this->config->isFailureAllowed()));
+        $this->io->write('  - <fg=cyan>Git directory:</fg=cyan> ' . $this->config->getGitDirectory());
+        $this->io->write('  - <fg=cyan>Bootstrap file:</fg=cyan> ' . $this->config->getBootstrap());
+        $this->io->write('  - <fg=cyan>Install mode:</fg=cyan> ' . $this->config->getRunConfig()->getMode());
+    }
+
+    /**
      * Display a hook configuration
+     *
      * @param  \CaptainHook\App\Config\Hook $config
      * @return void
      */
     private function displayHook(Config\Hook $config): void
     {
         if ($this->shouldHookBeDisplayed($config->getName())) {
-            $this->io->write('<info>' . $config->getName() . '</info>', !$this->extensive);
+            $this->io->write('  <info>' . $config->getName() . '</info>', !$this->extensive);
             $this->displayExtended($config);
             $this->displayActions($config);
         }
@@ -138,7 +170,7 @@ class Reader extends Runner\RepositoryAware
     {
         if ($this->extensive) {
             $this->io->write(
-                ' ' . str_repeat('-', 52 - strlen($config->getName())) .
+                ' ' . str_repeat('-', 50 - strlen($config->getName())) .
                 '--[enabled: ' . $this->yesOrNo($config->isEnabled()) .
                 ', installed: ' . $this->yesOrNo($this->repository->hookExists($config->getName())) . ']'
             );
@@ -166,8 +198,9 @@ class Reader extends Runner\RepositoryAware
      */
     private function displayAction(Config\Action $action): void
     {
-        $this->io->write(' - <fg=cyan>' . $action->getAction() . '</>');
+        $this->io->write('   - <fg=cyan>' . $action->getAction() . '</>');
         $this->displayOptions($action->getOptions());
+        $this->displayConfig($action);
         $this->displayConditions($action->getConditions());
     }
 
@@ -182,16 +215,45 @@ class Reader extends Runner\RepositoryAware
         if (empty($options->getAll())) {
             return;
         }
-        if ($this->show(self::OPT_OPTIONS)) {
-            $this->io->write('   <comment>Options:</comment>');
-            foreach ($options->getAll() as $key => $value) {
-                $this->displayOption($key, $value);
+        if (!$this->show(self::OPT_OPTIONS)) {
+            return;
+        }
+
+        $this->io->write('     <comment>Options:</comment>');
+        foreach ($options->getAll() as $key => $value) {
+            $this->displayOption($key, $value);
+        }
+    }
+
+    /**
+     * Display all action config values
+     *
+     * @param  \CaptainHook\App\Config\Action $action
+     * @return void
+     */
+    private function displayConfig(Config\Action $action): void
+    {
+        if (!$this->show(self::OPT_CONFIG)) {
+            return;
+        }
+
+        $config = [];
+        if ($action->getLabel() != $action->getAction()) {
+            $config['label'] = $action->getLabel();
+        }
+        if ($action->isFailureAllowed()) {
+            $config['failureAllowed'] = true;
+        }
+        if (!empty($config)) {
+            $this->io->write('     <comment>Config:</comment>');
+            foreach ($config as $key => $value) {
+                $this->io->write('      - ' . $key . ': <fg=gray>' . $value . '</>');
             }
         }
     }
 
     /**
-     * Display a singe option
+     * Display a single option
      *
      * @param  mixed  $key
      * @param  mixed  $value
@@ -203,7 +265,7 @@ class Reader extends Runner\RepositoryAware
         if (is_array($value)) {
             $value = implode(', ', $value);
         }
-        $this->io->write($prefix . '    - ' . $key . ': ' . $value);
+        $this->io->write($prefix . '      - ' . $key . ': <fg=gray>' . $value . '</>');
     }
 
     /**
@@ -218,13 +280,15 @@ class Reader extends Runner\RepositoryAware
         if (empty($conditions)) {
             return;
         }
-        if ($this->show(self::OPT_CONDITIONS)) {
-            if (empty($prefix)) {
-                $this->io->write($prefix . '   <comment>Conditions:</comment>');
-            }
-            foreach ($conditions as $condition) {
-                $this->displayCondition($condition, $prefix);
-            }
+        if (!$this->show(self::OPT_CONDITIONS)) {
+            return;
+        }
+
+        if (empty($prefix)) {
+            $this->io->write($prefix . '     <comment>Conditions:</comment>');
+        }
+        foreach ($conditions as $condition) {
+            $this->displayCondition($condition, $prefix);
         }
     }
 
@@ -237,7 +301,7 @@ class Reader extends Runner\RepositoryAware
      */
     private function displayCondition(Config\Condition $condition, string $prefix = ''): void
     {
-        $this->io->write($prefix . '    - ' . $condition->getExec());
+        $this->io->write($prefix . '      - <fg=cyan>' . $condition->getExec() . '</>');
 
         if (in_array(strtoupper($condition->getExec()), ['OR', 'AND'])) {
             $conditions = [];
@@ -251,7 +315,7 @@ class Reader extends Runner\RepositoryAware
             if (empty($condition->getArgs())) {
                 return;
             }
-            $this->io->write($prefix . '      <comment>Args:</comment>');
+            $this->io->write($prefix . '        <comment>Args:</comment>');
             foreach ($condition->getArgs() as $key => $value) {
                 $this->displayOption($key, $value, $prefix . '   ');
             }
@@ -266,9 +330,6 @@ class Reader extends Runner\RepositoryAware
      */
     private function show(string $option): bool
     {
-        if (empty($this->options)) {
-            return true;
-        }
         return $this->options[$option] ?? false;
     }
 

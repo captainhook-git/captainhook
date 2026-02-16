@@ -51,6 +51,22 @@ class ReaderTest extends TestCase
                ->run();
     }
 
+    public function testItDisplaysActionConfig(): void
+    {
+        $path   = realpath(CH_PATH_FILES . '/config/valid.json');
+        $config = Config\Factory::create($path);
+        $io     = $this->createIOMock();
+        $repo   = $this->createRepositoryMock();
+
+        $io->expects($this->atLeast(2))->method('write');
+
+        $runner = new Reader($io, $config, $repo);
+        $runner->setHook('pre-commit')
+            ->display(Reader::OPT_ACTIONS, true)
+            ->display(Reader::OPT_CONFIG, true)
+            ->run();
+    }
+
     public function testItDisplaysOnlyActions(): void
     {
         $path   = realpath(CH_PATH_FILES . '/config/valid.json');
@@ -58,7 +74,7 @@ class ReaderTest extends TestCase
         $io     = $this->createIOMock();
         $repo   = $this->createRepositoryMock();
 
-        $io->expects($this->exactly(2))->method('write');
+        $io->expects($this->atLeast(2))->method('write');
 
         $runner = new Reader($io, $config, $repo);
         $runner->setHook('pre-commit')
@@ -83,6 +99,24 @@ class ReaderTest extends TestCase
     }
 
     public function testItDisplaysAll(): void
+    {
+        $path   = realpath(CH_PATH_FILES . '/config/valid-with-nested-and-conditions.json');
+        $config = Config\Factory::create($path);
+        $io     = $this->createIOMock();
+        $repo   = $this->createRepositoryMock();
+
+        $io->expects($this->atLeast(4))->method('write');
+
+        $runner = new Reader($io, $config, $repo);
+        $runner->display(Reader::OPT_CONFIG, true);
+        $runner->display(Reader::OPT_OPTIONS, true);
+        $runner->display(Reader::OPT_CONDITIONS, true);
+        $runner->display(Reader::OPT_SETTINGS, true);
+        $runner->run();
+    }
+
+
+    public function testItDisplaysConditionsWithoutOptions(): void
     {
         $path   = realpath(CH_PATH_FILES . '/config/valid-with-nested-and-conditions.json');
         $config = Config\Factory::create($path);

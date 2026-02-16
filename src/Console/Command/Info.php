@@ -13,11 +13,11 @@ namespace CaptainHook\App\Console\Command;
 
 use CaptainHook\App\Console\IOUtil;
 use CaptainHook\App\Runner\Config\Reader;
-use Exception;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 /**
  * Command to display configuration information
@@ -64,7 +64,13 @@ class Info extends RepositoryAware
                  'list-config',
                  's',
                  InputOption::VALUE_NONE,
-                 'List all config settings'
+                 'List all action settings'
+             )
+             ->addOption(
+                 'application-config',
+                 null,
+                 InputOption::VALUE_NONE,
+                 'List all application settings'
              )
              ->addOption(
                  'extensive',
@@ -98,11 +104,13 @@ class Info extends RepositoryAware
                    ->display(Reader::OPT_ACTIONS, $input->getOption('list-actions'))
                    ->display(Reader::OPT_CONDITIONS, $input->getOption('list-conditions'))
                    ->display(Reader::OPT_OPTIONS, $input->getOption('list-options'))
+                   ->display(Reader::OPT_CONFIG, $input->getOption('list-config'))
+                   ->display(Reader::OPT_SETTINGS, $input->getOption('application-config'))
                    ->extensive($input->getOption('extensive'))
                    ->run();
 
             return 0;
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             return $this->crash($output, $e);
         }
     }
