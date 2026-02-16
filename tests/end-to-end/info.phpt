@@ -10,15 +10,16 @@ echo shell_exec(
     '--configuration=tests/_files/e2e/config-ok.json'
 );
 --EXPECTF--
-commit-msg
- - \CaptainHook\App\Hook\Message\Action\Beams
-pre-push
- - echo foo
-pre-commit
- - echo foo
-prepare-commit-msg
-post-commit
-post-merge
-post-checkout
-post-rewrite
-post-change
+Hooks:
+  commit-msg
+   - \CaptainHook\App\Hook\Message\Action\Beams
+  pre-push
+   - echo foo
+  pre-commit
+   - echo foo
+  prepare-commit-msg
+  post-commit
+  post-merge
+  post-checkout
+  post-rewrite
+  post-change
