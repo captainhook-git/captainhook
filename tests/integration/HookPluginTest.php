@@ -10,7 +10,7 @@ class HookPluginTest extends IntegrationTestCase
 
         $this->setConfig($repoPath, 'plugins', [
             [
-                'plugin' => '\\CaptainHook\\App\\Integration\\Plugin\\SimplePlugin',
+                'plugin' => '\\CaptainHook\\App\\Plugin\\Hook\\SimplePlugin',
                 'options' => [
                     'stuff' => 'cool things',
                 ],
