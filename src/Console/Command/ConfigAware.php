@@ -15,8 +15,8 @@ use CaptainHook\App\CH;
 use CaptainHook\App\Config;
 use CaptainHook\App\Console\Command;
 use CaptainHook\App\Console\IOUtil;
+use CaptainHook\App\Runner\Util as RunnerUtil;
 use RuntimeException;
-use SebastianFeldmann\Camino\Check;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -108,8 +108,9 @@ abstract class ConfigAware extends Command
      */
     protected function determineVerbosity(OutputInterface $out, Config $config): void
     {
-        $verbosity     = IOUtil::mapConfigVerbosity($config->getVerbosity());
-        $cliVerbosity  = $out->getVerbosity();
+        $chVerbosity  = RunnerUtil::getEnv('CAPTAINHOOK_VERBOSITY', $config->getVerbosity());
+        $verbosity    = IOUtil::mapConfigVerbosity($chVerbosity);
+        $cliVerbosity = $out->getVerbosity();
         if ($cliVerbosity !== OutputInterface::VERBOSITY_NORMAL) {
             $verbosity = $cliVerbosity;
         }
