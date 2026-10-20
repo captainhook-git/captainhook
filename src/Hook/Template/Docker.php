@@ -134,9 +134,9 @@ class Docker implements Template
      */
     private function createTTYOptions(string $options): string
     {
-        // Because this currently breaks working with Jetbrains IDEs it is deactivated for now
-        // $tty        = Hooks::allowsUserInput($hook) ? ' -t' : '';
-        // $useTTY      = !preg_match('# -[a-z]*t| --tty#', $options) ? $tty : '';
+        // Because this currently breaks working with JetBrains IDEs, it is deactivated for now
+        // $tty    = Hooks::allowsUserInput($hook) ? ' -t' : '';
+        // $useTTY = !preg_match('# -[a-z]*t| --tty#', $options) ? $tty : '';
         return '';
     }
 
@@ -211,7 +211,7 @@ class Docker implements Template
      */
     private function resolveBinaryPath(): string
     {
-        // if a specific executable is configured use just that
+        // if a specific executable is configured, use just that
         if (!empty($this->config->getRunConfig()->getCaptainsPath())) {
             return $this->config->getRunConfig()->getCaptainsPath();
         }
