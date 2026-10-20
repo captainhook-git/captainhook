@@ -54,6 +54,11 @@ class Shell extends Template\Local
             '    INTERACTIVE=""',
             'fi',
             '',
+            'if [ ! -x ' . $this->getExecutable() . ' ]; then',
+            '    echo "CaptainHook executable not found"',
+            '    exit 0',
+            'fi',
+            '',
             $this->getExecutable()
                 . ' $INTERACTIVE'
                 . ' --configuration=' . $this->pathInfo->getConfigPath()
