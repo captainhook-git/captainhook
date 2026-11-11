@@ -57,13 +57,13 @@ class CheckLockFile implements Action
      */
     public function execute(Config $config, IO $io, Repository $repository, Config\Action $action): void
     {
-        $path           = $action->getOptions()->get('path', getcwd());
-        $name           = $action->getOptions()->get('name', 'composer');
-        $pathname       = $path . DIRECTORY_SEPARATOR . $name;
-        $lockFileHash   = $this->getLockFileHash($pathname . '.lock');
-        $configFileHash = $this->getConfigFileHash($pathname . '.json');
+        $path             = $action->getOptions()->get('path', getcwd());
+        $name             = $action->getOptions()->get('name', 'composer');
+        $pathname         = $path . DIRECTORY_SEPARATOR . $name;
+        $lockFileHash     = $this->getLockFileHash($pathname . '.lock');
+        $configFileHashes = $this->getConfigFileHashes($pathname . '.json');
 
-        if ($lockFileHash !== $configFileHash) {
+        if (!in_array($lockFileHash, $configFileHashes, true)) {
             throw new Exception('Your composer.lock file is out of date');
         }
     }
@@ -88,16 +88,18 @@ class CheckLockFile implements Action
     }
 
     /**
-     * Read the composer.json file and create a md5 hash on its relevant content
+     * Create current and pre-2.11 Composer content hashes from composer.json.
+     *
+     * Legacy hashes omit config.policy and cannot detect policy-only changes.
      *
      * This more or less is composer internal code to generate the content-hash so this might not be the best idea
      * and will be removed in the future.
      *
      * @param  string $composerJson
-     * @return string
+     * @return array<string>
      * @throws \Exception
      */
-    private function getConfigFileHash(string $composerJson): string
+    private function getConfigFileHashes(string $composerJson): array
     {
         $content         = json_decode($this->loadFile($composerJson), true);
         $relevantContent = [];
@@ -109,8 +111,15 @@ class CheckLockFile implements Action
             $relevantContent['config']['platform'] = $content['config']['platform'];
         }
         ksort($relevantContent);
+        $hashes = [md5((string)json_encode($relevantContent))];
 
-        return md5((string)json_encode($relevantContent));
+        if (isset($content['config']['policy'])) {
+            $relevantContent['config']['policy'] = $content['config']['policy'];
+            ksort($relevantContent);
+            $hashes[] = md5((string)json_encode($relevantContent));
+        }
+
+        return $hashes;
     }
 
     /**
