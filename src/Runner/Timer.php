@@ -66,7 +66,7 @@ class Timer
     /**
      * Creates a new timer, starts the timer, and returns the instance.
      *
-     * @return \CaptainHook\App\Runner\Timer.
+     * @return \CaptainHook\App\Runner\Timer
      */
     public static function createAndStart(): self
     {

@@ -165,10 +165,9 @@ class PHP implements ActionRunner
      * @param  \CaptainHook\App\Hook\Action $action
      * @return bool
      */
-    private function isApplicable(Action $action)
+    private function isApplicable(Action $action): bool
     {
         if ($action instanceof Constrained) {
-            /** @var \CaptainHook\App\Hook\Constrained $action */
             return $action->getRestriction()->isApplicableFor($this->hook);
         }
         return true;

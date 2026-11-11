@@ -128,7 +128,7 @@ class Condition
      */
     private function createLogicCondition(Config\Condition $config): ConditionInterface
     {
-        /** @var \CaptainHook\App\Hook\Condition\Logic $class */
+        /** @var class-string<\CaptainHook\App\Hook\Condition\Logic> $class */
         $class      = '\\CaptainHook\\App\\Hook\\Condition\\Logic\\Logic' . ucfirst(strtolower($config->getExec()));
         $conditions = [];
         foreach ($config->getArgs() as $conf) {

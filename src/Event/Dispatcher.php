@@ -100,7 +100,7 @@ class Dispatcher
      * Return a list of handlers for a given event
      *
      * @param  string $event
-     * @return \CaptainHook\App\Event\Handler[];
+     * @return \CaptainHook\App\Event\Handler[]
      */
     private function handlersFor(string $event): array
     {
