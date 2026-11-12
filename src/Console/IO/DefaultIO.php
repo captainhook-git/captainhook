@@ -54,7 +54,7 @@ class DefaultIO extends Base
     protected ?HelperSet $helperSet;
 
     /**
-     * @var array<int, int>
+     * @var array<int, OutputInterface::VERBOSITY_*>
      */
     private array $verbosityMap;
 
